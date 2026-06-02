@@ -1,0 +1,30 @@
+---
+title: "Hello World"
+date: "2026-06-02"
+categories: [diary]
+---
+
+這是我用 Quarto 寫的第一篇文章。
+
+## 可以用的語法
+
+**粗體**、*斜體*、~~刪除線~~、`行內程式碼`
+
+### 列表
+
+- 項目一
+- 項目二
+- 項目三
+
+### 程式碼區塊
+
+``` python
+def hello():
+    print("Hello, World!")
+```
+
+### 引用
+
+> 這是引用文字
+
+寫好了，跑 `quarto render` 就能看到效果。

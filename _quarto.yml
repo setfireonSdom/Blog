@@ -1,0 +1,25 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: ""
+  description: ""
+  site-url: https://your-website-url.example.com
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+    right:
+      - text: "知有誰"
+        href: about.qmd
+
+format:
+  html:
+    theme: flatly
+    css: styles.css
+    search: false
+    smooth-scroll: true
+
+editor: visual
+
