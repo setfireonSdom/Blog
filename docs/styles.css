@@ -43,6 +43,59 @@ body {
 }
 
 
+
+/* 文章頁標題區 */
+#title-block-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+#title-block-header .title {
+  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+#title-block-header .quarto-title-meta {
+  font-family: "Noto Sans SC", sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+#title-block-header .quarto-title-meta-contents {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+#title-block-header .quarto-categories {
+  display: flex;
+  gap: 0.4rem;
+}
+
+#title-block-header .quarto-categories .quarto-category {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  padding: 0.05em 0.6em;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+#title-block-header .quarto-categories .quarto-category:hover {
+  background: var(--accent);
+  color: white;
+}
+
 .listing {
   margin-top: 0;
 }

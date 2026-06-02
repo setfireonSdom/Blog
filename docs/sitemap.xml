@@ -24,4 +24,8 @@
     <loc>https://your-website-url.example.com/index.html</loc>
     <lastmod>2026-06-02T04:18:40.584Z</lastmod>
   </url>
+  <url>
+    <loc>https://your-website-url.example.com/posts/opencode-go-integration-guide.html</loc>
+    <lastmod>2026-06-02T05:22:01.746Z</lastmod>
+  </url>
 </urlset>

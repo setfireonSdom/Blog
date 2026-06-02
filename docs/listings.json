@@ -2,10 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/hello-world.html",
-      "/posts/随笔一则.html",
-      "/posts/welcome/index.html"
+      "/posts/opencode-go-integration-guide.html"
     ]
   }
 ]
