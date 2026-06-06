@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/opencode-外部模型接入教程.html",
       "/posts/信息爆炸-情绪系统被操控.html",
       "/posts/大脑情绪与语言.html",
       "/posts/opencode-go-integration-guide.html"
