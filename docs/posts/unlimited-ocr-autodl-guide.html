@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-06-24">
+
+<title>Unlimited-OCR AutoDL 部署与使用教程</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">知有誰</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Unlimited-OCR AutoDL 部署与使用教程</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">教程</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="unlimited-ocr-autodl-部署与使用教程" class="level1">
+<h1>Unlimited-OCR AutoDL 部署与使用教程</h1>
+<p>这份教程记录如何在 AutoDL 云 GPU 服务器上部署并使用 <code>baidu/Unlimited-OCR</code>。适合本地电脑没有 NVIDIA GPU、但想用云服务器跑 OCR 的情况。</p>
+<section id="实际部署复盘这次是怎么跑通的" class="level2">
+<h2 class="anchored" data-anchor-id="实际部署复盘这次是怎么跑通的">0. 实际部署复盘：这次是怎么跑通的</h2>
+<p>这一章按本次真实部署过程整理，方便下次复用，也方便教学时解释为什么这样选配置、为什么这样处理问题。</p>
+<section id="一开始想在-mac-本地部署" class="level3">
+<h3 class="anchored" data-anchor-id="一开始想在-mac-本地部署">0.1 一开始想在 Mac 本地部署</h3>
+<p>本次最初目标是把 <code>baidu/Unlimited-OCR</code> 部署到本地电脑。检查本机环境后发现：</p>
+<pre class="text"><code>机器: MacBook Air
+芯片: Apple M4
+内存: 16GB
+架构: arm64
+GPU: Apple GPU / Metal
+Python: 3.13.11
+Docker: 未检测到</code></pre>
+<p>再看官方 README，发现官方推理要求是：</p>
+<pre class="text"><code>NVIDIA GPU
+CUDA 12.9
+Python 3.12.3
+torch / torchvision / transformers
+SGLang 或 Transformers CUDA 推理</code></pre>
+<p>官方 Transformers 示例里还有：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.<span class="bu">eval</span>().cuda()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>所以判断：Apple Silicon Mac 不能按官方方式原生部署。原因不是 Python 装不上，而是缺少 NVIDIA CUDA。Docker 也不能解决，因为 Mac Docker 里同样没有 NVIDIA CUDA GPU。</p>
+<p>当时讨论过几个替代方案：</p>
+<pre class="text"><code>1. 用 Hugging Face Space 在线体验。
+2. 租云 GPU 部署。
+3. 云 GPU 跑服务，Mac 本地做客户端。
+4. 等量化版本或社区适配。
+5. 改用 PaddleOCR / RapidOCR 等轻量本地 OCR。</code></pre>
+<p>最后选择：在 AutoDL 上租 GPU 云服务器部署。</p>
+</section>
+<section id="为什么没有选-rtx-2080-ti-11gb" class="level3">
+<h3 class="anchored" data-anchor-id="为什么没有选-rtx-2080-ti-11gb">0.2 为什么没有选 RTX 2080 Ti 11GB</h3>
+<p>一开始看过一台配置：</p>
+<pre class="text"><code>GPU: RTX 2080 Ti
+显存: 11GB
+CPU: 12 核 Xeon Platinum 8255C
+内存: 43GB
+系统盘: 30GB
+数据盘: 50GB
+GPU 驱动: 510.60.02
+CUDA: &lt;= 11.6</code></pre>
+<p>这台没有选，原因是：</p>
+<pre class="text"><code>1. 11GB 显存太小，Unlimited-OCR 是 3B BF16 视觉语言模型，长上下文推理容易 OOM。
+2. RTX 2080 Ti 是 Turing 架构，不适合 BF16 路线。
+3. 驱动 510.60.02 太老，只到 CUDA 11.6。
+4. 官方测试环境是 CUDA 12.9。
+5. SGLang 参数里使用 fa3 attention backend，老卡和老 CUDA 不合适。
+6. 系统盘 30GB，模型和缓存容易占满。</code></pre>
+<p>结论：这台机器即使能折腾，也不是稳定部署方案。</p>
+</section>
+<section id="最后选的-autodl-gpu-配置" class="level3">
+<h3 class="anchored" data-anchor-id="最后选的-autodl-gpu-配置">0.3 最后选的 AutoDL GPU 配置</h3>
+<p>后来选择了一台更合适的机器：</p>
+<pre class="text"><code>GPU: NVIDIA GeForce RTX 4080
+显存: 32760MiB
+CPU: 12 核 Xeon Platinum 8260
+内存: 62GB
+系统盘: 30GB
+数据盘: 50GB，可扩容
+GPU 驱动: 580.105.08
+nvidia-smi CUDA Version: 13.0</code></pre>
+<p>虽然 <code>nvidia-smi</code> 显示 CUDA 13.0，但 PyTorch 环境实际是：</p>
+<pre class="text"><code>PyTorch: 2.8.0+cu128
+torch.cuda.is_available(): True
+torch.version.cuda: 12.8</code></pre>
+<p>这个组合是可以的，因为 NVIDIA 驱动向下兼容 CUDA 12.x。最终选的 AutoDL 镜像是：</p>
+<pre class="text"><code>PyTorch / 2.8.0 / Python 3.12 / Ubuntu 22.04 / CUDA 12.8</code></pre>
+<p>这个镜像接近官方要求：</p>
+<pre class="text"><code>官方: Python 3.12.3 + CUDA 12.9
+实际: Python 3.12 + CUDA 12.8</code></pre>
+</section>
+<section id="第一次验证服务器环境" class="level3">
+<h3 class="anchored" data-anchor-id="第一次验证服务器环境">0.4 第一次验证服务器环境</h3>
+<p>登录 AutoDL 后先执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvidia-smi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>看到 GPU 正常：</p>
+<pre class="text"><code>NVIDIA GeForce RTX 4080
+32760MiB
+Driver Version: 580.105.08
+CUDA Version: 13.0</code></pre>
+<p>再执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import torch; print(torch.__version__); print(torch.cuda.is_available()); print(torch.version.cuda)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>输出：</p>
+<pre class="text"><code>2.8.0+cu128
+True
+12.8</code></pre>
+<p>这一步很关键。只要 <code>torch.cuda.is_available()</code> 是 <code>True</code>，说明当前 PyTorch 可以调用 GPU。</p>
+</section>
+<section id="为什么项目放在-rootautodl-tmp" class="level3">
+<h3 class="anchored" data-anchor-id="为什么项目放在-rootautodl-tmp">0.5 为什么项目放在 /root/autodl-tmp</h3>
+<p>AutoDL 系统盘只有 30GB，模型、缓存、依赖很容易把系统盘塞满。</p>
+<p>所以实际部署时采用：</p>
+<pre class="text"><code>项目目录: /root/autodl-tmp/Unlimited-OCR
+模型目录: /root/autodl-tmp/models/Unlimited-OCR
+Hugging Face 缓存: /root/autodl-tmp/huggingface
+输出结果: /root/autodl-tmp/outputs_pdf 或 outputs_images</code></pre>
+<p>避免使用默认缓存：</p>
+<pre class="text"><code>/root/.cache/huggingface</code></pre>
+<p>因为默认位置可能占系统盘。</p>
+</section>
+<section id="安装依赖时遇到的提示" class="level3">
+<h3 class="anchored" data-anchor-id="安装依赖时遇到的提示">0.6 安装依赖时遇到的提示</h3>
+<p>安装依赖过程中，先装官方仓库里的 SGLang wheel：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install wheel/sglang-0.0.0.dev11416+g92e8bb79e-py3-none-any.whl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>然后安装官方要求的 kernels 版本：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install kernels==0.11.7</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>安装时出现过：</p>
+<pre class="text"><code>- kernels==0.15.2
++ kernels==0.11.7</code></pre>
+<p>这表示环境里原来有 <code>kernels 0.15.2</code>，被降级成官方要求的 <code>0.11.7</code>。这是正常的。</p>
+<p>还出现过：</p>
+<pre class="text"><code>Failed to hardlink files; falling back to full copy</code></pre>
+<p>这也不是错误。原因是 uv 的缓存目录和虚拟环境可能在不同文件系统，不能硬链接，只能复制。解决方式是设置：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">UV_LINK_MODE</span><span class="op">=</span>copy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>不过不设置也能用，只是会有 warning。</p>
+</section>
+<section id="下载速度慢时改用镜像" class="level3">
+<h3 class="anchored" data-anchor-id="下载速度慢时改用镜像">0.7 下载速度慢时改用镜像</h3>
+<p>安装 <code>pymupdf</code> 时下载比较慢，所以中断后改用清华 PyPI 镜像：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install pymupdf==1.27.2.2 <span class="at">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Python 包镜像和 Hugging Face 模型镜像是两回事：</p>
+<pre class="text"><code>PyPI 镜像: 下载 pymupdf、requests、huggingface_hub 等 Python 包
+Hugging Face 镜像: 下载 baidu/Unlimited-OCR 模型权重</code></pre>
+<p>实际使用的 Hugging Face 镜像设置：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_ENDPOINT</span><span class="op">=</span>https://hf-mirror.com</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_HOME</span><span class="op">=</span>/root/autodl-tmp/huggingface</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">TRANSFORMERS_CACHE</span><span class="op">=</span>/root/autodl-tmp/huggingface/transformers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="第一次启动服务时发生了什么" class="level3">
+<h3 class="anchored" data-anchor-id="第一次启动服务时发生了什么">0.8 第一次启动服务时发生了什么</h3>
+<p>第一次直接启动：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> sglang.launch_server <span class="dt">\</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--model</span> baidu/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--served-model-name</span> Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--attention-backend</span> fa3 <span class="dt">\</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--page-size</span> 1 <span class="dt">\</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--mem-fraction-static</span> 0.75 <span class="dt">\</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--context-length</span> 32768 <span class="dt">\</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--enable-custom-logit-processor</span> <span class="dt">\</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--disable-overlap-schedule</span> <span class="dt">\</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--skip-server-warmup</span> <span class="dt">\</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--host</span> 0.0.0.0 <span class="dt">\</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">--port</span> 10000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>启动时看到 tokenizer、配置文件下载成功，但后面出现：</p>
+<pre class="text"><code>Local HF snapshot ... has no files matching ['*.safetensors', '*.bin', '*.pt']; will attempt download.
+Using model weights format ['*.safetensors']</code></pre>
+<p>这说明模型配置文件已经下载了，但权重文件还没有完整下载。</p>
+<p>当时检查缓存目录：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-sh</span> /root/autodl-tmp/huggingface</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>看到只有：</p>
+<pre class="text"><code>4.1G /root/autodl-tmp/huggingface</code></pre>
+<p>判断模型还没完整下载。因为 <code>Unlimited-OCR</code> 是 3B BF16 模型，完整权重通常不止这一点。</p>
+</section>
+<section id="改为手动下载模型" class="level3">
+<h3 class="anchored" data-anchor-id="改为手动下载模型">0.9 改为手动下载模型</h3>
+<p>为了避免启动服务时边下载边加载导致卡住，改用手动下载模型。</p>
+<p>一开始使用：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">huggingface-cli</span> download baidu/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--local-dir</span> /root/autodl-tmp/models/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--local-dir-use-symlinks</span> False</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>但新版 Hugging Face CLI 提示：</p>
+<pre class="text"><code>Warning: `huggingface-cli` is deprecated and no longer works. Use `hf` instead.</code></pre>
+<p>所以改成：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hf</span> download baidu/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--local-dir</span> /root/autodl-tmp/models/Unlimited-OCR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>这个经验很重要：现在新版环境要用 <code>hf download</code>，不要再用旧的 <code>huggingface-cli download</code>。</p>
+</section>
+<section id="最终启动成功" class="level3">
+<h3 class="anchored" data-anchor-id="最终启动成功">0.10 最终启动成功</h3>
+<p>模型准备好后，再次启动服务。最终看到：</p>
+<pre class="text"><code>Started server process [2721]
+Waiting for application startup.
+The server is fired up and ready to roll!
+Application startup complete.
+Uvicorn running on http://0.0.0.0:10000 (Press CTRL+C to quit)</code></pre>
+<p>这就表示服务启动成功。</p>
+<p>这个窗口不要关，因为它就是 OCR 服务端。</p>
+</section>
+<section id="如何判断-health-检查成功" class="level3">
+<h3 class="anchored" data-anchor-id="如何判断-health-检查成功">0.11 如何判断 health 检查成功</h3>
+<p>新开一个终端，执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://127.0.0.1:10000/health</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>服务窗口出现：</p>
+<pre class="text"><code>GET /health HTTP/1.1" 200 OK</code></pre>
+<p>这就算有返回，说明服务正常。</p>
+<p>同时还可能看到：</p>
+<pre class="text"><code>Prefill batch, #new-seq: 1, #new-token: 1...</code></pre>
+<p>这是 SGLang 处理请求的日志，不是错误。</p>
+</section>
+<section id="nvidia-smi-里的-sglang-进程说明" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-smi-里的-sglang-进程说明">0.12 nvidia-smi 里的 sglang 进程说明</h3>
+<p>启动服务后执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvidia-smi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>看到过类似：</p>
+<pre class="text"><code>sglang::scheduler 6720MiB</code></pre>
+<p>这说明 SGLang 服务进程已经占用了 GPU 显存，是正常现象。刚启动时显存可能只有几 GB，后续加载和推理时会继续变化。</p>
+</section>
+<section id="使用-infer.py-时复用已有服务" class="level3">
+<h3 class="anchored" data-anchor-id="使用-infer.py-时复用已有服务">0.13 使用 infer.py 时复用已有服务</h3>
+<p>服务启动后，新开终端运行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp/Unlimited-OCR</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>然后用 <code>infer.py</code> 处理 PDF：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--pdf</span> /root/autodl-tmp/mba.pdf <span class="dt">\</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs_pdf <span class="dt">\</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> base</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>当输出：</p>
+<pre class="text"><code>Reuse existing SGLang server: http://127.0.0.1:10000</code></pre>
+<p>说明 <code>infer.py</code> 没有再启动新服务，而是复用了已经启动的 10000 端口服务。这是正常的。</p>
+</section>
+<section id="遇到-requests0-的经验" class="level3">
+<h3 class="anchored" data-anchor-id="遇到-requests0-的经验">0.14 遇到 requests=0 的经验</h3>
+<p>处理一本 PDF 时，出现过：</p>
+<pre class="text"><code>Mode: pdf_pages, requests=0, concurrency=1, image_mode=base
+Requests: 0/0
+Total tokens: 0
+Wall time: 0.00s</code></pre>
+<p>这不是 OCR 很快完成，而是没有任何页面被送进模型。也就是说输入阶段没有生成请求。</p>
+<p>当时先检查 PDF 文件是否存在：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> /root/autodl-tmp/mba.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>结果：</p>
+<pre class="text"><code>-rw-r--r-- 1 root root 26M Jun 24 22:39 /root/autodl-tmp/mba.pdf</code></pre>
+<p>文件存在且大小 26M，说明不是空文件。下一步应该检查 PDF 页数、是否加密、是否能渲染第一页。</p>
+<p>推荐排查命令：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-</span> <span class="op">&lt;&lt;'PY'</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="st">import fitz</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="st">pdf = "/root/autodl-tmp/mba.pdf"</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="st">doc = fitz.open(pdf)</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="st">print("pages:", doc.page_count)</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="st">print("encrypted:", doc.is_encrypted)</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="st">print("metadata:", doc.metadata)</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="st">doc.close()</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>再测试能否转第一页图片：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-</span> <span class="op">&lt;&lt;'PY'</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="st">import fitz</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="st">pdf = "/root/autodl-tmp/mba.pdf"</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="st">doc = fitz.open(pdf)</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="st">page = doc[0]</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="st">pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="st">out = "/root/autodl-tmp/mba_page1.png"</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="st">pix.save(out)</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="st">print(out)</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="st">doc.close()</span></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果能生成第一页，就可以先用图片目录方式测试，避免一次跑整本书。</p>
+</section>
+<section id="本次部署形成的稳定流程" class="level3">
+<h3 class="anchored" data-anchor-id="本次部署形成的稳定流程">0.15 本次部署形成的稳定流程</h3>
+<p>最终总结出的稳定流程是：</p>
+<pre class="text"><code>1. 不在 Mac 本地跑 Unlimited-OCR，改用 AutoDL GPU。
+2. 不选 2080 Ti 11GB，选择 24GB+ 显存，实际使用 RTX 4080 32GB。
+3. 镜像选择 PyTorch 2.8.0 / Python 3.12 / CUDA 12.8。
+4. 用 nvidia-smi 和 torch.cuda.is_available() 验证 CUDA 可用。
+5. 项目、模型、缓存都放 /root/autodl-tmp。
+6. 使用 uv 创建虚拟环境。
+7. 安装官方 SGLang wheel、kernels==0.11.7、pymupdf。
+8. Python 包用清华 PyPI 镜像。
+9. Hugging Face 模型用 hf-mirror.com。
+10. 模型建议用 hf download 提前下载到本地目录。
+11. 用本地模型路径启动 SGLang 服务。
+12. 看到 Uvicorn running on http://0.0.0.0:10000 算启动成功。
+13. 用 curl /health，看到 200 OK 算服务可用。
+14. 新开终端激活同一个虚拟环境，用 infer.py 跑图片或 PDF。
+15. 大 PDF 先不要整本跑，先转 1 页或几页测试。</code></pre>
+<p>这也是后面教程正文采用的部署方式。</p>
+</section>
+</section>
+<section id="项目适用场景" class="level2">
+<h2 class="anchored" data-anchor-id="项目适用场景">1. 项目适用场景</h2>
+<p><code>baidu/Unlimited-OCR</code> 是一个视觉语言 OCR / 文档解析模型，适合处理：</p>
+<ul>
+<li>扫描件图片 OCR</li>
+<li>PDF 转图片后的多页识别</li>
+<li>中英文文档解析</li>
+<li>长文档内容提取</li>
+</ul>
+<p>它不适合直接部署在 Apple Silicon Mac 上，因为官方推理路线依赖 NVIDIA GPU 和 CUDA。</p>
+</section>
+<section id="本地-mac-为什么不适合直接跑" class="level2">
+<h2 class="anchored" data-anchor-id="本地-mac-为什么不适合直接跑">2. 本地 Mac 为什么不适合直接跑</h2>
+<p>如果本机是 MacBook Air / MacBook Pro Apple Silicon，例如 M 系列芯片，通常会遇到这些问题：</p>
+<ul>
+<li>没有 NVIDIA GPU</li>
+<li>没有 CUDA</li>
+<li>官方示例代码使用 <code>.cuda()</code></li>
+<li>SGLang 路线依赖 CUDA / GPU attention backend</li>
+<li>CPU 或 Apple MPS 强行跑可能极慢且容易不兼容</li>
+</ul>
+<p>所以更推荐：模型跑在云服务器，本地电脑只负责上传文件、下载结果。</p>
+</section>
+<section id="云服务器推荐配置" class="level2">
+<h2 class="anchored" data-anchor-id="云服务器推荐配置">3. 云服务器推荐配置</h2>
+<p>推荐最低配置：</p>
+<pre class="text"><code>GPU: 24GB 显存起步
+内存: 32GB 起步，64GB 更好
+系统: Ubuntu 22.04
+Python: 3.12
+CUDA: 12.x
+磁盘: 100GB 以上更稳</code></pre>
+<p>推荐 GPU：</p>
+<pre class="text"><code>RTX 4090 24GB
+RTX 4080 32GB
+A10 24GB
+A5000 24GB
+A100 40GB</code></pre>
+<p>不推荐：</p>
+<pre class="text"><code>RTX 2080 Ti 11GB
+CUDA 11.x
+CPU-only
+Apple / AMD GPU</code></pre>
+<p>原因是 <code>Unlimited-OCR</code> 是 3B BF16 视觉语言模型，官方还使用长上下文，11GB 显存很容易不够。</p>
+</section>
+<section id="已验证可用环境示例" class="level2">
+<h2 class="anchored" data-anchor-id="已验证可用环境示例">4. 已验证可用环境示例</h2>
+<p>本次部署使用的环境：</p>
+<pre class="text"><code>GPU: NVIDIA GeForce RTX 4080
+显存: 32760MiB
+Driver: 580.105.08
+CUDA Version from nvidia-smi: 13.0
+PyTorch: 2.8.0+cu128
+torch.cuda.is_available(): True
+torch.version.cuda: 12.8
+Python: 3.12
+Ubuntu: 22.04</code></pre>
+<p>AutoDL 镜像可以选择：</p>
+<pre class="text"><code>PyTorch / 2.8.0 / Python 3.12 / Ubuntu 22.04 / CUDA 12.8</code></pre>
+</section>
+<section id="登录服务器后先检查环境" class="level2">
+<h2 class="anchored" data-anchor-id="登录服务器后先检查环境">5. 登录服务器后先检查环境</h2>
+<p>进入 AutoDL 终端后，先检查 GPU：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nvidia-smi</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>再检查 PyTorch：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import torch; print(torch.__version__); print(torch.cuda.is_available()); print(torch.version.cuda)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>理想输出类似：</p>
+<pre class="text"><code>2.8.0+cu128
+True
+12.8</code></pre>
+<p>只要 <code>torch.cuda.is_available()</code> 是 <code>True</code>，说明 CUDA 可用。</p>
+</section>
+<section id="进入数据盘" class="level2">
+<h2 class="anchored" data-anchor-id="进入数据盘">6. 进入数据盘</h2>
+<p>不要把模型和项目放系统盘。AutoDL 系统盘通常只有 30GB，容易爆。</p>
+<p>进入数据盘：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="下载项目" class="level2">
+<h2 class="anchored" data-anchor-id="下载项目">7. 下载项目</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/baidu/Unlimited-OCR.git</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Unlimited-OCR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="创建虚拟环境" class="level2">
+<h2 class="anchored" data-anchor-id="创建虚拟环境">8. 创建虚拟环境</h2>
+<p>如果没有 <code>uv</code>，先安装：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple uv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>创建 Python 3.12 虚拟环境：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> venv <span class="at">--python</span> 3.12</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>激活成功后，命令行前面通常会出现：</p>
+<pre class="text"><code>(Unlimited-OCR)</code></pre>
+</section>
+<section id="设置镜像和缓存目录" class="level2">
+<h2 class="anchored" data-anchor-id="设置镜像和缓存目录">9. 设置镜像和缓存目录</h2>
+<p>建议设置 Hugging Face 镜像，并把模型缓存放到数据盘：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_ENDPOINT</span><span class="op">=</span>https://hf-mirror.com</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_HOME</span><span class="op">=</span>/root/autodl-tmp/huggingface</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">TRANSFORMERS_CACHE</span><span class="op">=</span>/root/autodl-tmp/huggingface/transformers</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">UV_LINK_MODE</span><span class="op">=</span>copy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>说明：</p>
+<ul>
+<li><code>HF_ENDPOINT</code> 用于 Hugging Face 模型下载镜像。</li>
+<li><code>HF_HOME</code> 把模型缓存放到数据盘。</li>
+<li><code>TRANSFORMERS_CACHE</code> 避免占用系统盘。</li>
+<li><code>UV_LINK_MODE=copy</code> 可以消除 uv 跨文件系统 hardlink 警告。</li>
+</ul>
+</section>
+<section id="安装依赖" class="level2">
+<h2 class="anchored" data-anchor-id="安装依赖">10. 安装依赖</h2>
+<p>在项目目录 <code>/root/autodl-tmp/Unlimited-OCR</code> 下执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install wheel/sglang-0.0.0.dev11416+g92e8bb79e-py3-none-any.whl</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install kernels==0.11.7 <span class="at">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install pymupdf==1.27.2.2 requests huggingface_hub <span class="at">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果看到类似提示：</p>
+<pre class="text"><code>Failed to hardlink files; falling back to full copy</code></pre>
+<p>这不是错误。它只是说 uv 不能用硬链接安装，改成普通复制，不影响使用。</p>
+</section>
+<section id="下载模型" class="level2">
+<h2 class="anchored" data-anchor-id="下载模型">11. 下载模型</h2>
+<p>模型可以在第一次启动服务时自动下载，也可以提前手动下载。推荐手动下载，更稳定。</p>
+<p>新版 Hugging Face CLI 使用 <code>hf</code>，不是 <code>huggingface-cli download</code>。</p>
+<p>执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_ENDPOINT</span><span class="op">=</span>https://hf-mirror.com</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_HOME</span><span class="op">=</span>/root/autodl-tmp/huggingface</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="ex">hf</span> download baidu/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--local-dir</span> /root/autodl-tmp/models/Unlimited-OCR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果下载中断，重复同一个命令即可。它会跳过已完成文件或继续下载。</p>
+<p>下载完成后，模型目录是：</p>
+<pre class="text"><code>/root/autodl-tmp/models/Unlimited-OCR</code></pre>
+</section>
+<section id="启动服务" class="level2">
+<h2 class="anchored" data-anchor-id="启动服务">12. 启动服务</h2>
+<p>进入项目目录并激活虚拟环境：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp/Unlimited-OCR</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>使用本地模型路径启动：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> sglang.launch_server <span class="dt">\</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--model</span> /root/autodl-tmp/models/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--served-model-name</span> Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--attention-backend</span> fa3 <span class="dt">\</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--page-size</span> 1 <span class="dt">\</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--mem-fraction-static</span> 0.75 <span class="dt">\</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--context-length</span> 32768 <span class="dt">\</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--enable-custom-logit-processor</span> <span class="dt">\</span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--disable-overlap-schedule</span> <span class="dt">\</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--skip-server-warmup</span> <span class="dt">\</span></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--host</span> 0.0.0.0 <span class="dt">\</span></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">--port</span> 10000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果没有提前下载模型，也可以直接用 Hugging Face 模型名：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> sglang.launch_server <span class="dt">\</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--model</span> baidu/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--served-model-name</span> Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--attention-backend</span> fa3 <span class="dt">\</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--page-size</span> 1 <span class="dt">\</span></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--mem-fraction-static</span> 0.75 <span class="dt">\</span></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--context-length</span> 32768 <span class="dt">\</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--enable-custom-logit-processor</span> <span class="dt">\</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--disable-overlap-schedule</span> <span class="dt">\</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--skip-server-warmup</span> <span class="dt">\</span></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--host</span> 0.0.0.0 <span class="dt">\</span></span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">--port</span> 10000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>启动成功时，会看到：</p>
+<pre class="text"><code>The server is fired up and ready to roll!
+Uvicorn running on http://0.0.0.0:10000</code></pre>
+<p>这个终端不要关。它就是 OCR 后端服务。</p>
+</section>
+<section id="常见启动日志说明" class="level2">
+<h2 class="anchored" data-anchor-id="常见启动日志说明">13. 常见启动日志说明</h2>
+<p>如果看到：</p>
+<pre class="text"><code>Ignore import error when loading sglang.srt.multimodal.processors.gemma4</code></pre>
+<p>通常可以忽略。SGLang 在扫描其他模型组件，但当前不是运行 Gemma4。</p>
+<p>如果看到：</p>
+<pre class="text"><code>torch_dtype is deprecated! Use dtype instead!</code></pre>
+<p>这只是警告，不影响启动。</p>
+<p>如果看到：</p>
+<pre class="text"><code>Local HF snapshot ... has no files matching ['*.safetensors']</code></pre>
+<p>说明模型权重还没完整下载，它会尝试继续下载。可以用下面命令看缓存目录大小：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-sh</span> /root/autodl-tmp/huggingface</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果目录大小持续增长，说明还在下载。</p>
+</section>
+<section id="测试服务是否正常" class="level2">
+<h2 class="anchored" data-anchor-id="测试服务是否正常">14. 测试服务是否正常</h2>
+<p>另开一个 AutoDL 终端，不要关闭服务终端。</p>
+<p>执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://127.0.0.1:10000/health</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果服务端日志出现：</p>
+<pre class="text"><code>GET /health HTTP/1.1" 200 OK</code></pre>
+<p>就说明服务正常。</p>
+</section>
+<section id="每次使用前的固定步骤" class="level2">
+<h2 class="anchored" data-anchor-id="每次使用前的固定步骤">15. 每次使用前的固定步骤</h2>
+<p>以后每次新开终端使用，都先执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp/Unlimited-OCR</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> http://127.0.0.1:10000/health</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果健康检查正常，就可以开始 OCR。</p>
+</section>
+<section id="识别图片目录" class="level2">
+<h2 class="anchored" data-anchor-id="识别图片目录">16. 识别图片目录</h2>
+<p>准备图片目录，例如：</p>
+<pre class="text"><code>/root/autodl-tmp/images</code></pre>
+<p>这个路径不是固定要求，只要目录真实存在即可。建议使用绝对路径，避免当前终端目录不同导致找不到文件。</p>
+<p>里面可以放：</p>
+<pre class="text"><code>001.jpg
+002.png
+003.jpeg</code></pre>
+<p>运行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_dir</span> /root/autodl-tmp/images <span class="dt">\</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs_images <span class="dt">\</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> gundam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>结果目录：</p>
+<pre class="text"><code>/root/autodl-tmp/outputs_images</code></pre>
+<p>输出目录也可以自定义，例如：</p>
+<pre class="text"><code>/root/autodl-tmp/outputs/my_images</code></pre>
+<p>如果目录不存在，通常程序会自动创建；如果报错，再手动创建即可。</p>
+<p>单张图片建议使用：</p>
+<pre class="text"><code>--image_mode gundam</code></pre>
+</section>
+<section id="识别-pdf" class="level2">
+<h2 class="anchored" data-anchor-id="识别-pdf">17. 识别 PDF</h2>
+<p>假设 PDF 路径是：</p>
+<pre class="text"><code>/root/autodl-tmp/mba.pdf</code></pre>
+<p>这个路径不是固定要求。<code>--pdf</code> 后面只需要填真实存在的 PDF 路径即可，推荐使用绝对路径。</p>
+<p>例如这些都可以：</p>
+<pre class="text"><code>/root/autodl-tmp/mba.pdf
+/root/autodl-tmp/books/mba.pdf
+/root/autodl-tmp/input/document.pdf</code></pre>
+<p>运行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb84"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--pdf</span> /root/autodl-tmp/mba.pdf <span class="dt">\</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs_pdf <span class="dt">\</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> base</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>结果目录：</p>
+<pre class="text"><code>/root/autodl-tmp/outputs_pdf</code></pre>
+<p>输出路径也不是固定要求。<code>--output_dir</code> 后面可以填任意你想保存结果的目录。</p>
+<p>例如一本书一个输出目录：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--pdf</span> /root/autodl-tmp/books/mba.pdf <span class="dt">\</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs/mba <span class="dt">\</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> base</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果路径里有空格或特殊字符，需要加引号：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--pdf</span> <span class="st">"/root/autodl-tmp/books/my book.pdf"</span> <span class="dt">\</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> <span class="st">"/root/autodl-tmp/outputs/my book"</span> <span class="dt">\</span></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> base</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>PDF / 多页图片建议使用：</p>
+<pre class="text"><code>--image_mode base</code></pre>
+<p>先用：</p>
+<pre class="text"><code>--concurrency 1</code></pre>
+<p>确认稳定后再考虑提高并发。</p>
+</section>
+<section id="如果-infer.py-显示-requests0" class="level2">
+<h2 class="anchored" data-anchor-id="如果-infer.py-显示-requests0">18. 如果 infer.py 显示 requests=0</h2>
+<p>如果运行 PDF 后输出：</p>
+<pre class="text"><code>Mode: pdf_pages, requests=0
+Requests: 0/0</code></pre>
+<p>说明没有任何页面被送去 OCR。它不是识别完成，而是输入阶段没有生成请求。</p>
+<p>先检查文件是否存在：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> /root/autodl-tmp/mba.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>再检查 PDF 页数和加密状态：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb92"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-</span> <span class="op">&lt;&lt;'PY'</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="st">import fitz</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="st">pdf = "/root/autodl-tmp/mba.pdf"</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="st">doc = fitz.open(pdf)</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="st">print("pages:", doc.page_count)</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="st">print("encrypted:", doc.is_encrypted)</span></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="st">print("metadata:", doc.metadata)</span></span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="st">doc.close()</span></span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果页数正常，再测试能否渲染第一页：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-</span> <span class="op">&lt;&lt;'PY'</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="st">import fitz</span></span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="st">pdf = "/root/autodl-tmp/mba.pdf"</span></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="st">doc = fitz.open(pdf)</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="st">page = doc[0]</span></span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a><span class="st">pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))</span></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="st">out = "/root/autodl-tmp/mba_page1.png"</span></span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="st">pix.save(out)</span></span>
+<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a><span class="st">print(out)</span></span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a><span class="st">doc.close()</span></span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果能生成第一页图片，可以改用图片目录方式测试：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb94"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /root/autodl-tmp/test_images</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /root/autodl-tmp/mba_page1.png /root/autodl-tmp/test_images/</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_dir</span> /root/autodl-tmp/test_images <span class="dt">\</span></span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs_test_image <span class="dt">\</span></span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> gundam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="查看输出结果" class="level2">
+<h2 class="anchored" data-anchor-id="查看输出结果">19. 查看输出结果</h2>
+<p>列出输出目录：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb95"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root/autodl-tmp/outputs_pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>或：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb96"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> /root/autodl-tmp/outputs_images</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>查看文件内容：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb97"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> /root/autodl-tmp/outputs_pdf/文件名</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>按 <code>q</code> 退出 <code>less</code>。</p>
+</section>
+<section id="显存与并发建议" class="level2">
+<h2 class="anchored" data-anchor-id="显存与并发建议">20. 显存与并发建议</h2>
+<p>第一次运行建议：</p>
+<pre class="text"><code>--concurrency 1</code></pre>
+<p>如果稳定，再逐步提高到：</p>
+<pre class="text"><code>--concurrency 2
+--concurrency 4</code></pre>
+<p>如果出现 CUDA out of memory，可以降低服务启动参数：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb100"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="ex">--mem-fraction-static</span> 0.65</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="ex">--context-length</span> 16384</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>保守启动命令示例：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb101"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> sglang.launch_server <span class="dt">\</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--model</span> /root/autodl-tmp/models/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">--served-model-name</span> Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">--attention-backend</span> fa3 <span class="dt">\</span></span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--page-size</span> 1 <span class="dt">\</span></span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--mem-fraction-static</span> 0.65 <span class="dt">\</span></span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--context-length</span> 16384 <span class="dt">\</span></span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--enable-custom-logit-processor</span> <span class="dt">\</span></span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--disable-overlap-schedule</span> <span class="dt">\</span></span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--skip-server-warmup</span> <span class="dt">\</span></span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--host</span> 0.0.0.0 <span class="dt">\</span></span>
+<span id="cb101-12"><a href="#cb101-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">--port</span> 10000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="端口占用问题" class="level2">
+<h2 class="anchored" data-anchor-id="端口占用问题">21. 端口占用问题</h2>
+<p>如果已经手动启动了服务，再运行 <code>infer.py</code> 时可能出现端口占用。</p>
+<p>如果 <code>infer.py</code> 输出：</p>
+<pre class="text"><code>Reuse existing SGLang server: http://127.0.0.1:10000</code></pre>
+<p>说明它复用了当前服务，这是正常的。</p>
+<p>如果报：</p>
+<pre class="text"><code>address already in use
+port 10000 already in use</code></pre>
+<p>说明它试图再启动一个服务，和已有服务冲突。解决方法：</p>
+<pre class="text"><code>方法一：保留当前服务，改用 API 调用脚本。
+方法二：按 Ctrl+C 停掉当前服务，再让 infer.py 自己启动。</code></pre>
+</section>
+<section id="一套最短复用命令" class="level2">
+<h2 class="anchored" data-anchor-id="一套最短复用命令">22. 一套最短复用命令</h2>
+<p>启动服务：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb105"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp/Unlimited-OCR</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_ENDPOINT</span><span class="op">=</span>https://hf-mirror.com</span>
+<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">HF_HOME</span><span class="op">=</span>/root/autodl-tmp/huggingface</span>
+<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">TRANSFORMERS_CACHE</span><span class="op">=</span>/root/autodl-tmp/huggingface/transformers</span>
+<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> sglang.launch_server <span class="dt">\</span></span>
+<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--model</span> /root/autodl-tmp/models/Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--served-model-name</span> Unlimited-OCR <span class="dt">\</span></span>
+<span id="cb105-11"><a href="#cb105-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--attention-backend</span> fa3 <span class="dt">\</span></span>
+<span id="cb105-12"><a href="#cb105-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">--page-size</span> 1 <span class="dt">\</span></span>
+<span id="cb105-13"><a href="#cb105-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">--mem-fraction-static</span> 0.75 <span class="dt">\</span></span>
+<span id="cb105-14"><a href="#cb105-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">--context-length</span> 32768 <span class="dt">\</span></span>
+<span id="cb105-15"><a href="#cb105-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">--enable-custom-logit-processor</span> <span class="dt">\</span></span>
+<span id="cb105-16"><a href="#cb105-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">--disable-overlap-schedule</span> <span class="dt">\</span></span>
+<span id="cb105-17"><a href="#cb105-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">--skip-server-warmup</span> <span class="dt">\</span></span>
+<span id="cb105-18"><a href="#cb105-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">--host</span> 0.0.0.0 <span class="dt">\</span></span>
+<span id="cb105-19"><a href="#cb105-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">--port</span> 10000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>新开终端，识别 PDF：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb106"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp/Unlimited-OCR</span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--pdf</span> /root/autodl-tmp/mba.pdf <span class="dt">\</span></span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs_pdf <span class="dt">\</span></span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> base</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>新开终端，识别图片目录：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb107"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /root/autodl-tmp/Unlimited-OCR</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> infer.py <span class="dt">\</span></span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_dir</span> /root/autodl-tmp/images <span class="dt">\</span></span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">--output_dir</span> /root/autodl-tmp/outputs_images <span class="dt">\</span></span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--concurrency</span> 1 <span class="dt">\</span></span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--image_mode</span> gundam</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="常见问题速查" class="level2">
+<h2 class="anchored" data-anchor-id="常见问题速查">23. 常见问题速查</h2>
+<section id="服务启动后没有-uvicorn" class="level3">
+<h3 class="anchored" data-anchor-id="服务启动后没有-uvicorn">23.1 服务启动后没有 Uvicorn</h3>
+<p>如果还没看到：</p>
+<pre class="text"><code>Uvicorn running on http://0.0.0.0:10000</code></pre>
+<p>说明服务还没启动完成。检查模型是否还在下载：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb109"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-sh</span> /root/autodl-tmp/huggingface</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>如果大小持续增长，继续等。如果长期不变，建议手动下载模型。</p>
+</section>
+<section id="health-有-200-ok-算成功吗" class="level3">
+<h3 class="anchored" data-anchor-id="health-有-200-ok-算成功吗">23.2 health 有 200 OK 算成功吗</h3>
+<p>算成功。</p>
+<p>日志类似：</p>
+<pre class="text"><code>GET /health HTTP/1.1" 200 OK</code></pre>
+<p>说明服务健康检查通过。</p>
+</section>
+<section id="nvidia-smi-显示-sglang-占显存正常吗" class="level3">
+<h3 class="anchored" data-anchor-id="nvidia-smi-显示-sglang-占显存正常吗">23.3 nvidia-smi 显示 sglang 占显存正常吗</h3>
+<p>正常。比如：</p>
+<pre class="text"><code>sglang::scheduler 6720MiB</code></pre>
+<p>说明 SGLang 进程已经占用 GPU。</p>
+</section>
+<section id="pymupdf-下载慢怎么办" class="level3">
+<h3 class="anchored" data-anchor-id="pymupdf-下载慢怎么办">23.4 PyMuPDF 下载慢怎么办</h3>
+<p>使用清华 PyPI 镜像：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb112"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install pymupdf==1.27.2.2 <span class="at">-i</span> https://pypi.tuna.tsinghua.edu.cn/simple</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="huggingface-cli-download-不能用怎么办" class="level3">
+<h3 class="anchored" data-anchor-id="huggingface-cli-download-不能用怎么办">23.5 huggingface-cli download 不能用怎么办</h3>
+<p>新版命令改成：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb113"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="ex">hf</span> download baidu/Unlimited-OCR <span class="at">--local-dir</span> /root/autodl-tmp/models/Unlimited-OCR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="最终建议" class="level2">
+<h2 class="anchored" data-anchor-id="最终建议">24. 最终建议</h2>
+<p>最稳的使用方式：</p>
+<pre class="text"><code>1. AutoDL 选择 PyTorch 2.8.0 / Python 3.12 / CUDA 12.8 镜像。
+2. 模型和缓存全部放 /root/autodl-tmp。
+3. 手动下载模型到 /root/autodl-tmp/models/Unlimited-OCR。
+4. 用 SGLang 启动 OCR 服务。
+5. 新开终端使用 infer.py 处理图片或 PDF。
+6. PDF 先用 concurrency=1 和 image_mode=base 测试。</code></pre>
+<p>如果只是测试，先不要跑整本书。先跑 1 页或几页，确认输出效果和速度后，再批量处理完整 PDF。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/your-website-url\.example\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
