@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-06-24">
 
-<title>index</title>
+<title>顺网云电脑网络问题排查总结</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,28 +24,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,71 +106,13 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -149,13 +125,13 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">知有誰</span></a>
   </li>  
 </ul>
@@ -169,189 +145,122 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="JUU0JUI4JTkzJUU2JUEwJThG">专栏 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="JUU2JTk1JTk5JUU3JUE4JThC">教程 <span class="quarto-category-count">(4)</span></div></div></div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">顺网云电脑网络问题排查总结</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">教程</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<section id="顺网云电脑网络问题排查总结" class="level1">
+<h1>顺网云电脑网络问题排查总结</h1>
+<section id="问题现象" class="level2">
+<h2 class="anchored" data-anchor-id="问题现象">问题现象</h2>
+<p>打开顺网云电脑提示 <strong>“当前网络不佳”</strong>。</p>
+</section>
+<section id="根因" class="level2">
+<h2 class="anchored" data-anchor-id="根因">根因</h2>
+<p>电脑上安装的 <strong>Clash Verge</strong> 退出后残留了 6 条 IPv6 utun 隧道默认路由。顺网云电脑客户端大量使用 IPv6 连接，结果流量全被导入这些已经不工作的死隧道，导致连接超时。</p>
+</section>
+<section id="修复步骤" class="level2">
+<h2 class="anchored" data-anchor-id="修复步骤">修复步骤</h2>
+<section id="彻底退出-clash-verge-后台服务" class="level3">
+<h3 class="anchored" data-anchor-id="彻底退出-clash-verge-后台服务">1. 彻底退出 Clash Verge 后台服务</h3>
+<p>关掉 Clash Verge 窗口不等于退出代理，后台还有一个系统级守护进程在运行。执行以下命令彻底退出：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 退出 Clash Verge 图形界面</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">osascript</span> <span class="at">-e</span> <span class="st">'tell application "Clash Verge" to quit'</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 彻底停止后台守护进程（需要密码）</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> launchctl bootout system /Library/LaunchDaemons/io.github.clash-verge-rev.clash-verge-rev.service.plist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>退出 Clash Verge 后仍提示网络不佳？继续下一步。</p>
+</blockquote>
+</section>
+<section id="关闭-wi-fi-的-ipv6" class="level3">
+<h3 class="anchored" data-anchor-id="关闭-wi-fi-的-ipv6">2. 关闭 Wi-Fi 的 IPv6</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">networksetup</span> <span class="at">-setv6off</span> Wi-Fi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>关闭后顺网走 IPv4（国内网络 IPv4 完全够用），延迟只有 18ms，0% 丢包。</p>
+</section>
+</section>
+<section id="日常使用流程" class="level2">
+<h2 class="anchored" data-anchor-id="日常使用流程">日常使用流程</h2>
+<section id="翻墙时" class="level3">
+<h3 class="anchored" data-anchor-id="翻墙时">翻墙时</h3>
+<p>正常打开 Clash Verge 即可，不影响翻墙功能。</p>
+</section>
+<section id="玩顺网云电脑时" class="level3">
+<h3 class="anchored" data-anchor-id="玩顺网云电脑时">玩顺网云电脑时</h3>
+<p><strong>翻完墙退出 Clash 后</strong>，如果顺网又提示网络不佳，执行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">networksetup</span> <span class="at">-setv6off</span> Wi-Fi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="常用命令速查" class="level2">
+<h2 class="anchored" data-anchor-id="常用命令速查">常用命令速查</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>操作</th>
+<th>命令</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>关闭 IPv6</td>
+<td><code>networksetup -setv6off Wi-Fi</code></td>
+</tr>
+<tr class="even">
+<td>开启 IPv6</td>
+<td><code>networksetup -setv6automatic Wi-Fi</code></td>
+</tr>
+<tr class="odd">
+<td>彻底退出 Clash</td>
+<td><code>osascript -e 'tell application "Clash Verge" to quit' &amp;&amp; sudo launchctl bootout system /Library/LaunchDaemons/io.github.clash-verge-rev.clash-verge-rev.service.plist</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="补充说明" class="level2">
+<h2 class="anchored" data-anchor-id="补充说明">补充说明</h2>
+<ul>
+<li>关闭 IPv6 对日常上网、看视频、打游戏、翻墙<strong>没有任何影响</strong></li>
+<li>IPv6 唯一的好处是 BT/PT 下载能快一点，不玩种子的话可以一直关着</li>
+<li>如果哪天不想关 IPv6 了，先确认 Clash 已彻底清干净，然后恢复：<code>networksetup -setv6automatic Wi-Fi</code></li>
+</ul>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="JUU2JTk1JTk5JUU3JUE4JThC" data-listing-date-sort="1782268560000" data-listing-file-modified-sort="1782268621637" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="120">
-<div class="thumbnail"><a href="./posts/顺网云电脑网络问题排查总结.html" class="no-external">
 
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</section>
+</section>
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/顺网云电脑网络问题排查总结.html" class="no-external">顺网云电脑网络问题排查总结</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk1JTk5JUU3JUE4JThC'); return false;">教程</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/顺网云电脑网络问题排查总结.html" class="no-external">
-打开顺网云电脑提示 <strong>“当前网络不佳”</strong>。
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/顺网云电脑网络问题排查总结.html" class="no-external">
-<div class="listing-date">
-Jun 24, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="JUU2JTk1JTk5JUU3JUE4JThC" data-listing-date-sort="1780740360000" data-listing-file-modified-sort="1782268591307" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2263">
-<div class="thumbnail"><a href="./posts/9router使用指南.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/9router使用指南.html" class="no-external">9Router 使用指南</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk1JTk5JUU3JUE4JThC'); return false;">教程</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/9router使用指南.html" class="no-external">
-<strong>项目地址</strong>：https://github.com/decolua/9router<br>
-<strong>官方网站</strong>：https://9router.com<br>
-<strong>License</strong>：MIT<br>
-<strong>Stars</strong>：16.5K+
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/9router使用指南.html" class="no-external">
-<div class="listing-date">
-Jun 6, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="JUU2JTk1JTk5JUU3JUE4JThC" data-listing-date-sort="1780734780000" data-listing-file-modified-sort="1780734823633" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1066">
-<div class="thumbnail"><a href="./posts/opencode-外部模型接入教程.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/opencode-外部模型接入教程.html" class="no-external">OpenCode 外部模型接入教程</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk1JTk5JUU3JUE4JThC'); return false;">教程</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/opencode-外部模型接入教程.html" class="no-external">
-基于 opencode 1.16.2 实测，2026-06
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/opencode-外部模型接入教程.html" class="no-external">
-<div class="listing-date">
-Jun 6, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="JUU0JUI4JTkzJUU2JUEwJThG" data-listing-date-sort="1780462800000" data-listing-file-modified-sort="1780734763787" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="491">
-<div class="thumbnail"><a href="./posts/信息爆炸-情绪系统被操控.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/信息爆炸-情绪系统被操控.html" class="no-external">我们的大脑是“情绪感应器”，不是“防火墙”</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUI4JTkzJUU2JUEwJThG'); return false;">专栏</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/信息爆炸-情绪系统被操控.html" class="no-external">
-人类大脑的进化逻辑，是<strong>先感受，再判断；先反应，再思考</strong>。
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/信息爆炸-情绪系统被操控.html" class="no-external">
-<div class="listing-date">
-Jun 3, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="JUU0JUI4JTkzJUU2JUEwJThG" data-listing-date-sort="1780461000000" data-listing-file-modified-sort="1780789702468" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="21">
-<div class="thumbnail"><a href="./posts/大脑情绪与语言.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/大脑情绪与语言.html" class="no-external">你以為你在思考？大腦與語言如何在你察覺前就替你做了決定</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('JUU0JUI4JTkzJUU2JUEwJThG'); return false;">专栏</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/大脑情绪与语言.html" class="no-external">
-你走進一間美術館，漫不經心地掃過一整牆的抽象畫。沒有仔細端詳，沒有閱讀作品說明，但你就是對其中幾幅產生了說不清的好感，對另外幾幅則隱約感到抗拒。
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/大脑情绪与语言.html" class="no-external">
-<div class="listing-date">
-Jun 3, 2026
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="JUU2JTk1JTk5JUU3JUE4JThC" data-listing-date-sort="1780329600000" data-listing-file-modified-sort="1780462373514" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1680">
-<div class="thumbnail"><a href="./posts/opencode-go-integration-guide.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/opencode-go-integration-guide.html" class="no-external">将 OpenCode Go 套餐模型接入 Qwen Coding Agent 完整指南</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('JUU2JTk1JTk5JUU3JUE4JThC'); return false;">教程</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/opencode-go-integration-guide.html" class="no-external">
-目标：让 Qwen Coding Agent 使用 OpenCode Go 套餐中的模型（如 DeepSeek V4 Pro、DeepSeek V4 Flash 等），享受 $10/月的低价高质量模型。
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/opencode-go-integration-guide.html" class="no-external">
-<div class="listing-date">
-Jun 2, 2026
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -757,5 +666,5 @@ Jun 2, 2026
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
