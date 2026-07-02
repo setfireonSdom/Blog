@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://your-website-url.example.com/posts/9router使用指南.html</loc>
-    <lastmod>2026-06-24T15:34:17.904Z</lastmod>
+    <lastmod>2026-07-02T08:04:29.645Z</lastmod>
   </url>
   <url>
     <loc>https://your-website-url.example.com/posts/顺网云电脑网络问题排查总结.html</loc>
@@ -39,5 +39,9 @@
   <url>
     <loc>https://your-website-url.example.com/posts/InfiniteTalk_部署文档.html</loc>
     <lastmod>2026-06-25T06:33:04.408Z</lastmod>
+  </url>
+  <url>
+    <loc>https://your-website-url.example.com/posts/awesome-agents-zh.html</loc>
+    <lastmod>2026-07-02T08:04:54.340Z</lastmod>
   </url>
 </urlset>
