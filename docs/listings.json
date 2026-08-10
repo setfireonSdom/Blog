@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/DeepTutor项目分析与使用指南.html",
+      "/posts/graphify-入门指南.html",
       "/posts/awesome-python-README-zh.html",
       "/posts/awesome-agents-zh.html",
       "/posts/InfiniteTalk_部署文档.html",

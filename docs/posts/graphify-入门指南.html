@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-06-06">
+<meta name="dcterms.date" content="2026-07-21">
 
-<title>OpenCode 外部模型接入教程</title>
+<title>Graphify 入門指南</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -151,9 +151,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">OpenCode 外部模型接入教程</h1>
+<h1 class="title">Graphify 入門指南</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">教程</div>
+    <div class="quarto-category">资讯</div>
   </div>
   </div>
 
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 6, 2026</p>
+      <p class="date">July 21, 2026</p>
     </div>
   </div>
   
@@ -177,338 +177,268 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="opencode-外部模型接入教程" class="level1">
-<h1>OpenCode 外部模型接入教程</h1>
+<section id="graphify-入門指南" class="level1">
+<h1>Graphify 入門指南</h1>
 <blockquote class="blockquote">
-<p>基于 opencode 1.16.2 实测，2026-06</p>
-</blockquote>
-<section id="配置文件在哪" class="level2">
-<h2 class="anchored" data-anchor-id="配置文件在哪">1. 配置文件在哪</h2>
-<p>OpenCode 的配置文件叫 <code>opencode.json</code>（或 <code>opencode.jsonc</code>，支持注释），有两个位置：</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 61%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>作用域</th>
-<th>路径</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>全局</strong></td>
-<td><code>~/.config/opencode/opencode.jsonc</code></td>
-<td>对本机所有项目生效</td>
-</tr>
-<tr class="even">
-<td><strong>项目</strong></td>
-<td>项目根目录 <code>/opencode.json</code>（和 <code>.git</code> 同级）</td>
-<td>只对当前项目生效</td>
-</tr>
-</tbody>
-</table>
-<p>两个文件可以同时存在（项目级覆盖全局级）。本文以修改<strong>全局配置</strong>为例。</p>
-<hr>
-</section>
-<section id="接入外部模型的两种方式" class="level2">
-<h2 class="anchored" data-anchor-id="接入外部模型的两种方式">2. 接入外部模型的两种方式</h2>
-<section id="方式一内置提供商最简单" class="level3">
-<h3 class="anchored" data-anchor-id="方式一内置提供商最简单">方式一：内置提供商（最简单）</h3>
-<p>OpenCode 预装了 75+ 主流提供商。在 TUI 中输入 <code>/connect</code>，搜索选择厂商（OpenAI、Anthropic、DeepSeek、Groq 等），粘贴 API Key 即可。无需手动写配置。</p>
-</section>
-<section id="方式二自定义提供商最灵活" class="level3">
-<h3 class="anchored" data-anchor-id="方式二自定义提供商最灵活">方式二：自定义提供商（最灵活）</h3>
-<p>适合这些场景：</p>
-<ul>
-<li>用 OpenRouter、9Router 等<strong>路由网关</strong></li>
-<li>用 Ollama、LM Studio 等<strong>本地模型</strong></li>
-<li>用任何提供 <strong>OpenAI 兼容接口</strong>的服务</li>
-</ul>
-<blockquote class="blockquote">
-<p>核心原理：只要服务商的 API 兼容 OpenAI 的 <code>/v1/chat/completions</code> 格式，就可以用 <code>@ai-sdk/openai-compatible</code> 这个适配器接入。</p>
+<p>把你的程式碼庫變成可查詢的知識圖譜 — 讓 AI 助手真正「看懂」你的專案。</p>
 </blockquote>
 <hr>
+<section id="這是什麼" class="level2">
+<h2 class="anchored" data-anchor-id="這是什麼">這是什麼？</h2>
+<p>Graphify 是一個 CLI 工具，掃描你的程式碼庫（程式碼、文件、PDF、圖片、影片），自動構建一份<strong>知識圖譜</strong>。之後你可以直接對圖譜提問，不用手動翻檔案。</p>
+<p><strong>一句話本質：</strong> 與其讓 AI 每次從零 grep 你的程式碼庫，不如先建一份地圖，以後所有問題都對著地圖問。</p>
+<hr>
 </section>
-</section>
-<section id="自定义-provider-核心模板" class="level2">
-<h2 class="anchored" data-anchor-id="自定义-provider-核心模板">3. 自定义 Provider 核心模板</h2>
-<p>下面是一个填空模板，<strong>除 <code>【】</code> 标注的部分外，其余一律不动</strong>。</p>
-<pre class="jsonc"><code>{
-  "$schema": "https://opencode.ai/config.json",
-
-  "provider": {
-    "【1】": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "【3】",
-      "options": {
-        "baseURL": "【4】"
-      },
-      "models": {
-        "【2】": {
-          "name": "【3】"
-        }
-      }
-    }
-  }
-}</code></pre>
-<section id="个空怎么填" class="level3">
-<h3 class="anchored" data-anchor-id="个空怎么填">5 个空怎么填</h3>
+<section id="它解決什麼問題" class="level2">
+<h2 class="anchored" data-anchor-id="它解決什麼問題">它解決什麼問題？</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 49%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>编号</th>
-<th>字段</th>
-<th>填什么</th>
-<th>谁给你</th>
+<th>痛點</th>
+<th>以前</th>
+<th>有 Graphify</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>1</strong></td>
-<td>提供商 ID</td>
-<td>自己起英文名，如 <code>9router</code></td>
-<td><strong>你自己起</strong></td>
+<td>接手陌生專案</td>
+<td>到處翻檔案，不知道從哪看起</td>
+<td><code>graph.html</code> 視覺化展示核心概念和子系統</td>
 </tr>
 <tr class="even">
-<td><strong>2</strong></td>
-<td>模型 ID</td>
-<td>模型名称，如 <code>deepseek-chat</code></td>
-<td><strong>服务商提供</strong>（在服务商文档或 <code>/v1/models</code> 端点查看）</td>
+<td>跨檔案追蹤關聯</td>
+<td>手動 grep + 拼湊上下文，容易漏</td>
+<td><code>graphify path A B</code> 直接告訴你連線路徑</td>
 </tr>
 <tr class="odd">
-<td><strong>3</strong></td>
-<td>显示名</td>
-<td>界面上的名字，如 <code>DeepSeek V4 Pro</code></td>
-<td><strong>你自己起</strong></td>
+<td>context window 不夠</td>
+<td>AI 只能看到你餵的片段，看不到全局</td>
+<td>整個程式碼庫濃縮成 <code>graph.json</code>，token 節省 71x</td>
 </tr>
 <tr class="even">
-<td><strong>4</strong></td>
-<td>baseURL</td>
-<td>API 端点地址</td>
-<td><strong>服务商提供</strong></td>
-</tr>
-<tr class="odd">
-<td><em>可选</em></td>
-<td>apiKey</td>
-<td>API 密钥</td>
-<td><strong>服务商后台生成</strong>（本地服务如 9Router/Ollama 通常不需要）</td>
+<td>團隊知識傳承</td>
+<td>靠口頭或文件，總是過期</td>
+<td><code>graphify-out/</code> 進 git，新人 clone 就有地圖</td>
 </tr>
 </tbody>
 </table>
+<hr>
+</section>
+<section id="快速入門30-秒" class="level2">
+<h2 class="anchored" data-anchor-id="快速入門30-秒">快速入門（30 秒）</h2>
+<section id="安裝" class="level3">
+<h3 class="anchored" data-anchor-id="安裝">1. 安裝</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 推薦（隔離環境）</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> tool install graphifyy</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 或</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">pipx</span> install graphifyy</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
-<p><code>【1】</code> 和 <code>【3】</code> 跟服务商无关，纯标识用途，自己随意命名即可。</p>
+<p>PyPI 包名是 <code>graphifyy</code>（兩個 y），CLI 指令仍是 <code>graphify</code>。</p>
 </blockquote>
+</section>
+<section id="註冊到你的-ai-助手" class="level3">
+<h3 class="anchored" data-anchor-id="註冊到你的-ai-助手">2. 註冊到你的 AI 助手</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>支援的平台：Claude Code、Cursor、Codex、Gemini CLI、OpenCode、GitHub Copilot 等 20+。</p>
+</section>
+<section id="建圖" class="level3">
+<h3 class="anchored" data-anchor-id="建圖">3. 建圖</h3>
+<p>在專案目錄下，於 AI 助手中輸入：</p>
+<pre><code>/graphify .</code></pre>
+<p>或直接 CLI 執行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> extract .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="拿到什麼" class="level3">
+<h3 class="anchored" data-anchor-id="拿到什麼">4. 拿到什麼</h3>
+<pre><code>graphify-out/
+├── graph.html       在瀏覽器打開 — 可點擊、篩選、搜尋
+├── GRAPH_REPORT.md  重點摘要：God nodes、驚喜連線、建議提問
+└── graph.json       完整圖譜 — 之後隨時查詢，不用重掃</code></pre>
 <hr>
 </section>
 </section>
-<section id="两个必要条件踩坑总结" class="level2">
-<h2 class="anchored" data-anchor-id="两个必要条件踩坑总结">4. 两个必要条件（踩坑总结）</h2>
-<section id="条件一models-块必须写" class="level3">
-<h3 class="anchored" data-anchor-id="条件一models-块必须写">条件一：<code>models</code> 块必须写</h3>
-<p><strong>opencode 1.16.2 要求自定义 provider 必须至少定义 <code>models</code></strong>，否则整个 provider 会被静默跳过。</p>
-<p>对比验证方法：查看启动日志：</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-t</span> ~/.local/share/opencode/log/ <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span> <span class="kw">|</span> <span class="fu">xargs</span> tail <span class="at">-5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>看到 <code>provider providerID=你的ID found</code> 即为成功加载。</p>
-</section>
-<section id="条件二ai-sdkopenai-compatible-包必须能被找到" class="level3">
-<h3 class="anchored" data-anchor-id="条件二ai-sdkopenai-compatible-包必须能被找到">条件二：<code>@ai-sdk/openai-compatible</code> 包必须能被找到</h3>
-<p><strong>无需手动安装</strong>。只要你的系统上有任何 Node 全局包依赖了它，Node.js 的模块解析机制就能自动找到（<code>npm list -g @ai-sdk/openai-compatible</code> 可验证）。</p>
-<p>如果系统上完全没有这个包，执行：</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @ai-sdk/openai-compatible</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="查詢範例" class="level2">
+<h2 class="anchored" data-anchor-id="查詢範例">查詢範例</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查 auth 與資料庫的關係</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> query <span class="st">"auth 和資料庫之間有什麼連接？"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 追蹤兩個概念之間的最短路徑</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> path <span class="st">"UserService"</span> <span class="st">"DatabasePool"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 解釋某個概念</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> explain <span class="st">"RateLimiter"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 拉論文進圖譜</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> add https://arxiv.org/abs/1706.03762</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 </section>
-</section>
-<section id="完整示例9router-接入-deepseek-v4-pro" class="level2">
-<h2 class="anchored" data-anchor-id="完整示例9router-接入-deepseek-v4-pro">5. 完整示例：9Router 接入 DeepSeek V4 Pro</h2>
-<p>假设你已安装 9Router（<code>npm install -g 9router &amp;&amp; 9router</code>），它监听在 <code>localhost:20128</code>，提供 OpenAI 兼容接口。9Router 是本地服务，<strong>不需要 apiKey</strong>。</p>
-<p><strong>已知信息：</strong> - 端点：<code>http://localhost:20128/v1</code> - 模型 ID：<code>cmc/deepseek/deepseek-v4-pro</code></p>
-<p><strong>填完的配置：</strong></p>
-<pre class="jsonc"><code>{
-  "$schema": "https://opencode.ai/config.json",
-
-  "provider": {
-    "9router": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "9Router",
-      "options": {
-        "baseURL": "http://localhost:20128/v1"
-      },
-      "models": {
-        "cmc/deepseek/deepseek-v4-pro": {
-          "name": "DeepSeek V4 Pro"
-        }
-      }
-    }
-  }
-}</code></pre>
-<p>保存后<strong>完全退出 opencode 再重启</strong>，输入 <code>/models</code> 即可看到 9Router 分类下的模型。</p>
+<section id="支援什麼檔案" class="level2">
+<h2 class="anchored" data-anchor-id="支援什麼檔案">支援什麼檔案</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 27%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>類型</th>
+<th>格式</th>
+<th>解析方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>程式碼</td>
+<td><code>.py .ts .js .go .rs .java .cpp .rb .cs .kt .php .swift .vue .svelte</code> 等 36+ 語言</td>
+<td>tree-sitter AST（完全本地，0 API 調用）</td>
+</tr>
+<tr class="even">
+<td>文件</td>
+<td><code>.md .mdx .txt .rst .html .yaml</code></td>
+<td>LLM 語義提取（可選本地 Ollama）</td>
+</tr>
+<tr class="odd">
+<td>PDF</td>
+<td><code>.pdf</code></td>
+<td>LLM 語義提取</td>
+</tr>
+<tr class="even">
+<td>圖片</td>
+<td><code>.png .jpg .webp .gif</code></td>
+<td>LLM Vision</td>
+</tr>
+<tr class="odd">
+<td>影片/音檔</td>
+<td><code>.mp4 .mov .mp3 .wav</code></td>
+<td>faster-whisper 本地轉文字</td>
+</tr>
+<tr class="even">
+<td>Office</td>
+<td><code>.docx .xlsx</code></td>
+<td>需安裝 <code>[office]</code> 擴展</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </section>
-<section id="设置默认模型可选" class="level2">
-<h2 class="anchored" data-anchor-id="设置默认模型可选">6. 设置默认模型（可选）</h2>
-<p>在配置顶层加 <code>model</code> 字段，格式为 <code>providerID/模型ID</code>：</p>
-<pre class="jsonc"><code>{
-  "$schema": "https://opencode.ai/config.json",
-  "model": "9router/cmc/deepseek/deepseek-v4-pro",
-
-  "provider": {
-    "9router": {
-      // ... 同上
-    }
-  }
-}</code></pre>
-<p>启动 opencode 后自动选中该模型。</p>
+<section id="團隊協作" class="level2">
+<h2 class="anchored" data-anchor-id="團隊協作">團隊協作</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 提交圖譜到 git</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add graphify-out/</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 安裝 git hook，每次 commit 自動重建圖譜</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">graphify</span> hook install</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>graphify-out/</code> 提交到 git 後，團隊所有人 clone 即有地圖。合併衝突時會自動 union-merge，不會留下衝突標記。</p>
 <hr>
 </section>
-<section id="多个-provider-怎么写" class="level2">
-<h2 class="anchored" data-anchor-id="多个-provider-怎么写">7. 多个 Provider 怎么写</h2>
-<p><code>provider</code> 是一个 JSON <strong>对象</strong>，每个提供商是一个键值对。加新的不要替换旧的，<strong>追加</strong>即可，键值对之间用逗号隔开。</p>
-<pre class="jsonc"><code>{
-  "$schema": "https://opencode.ai/config.json",
-
-  "provider": {
-
-    // Provider 一
-    "9router": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "9Router",
-      "options": {
-        "baseURL": "http://localhost:20128/v1"
-      },
-      "models": {
-        "cmc/deepseek/deepseek-v4-pro": {
-          "name": "DeepSeek V4 Pro"
-        }
-      }
-    },
-
-    // Provider 二（注意前面有逗号）
-    "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Ollama 本地",
-      "options": {
-        "baseURL": "http://localhost:11434/v1"
-      },
-      "models": {
-        "qwen3-coder": {
-          "name": "Qwen3 Coder 本地"
-        }
-      }
-    }
-  }
-}</code></pre>
-<p>要点：在上一个 <code>}</code> 后面加逗号，然后写下一个 provider。</p>
-<hr>
-</section>
-<section id="一个-provider-多个模型怎么写" class="level2">
-<h2 class="anchored" data-anchor-id="一个-provider-多个模型怎么写">8. 一个 Provider 多个模型怎么写</h2>
-<p>同理，<code>models</code> 也是一个 JSON <strong>对象</strong>，每加一个模型就追加一个键值对。</p>
-<pre class="jsonc"><code>"9router": {
-  "npm": "@ai-sdk/openai-compatible",
-  "name": "9Router",
-  "options": {
-    "baseURL": "http://localhost:20128/v1"
-  },
-  "models": {
-
-    // 模型一
-    "cmc/deepseek/deepseek-v4-pro": {
-      "name": "DeepSeek V4 Pro"
-    },
-
-    // 模型二（注意前面有逗号）
-    "cmc/xiaomi/mimo-v2.5": {
-      "name": "MIMO V 2.5"
-    }
-  }
-}</code></pre>
-<blockquote class="blockquote">
-<p><strong>谨慎</strong>：JSONC 的 <code>models</code> 块最后一项不要加尾逗号（<code>,}</code>），否则可能导致解析失败。</p>
-</blockquote>
-<section id="结构关系" class="level3">
-<h3 class="anchored" data-anchor-id="结构关系">结构关系</h3>
-<pre><code>opencode.jsonc
-  └── provider (对象)
-        ├── provider-A (对象)
-        │     └── models (对象)
-        │           ├── 模型1 (对象)
-        │           ├── 模型2 (对象)
-        │           └── ...
-        ├── provider-B (对象)
-        │     └── models (对象)
-        │           └── ...
-        └── ...</code></pre>
-<hr>
-</section>
-</section>
-<section id="运行验证" class="level2">
-<h2 class="anchored" data-anchor-id="运行验证">9. 运行验证</h2>
-<ol type="1">
-<li>确保你的模型服务在运行（如果是本地服务如 9Router、Ollama）</li>
-<li><strong>完全退出 opencode，重新启动</strong>（配置只在启动时加载）</li>
-<li>输入 <code>/models</code>，在列表里找到你配的 provider 和模型</li>
-<li>选中即可使用</li>
-</ol>
-<hr>
-</section>
-<section id="models-列表的-ui-行为" class="level2">
-<h2 class="anchored" data-anchor-id="models-列表的-ui-行为">10. <code>/models</code> 列表的 UI 行为</h2>
-<p>一个容易困惑的设计细节：</p>
-<p><strong>当前正在使用的模型不会出现在它所属的 provider 分类下</strong>，只会出现在 “Recent” 中。</p>
-<p>这意味着：如果你的自定义 provider 只配了 1~2 个模型，用完一遍后 provider 分类就会变空（全部移到 Recent 了）。这不是 bug，是设计如此。</p>
-<p>对比：opencode-go 等内置 provider 下面有十几二十个模型，不可能全部用完，所以分类永远存在。</p>
-<p><strong>解决办法</strong>：要么接受在 Recent 里选模型（功能不受影响），要么多配几个模型让分类里永远有剩余。</p>
-<hr>
-</section>
-<section id="常见问题" class="level2">
-<h2 class="anchored" data-anchor-id="常见问题">11. 常见问题</h2>
-<section id="q-api-key-不想写在配置文件里怎么办" class="level3">
-<h3 class="anchored" data-anchor-id="q-api-key-不想写在配置文件里怎么办">Q: API Key 不想写在配置文件里怎么办？</h3>
-<p>用环境变量代替：</p>
-<pre class="jsonc"><code>"apiKey": "{env:MY_API_KEY}"</code></pre>
-<p>然后在终端里 <code>export MY_API_KEY=sk-xxx</code> 或写入 <code>~/.zshrc</code>。</p>
-</section>
-<section id="q-本地服务9routerollama-等需要-apikey-吗" class="level3">
-<h3 class="anchored" data-anchor-id="q-本地服务9routerollama-等需要-apikey-吗">Q: 本地服务（9Router/Ollama 等）需要 apiKey 吗？</h3>
-<p>不需要。<code>baseURL</code> 指向 <code>localhost</code> 时，<code>apiKey</code> 字段可以直接省略。</p>
-</section>
-<section id="q-模型-id-在哪查看" class="level3">
-<h3 class="anchored" data-anchor-id="q-模型-id-在哪查看">Q: 模型 ID 在哪查看？</h3>
+<section id="核心概念" class="level2">
+<h2 class="anchored" data-anchor-id="核心概念">核心概念</h2>
 <ul>
-<li>内置服务商：使用 <code>/models</code> 命令查看</li>
-<li>本地服务（如 9Router/Ollama）：访问 <code>http://localhost:PORT/v1/models</code></li>
-<li>服务商文档</li>
+<li><strong>Graph</strong>：整個知識圖譜，存在 <code>graph.json</code></li>
+<li><strong>Node（節點）</strong>：檔案中的一個概念（類別、函數、變數、文件段落等）</li>
+<li><strong>Edge（邊）</strong>：節點之間的關係，標記為 <code>EXTRACTED</code>（來源明確引用）或 <code>INFERRED</code>（推理得出）</li>
+<li><strong>Community（社群）</strong>：Leiden 演算法自動聚類出的子系統</li>
+<li><strong>God node</strong>：圖中度數最高的節點（連接最多東西的 core concept）</li>
 </ul>
+<hr>
 </section>
-<section id="q-原来用-connect-添加的提供商需要写进配置文件吗" class="level3">
-<h3 class="anchored" data-anchor-id="q-原来用-connect-添加的提供商需要写进配置文件吗">Q: 原来用 <code>/connect</code> 添加的提供商需要写进配置文件吗？</h3>
-<p>不需要。<code>/connect</code> 会自动把凭证存到 <code>~/.local/share/opencode/auth.json</code>，provider 和 models 在启动时自动加载。配置文件只用于<strong>自定义 provider</strong> 或<strong>覆盖默认设置</strong>。</p>
+<section id="技術原理" class="level2">
+<h2 class="anchored" data-anchor-id="技術原理">技術原理</h2>
+<pre><code>程式碼檔案 ──→ tree-sitter AST 解析 ──→ 提取節點+邊（calls/imports/inherits）
+                                              │
+文件/PDF/圖片 ──→ LLM 語義提取 ───────────────┘
+                                              │
+                                              ↓
+                                     NetworkX 圖結構
+                                              │
+                                              ↓
+                              ┌── graph.html（vis.js 視覺化）
+                              ├── GRAPH_REPORT.md
+                              └── graph.json（供查詢遍歷）</code></pre>
+<ul>
+<li>程式碼解析：<strong>tree-sitter</strong>，確定性、無成本、全本地</li>
+<li>社群檢測：<strong>Leiden 演算法</strong>（graspologic）</li>
+<li>圖儲存：<strong>NetworkX</strong></li>
+<li>查詢方式：<strong>圖遍歷</strong>（不是 vector search，沒有 embedding）</li>
+</ul>
+<hr>
 </section>
-<section id="q-配置里的-npm-字段是什么意思" class="level3">
-<h3 class="anchored" data-anchor-id="q-配置里的-npm-字段是什么意思">Q: 配置里的 <code>npm</code> 字段是什么意思？</h3>
-<p><code>"npm": "@ai-sdk/openai-compatible"</code> 指定使用哪个 AI SDK 适配器包。只要是提供 OpenAI 兼容接口的服务，都用这个。你无需手动安装它——Node.js 的模块解析会自动找到。</p>
+<section id="隱私" class="level2">
+<h2 class="anchored" data-anchor-id="隱私">隱私</h2>
+<ul>
+<li>程式碼檔案：<strong>完全本地</strong>，永不離開你的機器。Code-only 專案甚至不需要 API Key</li>
+<li>影片/音檔：<strong>本地轉文字</strong>（faster-whisper）</li>
+<li>文件/PDF/圖片：可選後端（Ollama 全本地 / Claude / OpenAI / Gemini / DeepSeek）</li>
+<li><strong>無遙測、無使用追蹤、無分析</strong></li>
+</ul>
+<hr>
 </section>
-<section id="q-改完配置后模型不出现怎么办" class="level3">
-<h3 class="anchored" data-anchor-id="q-改完配置后模型不出现怎么办">Q: 改完配置后模型不出现怎么办？</h3>
-<ol type="1">
-<li><strong>确认完全退出了 opencode 再重启</strong>（不是切 session）</li>
-<li><strong>检查 <code>models</code> 块是否存在</strong>——没有它，整个 provider 被静默跳过</li>
-<li>查看启动日志确认 provider 是否加载：<code>ls -t ~/.local/share/opencode/log/ | head -1 | xargs grep provider</code></li>
-<li>检查 JSON 语法是否有误（尾逗号、引号配对）</li>
-</ol>
+<section id="與其他方案對比" class="level2">
+<h2 class="anchored" data-anchor-id="與其他方案對比">與其他方案對比</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 44%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Graphify</th>
+<th>向量資料庫（RAG）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>儲存方式</td>
+<td>圖結構（節點+邊）</td>
+<td>向量 embedding</td>
+</tr>
+<tr class="even">
+<td>解析方式</td>
+<td>AST + LLM 語義</td>
+<td>chunk + embedding</td>
+</tr>
+<tr class="odd">
+<td>查詢方式</td>
+<td>圖遍歷</td>
+<td>相似度搜尋</td>
+</tr>
+<tr class="even">
+<td>跨檔案關聯</td>
+<td>原生支援（明確邊）</td>
+<td>需要額外處理</td>
+</tr>
+<tr class="odd">
+<td>結果可溯源</td>
+<td>每個邊有 EXTRACTED/INFERRED 標籤</td>
+<td>黑盒子</td>
+</tr>
+<tr class="even">
+<td>LLM 成本（Code only）</td>
+<td>0</td>
+<td>每次都要</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="下一步" class="level2">
+<h2 class="anchored" data-anchor-id="下一步">下一步</h2>
+<ul>
+<li>官方網站：<a href="https://graphify.com">graphify.com</a></li>
+<li>GitHub：<a href="https://github.com/Graphify-Labs/graphify">github.com/Graphify-Labs/graphify</a></li>
+<li>在專案中跑一次 <code>/graphify .</code> 體驗看看</li>
+</ul>
 
 
-</section>
 </section>
 </section>
 

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-08-10">
+
+<title>DeepTutor 项目分析与使用指南</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">知有誰</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">DeepTutor 项目分析与使用指南</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">介绍</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 10, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="deeptutor-项目分析与使用指南" class="level1">
+<h1>DeepTutor 项目分析与使用指南</h1>
+<blockquote class="blockquote">
+<p>项目地址：<a href="https://github.com/HKUDS/DeepTutor">HKUDS/DeepTutor</a><br>
+分析基准：2026 年 8 月 10 日，<code>main</code> 分支，v1.5.11<br>
+一句话结论：它是一套可以自己部署的 AI 学习工作台，适合拿自己的教材、论文和笔记做问答、解题、出题、研究和写作，但需要自己准备大模型，并承担模型费用、部署和数据安全方面的责任。</p>
+</blockquote>
+<section id="先说人话它到底是什么" class="level2">
+<h2 class="anchored" data-anchor-id="先说人话它到底是什么">先说人话：它到底是什么</h2>
+<p>DeepTutor 可以理解成“把 ChatGPT、个人资料库、错题本、研究助手和写作工具装进同一个网站”。</p>
+<p>你可以先上传教材、讲义、PDF、Word、PPT 等资料，让它建立知识库。以后提问时，它不只是凭大模型自己的记忆回答，还可以先从你的资料里找相关内容，再结合模型生成答案。这种“先查资料，再回答”的做法通常叫 RAG。</p>
+<p>它又不只做资料问答。你还可以让它：</p>
+<ul>
+<li>一步步讲题，而不是只扔出答案；</li>
+<li>根据教材生成选择题、问答题和练习计划；</li>
+<li>搜索网页或论文，整理成带引用的研究报告；</li>
+<li>把难懂的概念做成图表、流程图、动画或交互页面；</li>
+<li>保存笔记、错题、聊天记录和长期学习偏好；</li>
+<li>根据资料生成一套可以边读边问、边读边测的“交互式书”；</li>
+<li>在 Markdown 写作台里改报告、写教程、整理学习笔记；</li>
+<li>接入 Claude Code、Codex、Gemini CLI、MCP 工具和聊天软件机器人。</li>
+</ul>
+<p>所以，它更像一个“AI 学习操作台”，不是一个单独的聊天机器人。</p>
+</section>
+<section id="它最有用的地方" class="level2">
+<h2 class="anchored" data-anchor-id="它最有用的地方">它最有用的地方</h2>
+<section id="围绕自己的材料学习" class="level3">
+<h3 class="anchored" data-anchor-id="围绕自己的材料学习">1. 围绕自己的材料学习</h3>
+<p>这是最实用的功能。</p>
+<p>例如你有一本 600 页的机器学习教材、一批课程 PPT 和老师发的习题。可以把它们放进同一个知识库，然后这样问：</p>
+<pre class="text"><code>只根据我上传的教材，解释交叉熵和 KL 散度的关系，并指出对应章节。</code></pre>
+<pre class="text"><code>根据第 3 章到第 5 章给我出 10 道题，先不要公布答案，我答完后再逐题讲。</code></pre>
+<pre class="text"><code>比较讲义和教材对过拟合的解释，有冲突的地方列出来。</code></pre>
+<p>与直接把一份 PDF 临时丢进普通聊天窗口相比，DeepTutor 的优点是资料可以长期保存，并在聊天、写作、出题、Book 和 Partner 等多个功能中重复使用。</p>
+</section>
+<section id="把问答案变成练习和反馈" class="level3">
+<h3 class="anchored" data-anchor-id="把问答案变成练习和反馈">2. 把“问答案”变成“练习和反馈”</h3>
+<p>它提供 Quiz、Solve 和 Mastery Path 等学习模式。说白了，就是让模型不只回答问题，还能出题、检查答案、补薄弱点并安排下一轮练习。</p>
+<p>例如备考时可以让它：</p>
+<ol type="1">
+<li>根据指定章节出一组题；</li>
+<li>记录你的答案；</li>
+<li>解释错因；</li>
+<li>把错题放进题库；</li>
+<li>针对薄弱知识点继续出题。</li>
+</ol>
+<p>不过要注意，自动批改仍然是模型判断，不能当作权威评分。数学、法律、医学和工程安全等高风险内容，必须人工复核。</p>
+</section>
+<section id="做资料调研和报告" class="level3">
+<h3 class="anchored" data-anchor-id="做资料调研和报告">3. 做资料调研和报告</h3>
+<p>Research 模式可以调用网页搜索、论文搜索和知识库，生成带来源的报告。Co-Writer 则像一个带 AI 的 Markdown 编辑器：选中一段，要求扩写、缩写、改写或补证据，修改内容会以差异形式展示，确认后才写入。</p>
+<p>适合这些工作：</p>
+<ul>
+<li>课程论文的前期资料整理；</li>
+<li>文献主题归纳；</li>
+<li>技术路线对比；</li>
+<li>教案和教程编写；</li>
+<li>从多份内部文档整理说明书。</li>
+</ul>
+<p>引用能帮助核查，但不代表内容自动正确。最终仍应打开原文确认，不要只看模型生成的引用列表。</p>
+</section>
+<section id="建立长期学习档案" class="level3">
+<h3 class="anchored" data-anchor-id="建立长期学习档案">4. 建立长期学习档案</h3>
+<p>DeepTutor 的 Memory 不是完全藏在数据库里的黑箱，而是分成三层文件：</p>
+<ul>
+<li>L1：原始操作和对话记录；</li>
+<li>L2：按聊天、题库、知识库等场景整理出的事实；</li>
+<li>L3：跨场景总结出的个人资料、近期状态和偏好。</li>
+</ul>
+<p>你可以查看、修改和追溯这些记忆。例如它可以逐渐记住“你正在学概率论”“你容易混淆条件概率和联合概率”“你偏好先举例再讲公式”。</p>
+<p>这比每次重新介绍自己方便，但记忆摘要仍由模型生成，可能总结错。涉及个人信息时，也要把这些文件当作敏感数据保护。</p>
+</section>
+<section id="把同一套能力接到其他地方" class="level3">
+<h3 class="anchored" data-anchor-id="把同一套能力接到其他地方">5. 把同一套能力接到其他地方</h3>
+<p>Partner 可以理解成“有独立人设、资料库和记忆的长期 AI 助手”。它可以在 DeepTutor 网页中使用，也能按配置连接飞书、Telegram、Slack、Discord、钉钉、企业微信等聊天渠道。</p>
+<p>My Agents 则可以调用本机的 Claude Code、Codex、Gemini、Kimi、OpenCode 或 MiMo Code CLI，也能导入部分工具的历史对话。</p>
+<p>这部分能力很强，但配置较多，更适合技术用户。只是想上传教材问问题的人，可以完全不碰它。</p>
+</section>
+</section>
+<section id="它不是魔法也不等于老师" class="level2">
+<h2 class="anchored" data-anchor-id="它不是魔法也不等于老师">它不是魔法，也不等于老师</h2>
+<p>项目名称中有 Tutor，但它不能保证真正“懂你”，也没有证据表明它可以稳定替代真人教师。</p>
+<p>它的实际效果主要取决于四件事：</p>
+<ol type="1">
+<li>你接入的大模型够不够强；</li>
+<li>上传资料的质量如何；</li>
+<li>文档是否被正确解析和检索；</li>
+<li>你的问题是否具体。</li>
+</ol>
+<p>模型太弱时，复杂工具调用可能失败、循环或输出格式错误。资料扫描质量差时，知识库可能根本没读对。检索到了原文，也不代表模型不会理解错。因此更准确的定位是“功能完整的 AI 学习与知识工作台”，而不是“答案永远正确的数字老师”。</p>
+</section>
+<section id="项目结构和工作原理" class="level2">
+<h2 class="anchored" data-anchor-id="项目结构和工作原理">项目结构和工作原理</h2>
+<p>不看代码也可以这样理解它的流程：</p>
+<pre class="text"><code>浏览器或命令行
+       ↓
+统一的任务调度器
+       ↓
+判断当前要聊天、解题、研究、出题还是画图
+       ↓
+大模型思考并按需调用知识库、搜索、记忆、代码等工具
+       ↓
+工具结果返回给大模型
+       ↓
+大模型整理最终答案，并保存会话和必要的记忆</code></pre>
+<p>代码层面主要分成这些部分：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>目录</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>deeptutor/</code></td>
+<td>Python 核心，包括 FastAPI 后端、智能体循环、知识库、记忆和工具</td>
+</tr>
+<tr class="even">
+<td><code>web/</code></td>
+<td>Next.js 16 + React 19 前端</td>
+</tr>
+<tr class="odd">
+<td><code>deeptutor_cli/</code></td>
+<td>基于 Typer 的命令行工具</td>
+</tr>
+<tr class="even">
+<td><code>packaging/deeptutor-cli/</code></td>
+<td>不带网页和服务器依赖的独立 CLI 包</td>
+</tr>
+<tr class="odd">
+<td><code>tests/</code></td>
+<td>后端测试</td>
+</tr>
+<tr class="even">
+<td><code>data/</code></td>
+<td>运行后生成的配置、聊天、记忆、知识库、日志和密钥等数据</td>
+</tr>
+</tbody>
+</table>
+<p>Web、CLI 和 SDK 共用同一个调度器，不是三套互不相干的实现。Chat、Quiz、Research、Visualize、Solve 和 Mastery Path 也大体共用同一套智能体循环，只是目标、提示和可用工具不同。</p>
+<section id="技术栈" class="level3">
+<h3 class="anchored" data-anchor-id="技术栈">技术栈</h3>
+<ul>
+<li>后端：Python 3.11 至 3.13、FastAPI、Uvicorn；</li>
+<li>前端：Next.js 16、React 19、TypeScript；</li>
+<li>默认知识库：LlamaIndex、本地向量检索、BM25、FAISS；</li>
+<li>其他知识库方案：PageIndex、GraphRAG、LightRAG、外部 LightRAG Server、Tencent IMA、Obsidian；</li>
+<li>存储：文件、SQLite，部分部署可接 PocketBase；</li>
+<li>部署：PyPI、源码、Docker、Docker Compose、Podman、CLI-only；</li>
+<li>许可证：Apache License 2.0。</li>
+</ul>
+</section>
+</section>
+<section id="使用前要准备什么" class="level2">
+<h2 class="anchored" data-anchor-id="使用前要准备什么">使用前要准备什么</h2>
+<section id="必需项" class="level3">
+<h3 class="anchored" data-anchor-id="必需项">必需项</h3>
+<ul>
+<li>一台能运行 Docker 的电脑，或者 Python 3.11 至 3.13 加 Node.js 20 以上；</li>
+<li>一个可用的大模型；</li>
+<li>云模型的 API Key，或已经运行的本地模型服务。</li>
+</ul>
+<p>程序可以在没配置模型时启动，但基本不能干活。</p>
+</section>
+<section id="知识库额外需要" class="level3">
+<h3 class="anchored" data-anchor-id="知识库额外需要">知识库额外需要</h3>
+<p>如果只做普通聊天，不需要 embedding 模型。</p>
+<p>如果要使用默认的本地知识库和 RAG，需要再配置一个 embedding 模型。它负责把文本转换成向量，方便从大量资料中找出与问题最相关的段落。可以使用 OpenAI、Gemini、Cohere、Jina、Ollama、DashScope、SiliconFlow 或兼容接口。</p>
+<p>更换 embedding 模型或向量维度后，旧知识库通常要重新建立索引，不能把不同模型生成的向量随便混用。</p>
+</section>
+<section id="钱花在哪里" class="level3">
+<h3 class="anchored" data-anchor-id="钱花在哪里">钱花在哪里</h3>
+<p>DeepTutor 本身开源免费，但不代表使用免费。可能产生费用的地方包括：</p>
+<ul>
+<li>大模型 API；</li>
+<li>embedding API；</li>
+<li>网页或论文搜索服务；</li>
+<li>PageIndex 等托管检索服务；</li>
+<li>图像、视频、语音生成；</li>
+<li>云端文档解析；</li>
+<li>IM 平台和远程 MCP 服务。</li>
+</ul>
+<p>Research、GraphRAG、Book 和记忆整理通常会发起多轮模型请求，比普通聊天更费 token。使用本地模型可以减少 API 费用，但会消耗自己的内存、显存、硬盘和电力。</p>
+</section>
+</section>
+<section id="最推荐的安装方式docker" class="level2">
+<h2 class="anchored" data-anchor-id="最推荐的安装方式docker">最推荐的安装方式：Docker</h2>
+<p>如果只是想用，不准备改源码，Docker 最省事，也更容易清理和迁移。</p>
+<section id="第一步启动" class="level3">
+<h3 class="anchored" data-anchor-id="第一步启动">第一步：启动</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">--name</span> deeptutor <span class="dt">\</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">-p</span> 127.0.0.1:3782:3782 <span class="dt">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">-v</span> deeptutor-data:/app/data <span class="dt">\</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  ghcr.io/hkuds/deeptutor:latest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>然后打开：</p>
+<pre class="text"><code>http://127.0.0.1:3782</code></pre>
+<p>命令中的 <code>127.0.0.1</code> 很重要，它让服务默认只从本机访问。第一次试用时，不要为了方便改成公网暴露。</p>
+</section>
+<section id="第二步配置大模型" class="level3">
+<h3 class="anchored" data-anchor-id="第二步配置大模型">第二步：配置大模型</h3>
+<p>进入：</p>
+<pre class="text"><code>Settings → Models → LLM</code></pre>
+<p>填写提供商、Base URL、API Key 和模型名称，然后先做连接测试。可以选择 OpenAI、Anthropic、Gemini、DeepSeek、Qwen、Kimi、OpenRouter、Azure OpenAI 或 OpenAI-compatible 接口等。</p>
+<p>如果使用本机 Ollama，Docker 里的 <code>localhost</code> 指的是容器自己，不是你的电脑。Base URL 通常要填写：</p>
+<pre class="text"><code>http://host.docker.internal:11434/v1</code></pre>
+<p>Linux 运行 Docker 时，启动命令可能还需要加入：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">--add-host=host.docker.internal:host-gateway</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="第三步先测试普通聊天" class="level3">
+<h3 class="anchored" data-anchor-id="第三步先测试普通聊天">第三步：先测试普通聊天</h3>
+<p>不要一上来就装 GraphRAG、MCP 和十几个插件。先在 Chat 中问一个简单问题，确认模型输出、中文和流式响应都正常。</p>
+<p>例如：</p>
+<pre class="text"><code>用生活中的例子解释贝叶斯公式，然后出一道简单题让我回答。</code></pre>
+</section>
+<section id="第四步配置-embedding" class="level3">
+<h3 class="anchored" data-anchor-id="第四步配置-embedding">第四步：配置 embedding</h3>
+<p>要上传教材建立默认知识库，再进入：</p>
+<pre class="text"><code>Settings → Models → Embedding</code></pre>
+<p>配置 embedding 提供商并测试连接。本地 Ollama embedding 的地址通常是：</p>
+<pre class="text"><code>http://host.docker.internal:11434/api/embed</code></pre>
+</section>
+<section id="第五步建立知识库" class="level3">
+<h3 class="anchored" data-anchor-id="第五步建立知识库">第五步：建立知识库</h3>
+<p>进入 Knowledge Center：</p>
+<ol type="1">
+<li>新建知识库；</li>
+<li>初次使用选择默认的 LlamaIndex 即可；</li>
+<li>上传 PDF、DOCX、PPTX、XLSX 或文本资料；</li>
+<li>等待解析和索引完成；</li>
+<li>在 Chat 中选择该知识库后提问；</li>
+<li>要求回答附来源，并抽查原文。</li>
+</ol>
+<p>遇到扫描版 PDF、公式多或版式复杂的文件时，默认文本解析效果可能不好。项目支持 MinerU、Docling、MarkItDown 和 PyMuPDF4LLM 等解析器，但部分需要额外依赖或服务。先用默认方案，确实读不准再更换。</p>
+</section>
+<section id="停止和再次启动" class="level3">
+<h3 class="anchored" data-anchor-id="停止和再次启动">停止和再次启动</h3>
+<p>前台运行时按 <code>Ctrl+C</code> 停止。因为示例使用了 <code>--rm</code>，容器会被删除，但 <code>deeptutor-data</code> 数据卷仍然保留配置和资料。再次执行同一条 <code>docker run</code> 命令即可继续使用。</p>
+<p>查看数据卷：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume inspect deeptutor-data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="不用-docker从-pypi-安装" class="level2">
+<h2 class="anchored" data-anchor-id="不用-docker从-pypi-安装">不用 Docker：从 PyPI 安装</h2>
+<p>这种方式适合熟悉 Python 环境的人。</p>
+<p>要求：</p>
+<ul>
+<li>Python 3.11 至 3.13；</li>
+<li>Node.js 20 以上；</li>
+<li>建议单独建立工作目录和虚拟环境。</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> my-deeptutor</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> my-deeptutor</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-U</span> deeptutor</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> init</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> start</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>deeptutor init</code> 会询问端口、LLM 和可选 embedding。默认前端端口是 <code>3782</code>，后端端口是 <code>8001</code>。启动后打开终端显示的网址，通常也是 <code>http://127.0.0.1:3782</code>。</p>
+<p>Windows PowerShell 激活虚拟环境可使用：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本地安装默认可能在宿主机的受限子进程中运行模型生成的代码。对安全边界没有把握时，优先使用 Docker，并阅读后面的安全说明。</p>
+</section>
+<section id="开发者从源码启动" class="level2">
+<h2 class="anchored" data-anchor-id="开发者从源码启动">开发者：从源码启动</h2>
+<p>准备 Python 3.11 至 3.13 和 Node.js 22 LTS：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/HKUDS/DeepTutor.git</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> DeepTutor</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> venv .venv</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">--upgrade</span> pip</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> web</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> ci <span class="at">--legacy-peer-deps</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> init</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> start <span class="at">--dev</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>--dev</code> 会以开发模式启动前端，支持热更新。源码体量已经很大，涉及后端、前端、多种 RAG、工具调用、多用户和容器部署，不适合当作一个下午就能完全看懂的小项目。</p>
+</section>
+<section id="命令行用法" class="level2">
+<h2 class="anchored" data-anchor-id="命令行用法">命令行用法</h2>
+<p>不想开网页，可以使用 CLI：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> chat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>单次提问：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> run chat <span class="st">"用通俗语言解释傅里叶变换"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>使用解题能力：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> run deep_solve <span class="st">"解方程 x^2 - 5x + 6 = 0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>创建知识库：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> kb create textbook <span class="at">--doc</span> textbook.pdf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>指定知识库解题：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> run deep_solve <span class="st">"根据教材解释这道题"</span> <span class="at">--tool</span> rag <span class="at">--kb</span> textbook</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>查看配置和记忆：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> config show</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> memory show</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>只安装 CLI 的精简包目前要从源码仓库安装：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-e</span> ./packaging/deeptutor-cli</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> init <span class="at">--cli</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">deeptutor</span> chat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="推荐的日常使用流程" class="level2">
+<h2 class="anchored" data-anchor-id="推荐的日常使用流程">推荐的日常使用流程</h2>
+<p>如果你的目标是“用自己的教材认真学一门课”，建议这样用：</p>
+<ol type="1">
+<li>先配置一个工具调用能力较好的 LLM；</li>
+<li>配置 embedding；</li>
+<li>按课程或主题建立知识库，不要把所有文件都塞进一个库；</li>
+<li>上传资料后先问几道有明确答案的问题，检查引用是否准确；</li>
+<li>用 Chat 解释概念，用 Solve 讲题；</li>
+<li>每学完一章，用 Quiz 生成练习；</li>
+<li>把错题加入题库，把重要总结放进笔记；</li>
+<li>每隔一段时间检查 Memory，删掉错误总结；</li>
+<li>最后再尝试 Mastery Path、Book、GraphRAG 等复杂功能。</li>
+</ol>
+<p>一个比较好的提示词模板：</p>
+<pre class="text"><code>请只根据我选择的知识库回答。
+先用两三句话说结论，再分步骤解释。
+每个关键结论注明资料来源和页码；如果资料不足，直接说不知道，不要补写。
+最后出两道检查理解的小题，先不要给答案。</code></pre>
+</section>
+<section id="数据隐私和安全" class="level2">
+<h2 class="anchored" data-anchor-id="数据隐私和安全">数据、隐私和安全</h2>
+<p>这是使用 DeepTutor 前必须看的一节。</p>
+<section id="本地部署不等于数据不出电脑" class="level3">
+<h3 class="anchored" data-anchor-id="本地部署不等于数据不出电脑">本地部署不等于数据不出电脑</h3>
+<p>DeepTutor 程序可以在本地运行，但只要你使用云端 LLM、embedding、搜索、文档解析、PageIndex、Tencent IMA、IM 或远程 MCP，相关提示词、附件片段或检索内容就可能发送给第三方。</p>
+<p>是否保存、是否用于训练、是否符合学校或公司的合规要求，要看每个服务商自己的条款。不要把涉密资料、学生个人信息或未授权教材直接交给云服务。</p>
+</section>
+<section id="data-要当作敏感目录" class="level3">
+<h3 class="anchored" data-anchor-id="data-要当作敏感目录"><code>data/</code> 要当作敏感目录</h3>
+<p>运行数据主要放在 <code>data/</code>，其中可能包括：</p>
+<ul>
+<li>API Key 和 OAuth 凭据；</li>
+<li>聊天记录和附件；</li>
+<li>个人学习记忆；</li>
+<li>知识库和解析缓存；</li>
+<li>日志、账号和权限信息。</li>
+</ul>
+<p>配置是普通 JSON/YAML 文件，不能假设默认进行了静态加密。备份、同步和分享整个目录前要检查内容，并限制文件访问权限。</p>
+</section>
+<section id="模型生成代码会被执行" class="level3">
+<h3 class="anchored" data-anchor-id="模型生成代码会被执行">模型生成代码会被执行</h3>
+<p>Office 技能可以生成 DOCX、PDF、PPTX 和 XLSX。实现方式不是模型直接吐出文件，而是模型写 Python 脚本，再由 DeepTutor 执行。</p>
+<p>本地安装和单容器部署中，<code>sandbox_allow_subprocess</code> 默认开启。它虽然有一定限制，但运行模型生成代码始终是实际风险。不需要文件生成功能时，可以在 <code>data/user/settings/system.json</code> 中关闭：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"sandbox_allow_subprocess"</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>安全要求较高时，使用带独立 sandbox runner sidecar 的 Docker Compose 方案，比在主应用或宿主机里直接运行更稳妥。</p>
+</section>
+<section id="不要裸奔到公网" class="level3">
+<h3 class="anchored" data-anchor-id="不要裸奔到公网">不要裸奔到公网</h3>
+<p>默认认证是关闭的，官方 Docker 示例只绑定 <code>127.0.0.1</code>，适合个人本机使用。如果要让局域网或公网访问，至少需要：</p>
+<ul>
+<li>启用认证；</li>
+<li>配置精确的 CORS 来源；</li>
+<li>使用 HTTPS 和反向代理；</li>
+<li>限制注册、工具、MCP 和代码执行权限；</li>
+<li>做好 <code>data/</code> 备份和访问控制；</li>
+<li>定期更新版本并查看安全问题。</li>
+</ul>
+<p>项目的多用户模式更适合彼此信任的邀请制小团队，不适合互不信任的公开租户。仓库自己的 Compose 注释也说明，runner 对普通用户数据的隔离并非严格的租户级安全边界。</p>
+</section>
+<section id="社区插件也有供应链风险" class="level3">
+<h3 class="anchored" data-anchor-id="社区插件也有供应链风险">社区插件也有供应链风险</h3>
+<p>Skills、MCP 服务和 CLI Apps 都能扩展能力，也会扩大权限和攻击面。不要因为页面上能“一键安装”就默认可信。安装前检查来源、脚本、权限和网络访问范围。</p>
+<p>上传的文档和抓取的网页还可能包含提示注入内容，诱导模型泄露信息或调用危险工具。对来源不明的材料，应减少可用工具和权限。</p>
+</section>
+</section>
+<section id="优点" class="level2">
+<h2 class="anchored" data-anchor-id="优点">优点</h2>
+<section id="功能真正连在一起" class="level3">
+<h3 class="anchored" data-anchor-id="功能真正连在一起">功能真正连在一起</h3>
+<p>知识库、笔记、题库、记忆、写作和聊天可以互相引用，不是很多独立 Demo 的简单拼盘。Web 和 CLI 也共用后端调度逻辑。</p>
+</section>
+<section id="知识库选择多" class="level3">
+<h3 class="anchored" data-anchor-id="知识库选择多">知识库选择多</h3>
+<p>默认 LlamaIndex 已够多数人使用，高级用户还可以选择 PageIndex、GraphRAG、LightRAG、Obsidian 等方案。索引支持版本化重建，重建失败时不必马上破坏旧索引。</p>
+</section>
+<section id="记忆相对透明" class="level3">
+<h3 class="anchored" data-anchor-id="记忆相对透明">记忆相对透明</h3>
+<p>三层记忆保存为可以检查的文件，并提供追溯关系，比完全隐藏的“模型记住了你”更容易纠错。</p>
+</section>
+<section id="安装路径比较完整" class="level3">
+<h3 class="anchored" data-anchor-id="安装路径比较完整">安装路径比较完整</h3>
+<p>项目提供 PyPI、Docker 镜像、源码开发、CLI-only 和多种 Compose 方案。Apache 2.0 许可证也方便研究、修改和二次开发。</p>
+</section>
+<section id="工程化不只是演示级" class="level3">
+<h3 class="anchored" data-anchor-id="工程化不只是演示级">工程化不只是演示级</h3>
+<p>仓库有大量 Python 和前端测试，CI 覆盖 Python 3.11 至 3.13、前端测试、代码格式和导入检查。代码对流式响应、上下文窗口、工具重试、缓存、索引版本和多用户路径等问题都有专门处理。</p>
+</section>
+</section>
+<section id="缺点和现实成本" class="level2">
+<h2 class="anchored" data-anchor-id="缺点和现实成本">缺点和现实成本</h2>
+<section id="功能太多学习成本不低" class="level3">
+<h3 class="anchored" data-anchor-id="功能太多学习成本不低">功能太多，学习成本不低</h3>
+<p>Chat、Knowledge、Memory、Book、Partner、MCP、Skills、CLI Apps 和多种 RAG 同时存在，新用户很容易不知道从哪开始。最好的办法是先只用 Chat 和默认知识库。</p>
+</section>
+<section id="对模型能力有要求" class="level3">
+<h3 class="anchored" data-anchor-id="对模型能力有要求">对模型能力有要求</h3>
+<p>普通问答很多模型都能做，但复杂研究、多轮工具、结构化出题和 Book 生成更依赖强模型。小型本地模型即使接口兼容，也不一定稳定。</p>
+</section>
+<section id="高级功能可能很烧钱" class="level3">
+<h3 class="anchored" data-anchor-id="高级功能可能很烧钱">高级功能可能很烧钱</h3>
+<p>GraphRAG 建索引、长报告、Book 和多智能体调用都可能产生大量请求。一定要设置预算和 token 上限，先用小资料测试。</p>
+</section>
+<section id="部署矩阵复杂" class="level3">
+<h3 class="anchored" data-anchor-id="部署矩阵复杂">部署矩阵复杂</h3>
+<p>云模型、本地模型、Docker、反向代理、WebSocket、OAuth、CORS、多用户和代码沙箱组合起来后，排错难度明显增加。</p>
+</section>
+<section id="仍是快速变化中的年轻项目" class="level3">
+<h3 class="anchored" data-anchor-id="仍是快速变化中的年轻项目">仍是快速变化中的年轻项目</h3>
+<p>项目首发时间不长，版本更新很快，近期发布记录仍持续修复工具调用、内存、RAG、多用户授权和输出隔离问题。活跃是好事，也意味着升级后可能遇到配置或行为变化。</p>
+</section>
+<section id="测试多不等于所有场景都成熟" class="level3">
+<h3 class="anchored" data-anchor-id="测试多不等于所有场景都成熟">测试多，不等于所有场景都成熟</h3>
+<p>自动化测试主要证明代码经过了检查，不证明教学效果、答案正确率、企业级安全或隐私合规。仓库的浏览器端到端测试和完整容器拓扑验证也没有完全覆盖所有组合。</p>
+</section>
+</section>
+<section id="适合谁" class="level2">
+<h2 class="anchored" data-anchor-id="适合谁">适合谁</h2>
+<ul>
+<li>想用自己的教材、论文和笔记建立长期 AI 学习空间的人；</li>
+<li>愿意配置 API 或本地模型的学生、研究者和教师；</li>
+<li>想把 RAG、出题、研究、写作和记忆放在一个系统里的技术用户；</li>
+<li>需要私有部署，并愿意自己管理数据和安全的小团队；</li>
+<li>想研究智能体、RAG、学习记忆和工具调用架构的开发者。</li>
+</ul>
+</section>
+<section id="不适合谁" class="level2">
+<h2 class="anchored" data-anchor-id="不适合谁">不适合谁</h2>
+<ul>
+<li>只想打开网页就用，不想配置模型或处理部署问题的人；</li>
+<li>只需要最简单的 PDF 问答，且不需要记忆、题库和写作等功能的人；</li>
+<li>希望完全免费，同时又不愿运行本地模型的人；</li>
+<li>要求答案绝对正确、可以无人复核自动评分的场景；</li>
+<li>医疗、法律、安全工程和正式考试等高风险用途；</li>
+<li>需要互联网公开注册、强租户隔离和完整合规审计的平台；</li>
+<li>有严格保密资料，却准备接入多个云服务和第三方插件的组织。</li>
+</ul>
+</section>
+<section id="最终评价" class="level2">
+<h2 class="anchored" data-anchor-id="最终评价">最终评价</h2>
+<p>DeepTutor 的价值不在于“它比所有聊天机器人更聪明”，而在于它把学习过程中常见的材料、提问、练习、笔记、研究、写作和长期记忆串在了一起。对愿意折腾的用户，它可以成为一套很完整的个人 AI 学习基础设施。</p>
+<p>但它并不是装完就自动变成名师。模型质量、资料质量、检索效果、费用控制和安全配置都需要使用者负责。普通用户应从 Docker、一个可靠的 LLM 和默认 LlamaIndex 知识库开始，先确认“能稳定根据自己的资料回答”，再逐步开启其他能力。</p>
+<p>如果你的需求只是偶尔问一份 PDF，它可能太重；如果你想长期维护自己的课程资料、错题、笔记和学习记忆，它才真正有优势。</p>
+</section>
+<section id="资料来源" class="level2">
+<h2 class="anchored" data-anchor-id="资料来源">资料来源</h2>
+<ul>
+<li><a href="https://github.com/HKUDS/DeepTutor">DeepTutor GitHub 仓库</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/blob/main/README.md">官方英文 README</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/blob/main/assets/README/README_CN.md">官方中文 README</a></li>
+<li><a href="https://deeptutor.info/">官方文档站</a></li>
+<li><a href="https://docs.deeptutor.info/get-started/pypi/">PyPI 安装说明</a></li>
+<li><a href="https://docs.deeptutor.info/get-started/docker/">Docker 安装说明</a></li>
+<li><a href="https://docs.deeptutor.info/get-started/providers/">模型提供商说明</a></li>
+<li><a href="https://docs.deeptutor.info/explore/knowledge/">知识库说明</a></li>
+<li><a href="https://docs.deeptutor.info/get-started/multi-user/">多用户说明</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/blob/main/CONTAINERIZATION.md">容器和安全说明</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/blob/main/pyproject.toml">Python 项目配置</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/blob/main/web/package.json">前端项目配置</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/blob/main/LICENSE">Apache 2.0 许可证</a></li>
+<li><a href="https://github.com/HKUDS/DeepTutor/releases/tag/v1.5.11">v1.5.11 发布说明</a></li>
+</ul>
+<blockquote class="blockquote">
+<p>本文根据指定日期的仓库内容整理。DeepTutor 更新很快，实际安装前应再次查看 README、Release 和官方文档。</p>
+</blockquote>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/your-website-url\.example\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
