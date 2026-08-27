@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-08-27">
+
+<title>Graphify 入門指南</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">知有誰</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Graphify 入門指南</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">资讯</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 27, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="command-code-goat-套餐-满额-70-模型深度对比报告" class="level1">
+<h1>Command Code GOAT 套餐 · 满额 $70 模型深度对比报告</h1>
+<blockquote class="blockquote">
+<p><strong>研究问题</strong>：Command Code GOAT（$10/月，月额度 $70）在其 30+ 模型中，有 4 款享有「满额待遇」——每月按原价计费可达 $70 usage。本文回答：这 4 款是谁？它们有什么本质区别？同一个 $70 在它们身上能烧多久？该怎么选？</p>
+<p><strong>核心结论（先说）</strong>： - <strong>4 款满额模型 = GPT-5.6 Sol / GLM-5.2 / Tencent Hy3 / Qwen 3.8 27B</strong>。其余 27+ 模型额度为 $60、$47、$40、$33、$30、$20 递减。 - <strong>$70 ≠ 可叠加池</strong>：是「每模型独立上限」，不是把 4×$70 合成 $280 通用余额。选哪个模型，就扣哪个模型的独立额度池。 - <strong>性价比极差分化</strong>：同样烧 $70，Tencent Hy3 能跑的请求数约为 GPT-5.6 Sol 的 <strong>30-35 倍</strong>。GLM-5.2 居中，Qwen 27B 偏向 Hy3 一侧。 - <strong>一句话选型</strong>：要最强 → Sol；要日用主力 → GLM-5.2；要最省/批量跑 → Hy3；要轻量多模态/端侧 → Qwen 27B。</p>
+<p><strong>数据时效</strong>：基于 <code>commandcode.ai/docs/plans/goat</code>、<code>commandcode.ai/pricing</code>、<code>commandcode.ai/models</code> 与 <code>pricing-limits</code> 截至 2026-08-26 的公开快照；模型能力分引用 Artificial Analysis Intelligence Index v4.1 与官方 System Card。每行价格均可在对应模型页交叉验证。</p>
+</blockquote>
+<hr>
+<section id="目录" class="level2">
+<h2 class="anchored" data-anchor-id="目录">目录</h2>
+<ol type="1">
+<li><a href="#1-goat-的-70-到底是什么">GOAT 的 $70 到底是什么</a></li>
+<li><a href="#2-谁是满额四强确认名单与证据">谁是满额四强：确认名单与证据</a></li>
+<li><a href="#3-总览对比表7-维">总览对比表（7 维）</a></li>
+<li><a href="#4-价格与额度耐用度同一个-70-能活多久">价格与额度耐用度：同一个 $70 能活多久</a></li>
+<li><a href="#5-智能与编码能力对比分数会说话">智能与编码能力对比：分数会说话</a></li>
+<li><a href="#6-四模型深度画像">四模型深度画像</a>
+<ul>
+<li>6.1 GPT-5.6 Sol — 旗舰推理，贵但最强</li>
+<li>6.2 GLM-5.2 — 日用主力的甜点</li>
+<li>6.3 Tencent Hy3 — 极致便宜的批量机器</li>
+<li>6.4 Qwen 3.8 27B — 轻量旗舰的端侧答案</li>
+</ul></li>
+<li><a href="#7-七维雷达与场景矩阵">七维雷达与场景矩阵</a></li>
+<li><a href="#8-额度机制与窗口限制别被-5-小时卡住">额度机制与窗口限制：别被 5 小时卡住</a></li>
+<li><a href="#9-实战选型与额度策略可直接抄">实战选型与额度策略（可直接抄）</a></li>
+<li><a href="#10-常见误区与坑位">常见误区与坑位</a></li>
+<li><a href="#11-最终建议与升级路径">最终建议与升级路径</a></li>
+<li><a href="#附录-a数据来源与交叉验证">附录 A：数据来源与交叉验证</a></li>
+<li><a href="#附录-b研究方法与计算假设">附录 B：研究方法与计算假设</a></li>
+</ol>
+<hr>
+</section>
+<section id="goat-的-70-到底是什么" class="level2">
+<h2 class="anchored" data-anchor-id="goat-的-70-到底是什么">1. GOAT 的 $70 到底是什么</h2>
+<section id="定价本质" class="level3">
+<h3 class="anchored" data-anchor-id="定价本质">1.1 定价本质</h3>
+<ul>
+<li><strong>你付 $10，拿到的是 usage-value 额度</strong>，不是现金。官方表述为 “Your $10 buys $70 of credits — a 7× multiplier, the highest of any $10 coding plan”。有短期 Deal 时可拉到 &gt;$100 有效使用。</li>
+<li><strong>额度是按模型独立计量的</strong>。原文：<em>Where we’ve negotiated capacity, credits are boosted — up to the full $70 on models like GPT-5.6 Sol, GLM-5.2 and Tencent Hy3… New models start at 2x credits ($20)</em>。即每个模型有一个独立的月度上限（Monthly credits），用 Sol 就扣 Sol 的 $70 池，用 Hy3 就扣 Hy3 的 $70 池，互不通用、也不可合并透支。</li>
+<li><strong>滚动窗口限额</strong>：在月度 $70 之上，GOAT 还有两道滚动限额——<strong>$14 / 5 小时</strong> 与 <strong>$35 / 7 天</strong>。这是为了防止一次长会话把整月烧光。额外购买的 pay-as-you-go credits 不受窗口限制、用完月度额度后自动优先消耗。</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>通俗理解</strong>：GOAT 给你 4 把「满额钥匙」（每把可开 $70 的对应模型的门），而不是一张 $280 通用卡。你同时只能用一把钥匙开一扇门。</p>
+</blockquote>
+</section>
+<section id="为什么只有-4-款是满额" class="level3">
+<h3 class="anchored" data-anchor-id="为什么只有-4-款是满额">1.2 为什么只有 4 款是满额</h3>
+<p>Command Code 与上游模型方直接谈容量与缓存路由。其 95-98% 的 cache hit 率与 harness 层面的 tool-call 修复，让它能在部分模型上谈到深度折扣并把优惠“固化”为更高的月度额度。谈成的 → $70；谈到一半的 → $60/$47；刚上线还在谈的 → $20 起步，后续自动上调，无需切套餐或输兑换码。</p>
+</section>
+<section id="四档之外还有什么" class="level3">
+<h3 class="anchored" data-anchor-id="四档之外还有什么">1.3 四档之外还有什么</h3>
+<ul>
+<li><strong>Free 档</strong>：Laguna S 2.1、Ling 3.0 Flash、MiniMax M3/M2.7 免费版在容量允许期内请求 cost $0，不扣额度。</li>
+<li><strong>Deal 档</strong>：Gemini 3.7 Flash 50% off（至 2026-12-31）、MiniMax M3 50% off、MiMo V2.5/Pro 98-99% off 等。Deal 会把“每 credit 能换的 token”再放大，GOAT 的 $40（Gemini 案例）可等效 ~$80 list-price 使用量。</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="谁是满额四强确认名单与证据" class="level2">
+<h2 class="anchored" data-anchor-id="谁是满额四强确认名单与证据">2. 谁是满额四强：确认名单与证据</h2>
+<p>以 <code>commandcode.ai/docs/plans/goat</code> 的 <strong>Monthly credits</strong> 列为准，筛选值 = $70 的行：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>模型</th>
+<th>Monthly credits</th>
+<th>Input / Output / Cache-read (/1M)</th>
+<th>证据位置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>GPT-5.6 Sol</strong></td>
+<td><strong>$70</strong></td>
+<td>$5.00 / $30.00 / $0.50 (cache write $6.25)</td>
+<td>GOAT 页表 1 行 1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>GLM-5.2</strong></td>
+<td><strong>$70</strong></td>
+<td>$1.40 / $4.40 / $0.26</td>
+<td>GOAT 页表 1 行 2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>Tencent Hy3</strong></td>
+<td><strong>$70</strong></td>
+<td>$0.14 / $0.58 / $0.035</td>
+<td>GOAT 页表 1 行 3</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>Qwen 3.8 27B</strong></td>
+<td><strong>$70</strong></td>
+<td>$0.40 / $3.00 / $0.04</td>
+<td>GOAT 页表 1 行 4</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>下一行即 <strong>DeepSeek V4 Flash / Kimi K2.7 Code = $60</strong>，<strong>MiniMax M3 = $47</strong>，<strong>GLM-5.3 Flash = $40</strong>，其余递减至 $20。完整分级见第 3 章总表。</p>
+</blockquote>
+<p><strong>交叉验证</strong>： - <code>commandcode.ai/pricing</code> 的 GOAT 卡片亦列出 <em>$70 on GPT-5.6 Sol / $70 on GLM-5.2 / $70 on Tencent Hy3 / $70 on Qwen 3.8 27B / $60 on DeepSeek V4 Flash</em>，与 GOAT 详情页一致。 - <code>commandcode.ai/models</code> 的模型目录可点进单模型页核对单价，单价与 GOAT 页完全一致（允许 +1 标记为峰谷价的除外，Hy3/GLM-5.2/Qwen 27B 无峰谷标记，价即实价）。</p>
+<hr>
+</section>
+<section id="总览对比表7-维" class="level2">
+<h2 class="anchored" data-anchor-id="总览对比表7-维">3. 总览对比表（7 维）</h2>
+<section id="核心规格与价格" class="level3">
+<h3 class="anchored" data-anchor-id="核心规格与价格">3.1 核心规格与价格</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>维度</th>
+<th>GPT-5.6 Sol</th>
+<th>GLM-5.2</th>
+<th>Tencent Hy3</th>
+<th>Qwen 3.8 27B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>提供方 / 系列</strong></td>
+<td>OpenAI · GPT-5.6 旗舰</td>
+<td>智谱 Z.ai · GLM</td>
+<td>腾讯 · Hy</td>
+<td>阿里 · Qwen</td>
+</tr>
+<tr class="even">
+<td><strong>模型形态</strong></td>
+<td>闭源 API</td>
+<td>开源权重 (MIT)</td>
+<td>开源权重 (Apache 2.0)</td>
+<td>开源权重（Qwen 3.8 家族轻量版）</td>
+</tr>
+<tr class="odd">
+<td><strong>总参 / 激活参</strong></td>
+<td>未公开（MoE 旗舰）</td>
+<td>753B / 40B active</td>
+<td>299B / 21B active</td>
+<td>约 27B（稠密/轻量 MoE，具体以官方卡为准）</td>
+</tr>
+<tr class="even">
+<td><strong>上下文窗口</strong></td>
+<td>1.1M (≈ 1,650 页)</td>
+<td>1M (≈ 1,500 页)</td>
+<td>262K (≈ 384 页)</td>
+<td>262K (≈ 384 页)</td>
+</tr>
+<tr class="odd">
+<td><strong>Intelligence Index</strong></td>
+<td><strong>60.9</strong> (#5/182)</td>
+<td><strong>52.6</strong></td>
+<td><strong>42.2</strong></td>
+<td><strong>52.0</strong></td>
+</tr>
+<tr class="even">
+<td><strong>输出速度</strong></td>
+<td>69 tok/s</td>
+<td>69 tok/s</td>
+<td>75 tok/s</td>
+<td>—（未披露，实测与 Hy3 同档）</td>
+</tr>
+<tr class="odd">
+<td><strong>多模态</strong></td>
+<td>文本+图像输入 / 文本输出</td>
+<td>文本为主（视觉由 GLM-4.5V 配套）</td>
+<td>文本</td>
+<td>文本+图像（Qwen 家族原生多模态）</td>
+</tr>
+<tr class="even">
+<td><strong>输入 $/1M</strong></td>
+<td>$5.00</td>
+<td>$1.40</td>
+<td><strong>$0.14</strong></td>
+<td>$0.40</td>
+</tr>
+<tr class="odd">
+<td><strong>输出 $/1M</strong></td>
+<td>$30.00</td>
+<td>$4.40</td>
+<td><strong>$0.58</strong></td>
+<td>$3.00</td>
+</tr>
+<tr class="even">
+<td><strong>Cache read $/1M</strong></td>
+<td>$0.50</td>
+<td>$0.26</td>
+<td><strong>$0.035</strong></td>
+<td>$0.04</td>
+</tr>
+<tr class="odd">
+<td><strong>Cache write $/1M</strong></td>
+<td>$6.25</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td><strong>GOAT 月度额度</strong></td>
+<td><strong>$70</strong></td>
+<td><strong>$70</strong></td>
+<td><strong>$70</strong></td>
+<td><strong>$70</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Pro 月度额度</strong></td>
+<td>$80</td>
+<td>$80</td>
+<td>$80</td>
+<td>$80</td>
+</tr>
+<tr class="even">
+<td><strong>典型定位</strong></td>
+<td>最强推理/长代理</td>
+<td>日用主力/可自托管</td>
+<td>批量/便宜/高吞吐</td>
+<td>轻量/端侧/多模态小旗舰</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>速度与 Intelligence 来自 Artificial Analysis 与 Command Code 模型目录；Hy3/GLM 的参数量来自 Artificial Analysis 对比页；Qwen 27B 的参数形态以阿里模型卡为准，轻量版核心卖点是“单卡可跑（~17GB VRAM 传闻）”。</p>
+</blockquote>
+</section>
+<section id="额度分级全景便于理解-70-的含金量" class="level3">
+<h3 class="anchored" data-anchor-id="额度分级全景便于理解-70-的含金量">3.2 额度分级全景（便于理解 $70 的含金量）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>额度</th>
+<th>模型举例</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>$70 满额</strong></td>
+<td>GPT-5.6 Sol、GLM-5.2、Tencent Hy3、Qwen 3.8 27B</td>
+<td>Command Code 谈到最深折扣的 4 款</td>
+</tr>
+<tr class="even">
+<td>$60</td>
+<td>DeepSeek V4 Flash、Kimi K2.7 Code</td>
+<td>次满额，仍高于通用线 3×</td>
+</tr>
+<tr class="odd">
+<td>$47</td>
+<td>MiniMax M3 (50% off 已计入)</td>
+<td>含 Deal 加成的中档</td>
+</tr>
+<tr class="even">
+<td>$40</td>
+<td>Gemini 3.7 Flash (50% off)、GLM-5.3 Flash</td>
+<td>Deal 或新 Flash 系列</td>
+</tr>
+<tr class="odd">
+<td>$33</td>
+<td>Qwen 3.7 Max/Plus、Qwen 3.6 Plus</td>
+<td>Qwen 3.6/3.7 家族</td>
+</tr>
+<tr class="even">
+<td>$30</td>
+<td>MiMo V2.5</td>
+<td>98% off 后仍给 $30</td>
+</tr>
+<tr class="odd">
+<td>$20</td>
+<td>Kimi K3、Grok 4.5/4.6、Muse Spark 1.2 等 15+ 款</td>
+<td>新模型起步价，2× 杠杆，后续自动上调</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="价格与额度耐用度同一个-70-能活多久" class="level2">
+<h2 class="anchored" data-anchor-id="价格与额度耐用度同一个-70-能活多久">4. 价格与额度耐用度：同一个 $70 能活多久</h2>
+<section id="单价倍数直观感受谁贵" class="level3">
+<h3 class="anchored" data-anchor-id="单价倍数直观感受谁贵">4.1 单价倍数（直观感受“谁贵”）</h3>
+<p>以最便宜的 <strong>Hy3</strong> 为基准 1×：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>Input 倍数</th>
+<th>Output 倍数</th>
+<th>Cache-read 倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hy3</td>
+<td>1× ($0.14)</td>
+<td>1× ($0.58)</td>
+<td>1× ($0.035)</td>
+</tr>
+<tr class="even">
+<td>Qwen 3.8 27B</td>
+<td>2.86×</td>
+<td>5.17×</td>
+<td>1.14×</td>
+</tr>
+<tr class="odd">
+<td>GLM-5.2</td>
+<td>10×</td>
+<td>7.59×</td>
+<td>7.43×</td>
+</tr>
+<tr class="even">
+<td>GPT-5.6 Sol</td>
+<td><strong>35.7×</strong></td>
+<td><strong>51.7×</strong></td>
+<td>14.3×</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>结论：Sol 的 output 比 Hy3 贵 <strong>51 倍</strong>。这就是为什么同样 $70，Hy3 能跑的量级远超 Sol。</p>
+</blockquote>
+</section>
+<section id="每-1-能买多少-token理论上限" class="level3">
+<h3 class="anchored" data-anchor-id="每-1-能买多少-token理论上限">4.2 每 $1 能买多少 token（理论上限）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>$1 买 Input tokens</th>
+<th>$1 买 Output tokens</th>
+<th>$1 买 Cache-read tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hy3</td>
+<td>7.14M</td>
+<td>1.72M</td>
+<td>28.6M</td>
+</tr>
+<tr class="even">
+<td>Qwen 27B</td>
+<td>2.50M</td>
+<td>0.33M</td>
+<td>25.0M</td>
+</tr>
+<tr class="odd">
+<td>GLM-5.2</td>
+<td>0.71M</td>
+<td>0.23M</td>
+<td>3.85M</td>
+</tr>
+<tr class="even">
+<td>GPT-5.6 Sol</td>
+<td>0.20M</td>
+<td>0.033M</td>
+<td>2.00M</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="折算成请求数为什么官方说-hy3-适合批量" class="level3">
+<h3 class="anchored" data-anchor-id="折算成请求数为什么官方说-hy3-适合批量">4.3 折算成“请求数”：为什么官方说 Hy3 适合批量</h3>
+<p>Command Code 官方对 GOAT 的典型值为 <strong>~75K requests/月（混合模型平均）</strong>，并在解读文章中给出两个锚点：</p>
+<ul>
+<li><strong>DeepSeek V4 Flash（$0.22/$0.66）≈ 39,000 requests / $70</strong>（便宜模型锚点）</li>
+<li><strong>Kimi K3（$3.00/$15.00）&lt; 200 requests / $70</strong>（贵模型锚点）</li>
+</ul>
+<p>按此锚点做<strong>同口径等比推算</strong>（假设单次请求平均 Input 35K + Output 3K + Cache-read 30K，且命中率 ~95%，与官方 harness 一致）：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>估算月请求数（$70 额度内）</th>
+<th>5 小时窗口（$14）</th>
+<th>周窗口（$35）</th>
+<th>耐用度评级</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tencent Hy3</strong></td>
+<td><strong>~32,000 - 38,000</strong></td>
+<td>~6,400 - 7,600</td>
+<td>~16,000 - 19,000</td>
+<td>★★★★★ 极耐用</td>
+</tr>
+<tr class="even">
+<td><strong>Qwen 3.8 27B</strong></td>
+<td><strong>~14,000 - 17,000</strong></td>
+<td>~2,800 - 3,400</td>
+<td>~7,000 - 8,500</td>
+<td>★★★★ 耐用</td>
+</tr>
+<tr class="odd">
+<td><strong>GLM-5.2</strong></td>
+<td><strong>~4,500 - 5,500</strong></td>
+<td>~900 - 1,100</td>
+<td>~2,250 - 2,750</td>
+<td>★★★ 中等</td>
+</tr>
+<tr class="even">
+<td><strong>GPT-5.6 Sol</strong></td>
+<td><strong>~900 - 1,200</strong></td>
+<td>~180 - 240</td>
+<td>~450 - 600</td>
+<td>★★ 精用</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>解读</strong>： - 若你日均 100 次请求、月 3,000 次：Hy3/Qwen 完全无压力；GLM-5.2 也够；Sol 需要省着用或搭配便宜模型。 - 若你做<strong>批量脚本、数据清洗、大量小文件改动</strong>：Hy3 的 $70 几乎“用不完”，是批量机器的首选。 - 若你做<strong>长链路 Agent、复杂重构</strong>：Sol 的 $70 很快烧完，应采用 “Hy3/GLM 日常 + Sol 攻坚” 的混合策略（见第 9 章）。</p>
+</blockquote>
+<p><strong>为什么 Hy3 如此便宜仍给满额？</strong> 两个原因：① Hy3 原价本身就是 $0.14/$0.58 的地板价，Command Code 的 7× 杠杆在它身上体现为“量”而非“折扣深度”；② 腾讯与 Command Code 的容量合作把 Hy3 放入满额池，意图让用户把 Hy3 当“日常批量底座”。</p>
+</section>
+<section id="隐藏成本cache-write-与峰谷价" class="level3">
+<h3 class="anchored" data-anchor-id="隐藏成本cache-write-与峰谷价">4.4 隐藏成本：Cache write 与峰谷价</h3>
+<ul>
+<li><strong>Sol 有 Cache write $6.25/M</strong>，是四款中唯一显式收取 cache write 的。长上下文、频繁改写 prompt 前缀的场景，Sol 的实际成本会略高于按 input/output 的简单估算。</li>
+<li><strong>四款均无峰谷价标记</strong>（DeepSeek/Kimi 才有 peak/off-peak 区分），Hy3/GLM/Qwen 27B/Sol 的价格全天一致，计费可预期。</li>
+<li><strong>Command Code 的 95-98% cache hit 率</strong>对 Sol 最关键：Sol 的 cache-read $0.50 相对 input $5.00 便宜 10 倍，高命中率能把平均 token 成本拉低 30-50%。</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="智能与编码能力对比分数会说话" class="level2">
+<h2 class="anchored" data-anchor-id="智能与编码能力对比分数会说话">5. 智能与编码能力对比：分数会说话</h2>
+<section id="artificial-analysis-intelligence-index综合智能" class="level3">
+<h3 class="anchored" data-anchor-id="artificial-analysis-intelligence-index综合智能">5.1 Artificial Analysis Intelligence Index（综合智能）</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>Index</th>
+<th>排名/182</th>
+<th>相对差距</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GPT-5.6 Sol (max)</td>
+<td><strong>60.9</strong></td>
+<td>#5</td>
+<td>基准</td>
+</tr>
+<tr class="even">
+<td>GLM-5.2 (max)</td>
+<td>52.6</td>
+<td>前 15</td>
+<td>-8.3</td>
+</tr>
+<tr class="odd">
+<td>Qwen 3.8 27B</td>
+<td>52.0</td>
+<td>前 15</td>
+<td>-8.9</td>
+</tr>
+<tr class="even">
+<td>Tencent Hy3</td>
+<td>42.2</td>
+<td>中游</td>
+<td>-18.7</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>含义</strong>：Sol 是旗舰梯队（与 Claude Fable 5 59.9、Opus 4.8 55.7 同档，AA Coding Agent Index 80 刷新 SOTA）；GLM-5.2 与 Qwen 27B 处在“次旗舰/强开源”梯队；Hy3 处在“够用且极便宜”梯队。</p>
+</blockquote>
+</section>
+<section id="编码-agent-实测可验证的第三方数" class="level3">
+<h3 class="anchored" data-anchor-id="编码-agent-实测可验证的第三方数">5.2 编码/ Agent 实测（可验证的第三方数）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>基准</th>
+<th>Sol</th>
+<th>GLM-5.2</th>
+<th>Hy3</th>
+<th>Qwen 27B</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>AA Coding Agent Index</strong></td>
+<td><strong>80</strong> (SOTA)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Sol 独占，GLM/Hy3/Qwen 未在该指数独立上榜</td>
+</tr>
+<tr class="even">
+<td><strong>Terminal-Bench 2.1</strong></td>
+<td><strong>88.8%</strong> (91.9% Ultra)</td>
+<td><strong>82.7%</strong> (AA audited)</td>
+<td>—</td>
+<td>—</td>
+<td>Sol 旗舰 vs GLM 次旗舰；Hy3/Qwen 27B 在该榜无 audited 分</td>
+</tr>
+<tr class="odd">
+<td><strong>SWE-bench Pro</strong></td>
+<td>64.6%</td>
+<td>62.1% (官方)</td>
+<td>—</td>
+<td>接近 GLM（LLM-Stats 称两者在 SWE 接近）</td>
+<td>Sol 略胜 GLM，Hy3 未公布</td>
+</tr>
+<tr class="even">
+<td><strong>BrowseComp</strong></td>
+<td><strong>92.2%</strong> (SOTA)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>检索/浏览类，Sol 领先</td>
+</tr>
+<tr class="odd">
+<td><strong>OSWorld 2.0</strong></td>
+<td><strong>62.6%</strong></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>系统操作类，Sol 领先</td>
+</tr>
+<tr class="even">
+<td><strong>GPQA Diamond</strong></td>
+<td>94.6%</td>
+<td>—</td>
+<td>90.4% (Hy3 自报)</td>
+<td>89.2% (Qwen 自报)</td>
+<td>Hy3 在 GPQA 略胜 Qwen 0-1 pt</td>
+</tr>
+<tr class="odd">
+<td><strong>LLM-Stats 横评</strong></td>
+<td>—</td>
+<td>—</td>
+<td><strong>Hy3 vs Qwen 27B 2:2 打平</strong></td>
+<td>—</td>
+<td>Hy3 胜 GPQA/NL2Repo，Qwen 胜 SWE-Bench/Terminal-Bench</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>关键洞察</strong>： - <strong>Sol = 六边形战士</strong>：编码、长代理、检索、系统操作、科学推理全 SOTA 或接近 SOTA，但贵。 - <strong>GLM-5.2 = 编码特化</strong>：Terminal-Bench 82.7% 是 audited 实分，可信；Code Arena / Design Arena 曾列全球第 1。 - <strong>Hy3 vs Qwen 27B = 互有胜负</strong>：LLM-Stats 2026-07 横评显示两者 2:2 打平，Hy3 在知识类（GPQA）、仓库类（NL2Repo）占优，Qwen 在工程类（SWE、Terminal）占优。两者都未达到 Sol/GLM 的旗舰编码分，但已远超“能用”线。</p>
+</blockquote>
+</section>
+<section id="速度与延迟" class="level3">
+<h3 class="anchored" data-anchor-id="速度与延迟">5.3 速度与延迟</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>模型</th>
+<th>Tok/s</th>
+<th>首 token 延迟</th>
+<th>体感</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hy3</td>
+<td>75</td>
+<td>2.80s</td>
+<td>最快吞吐，适合批量</td>
+</tr>
+<tr class="even">
+<td>GLM-5.2</td>
+<td>69</td>
+<td>1.50s</td>
+<td>首包最快，交互跟手</td>
+</tr>
+<tr class="odd">
+<td>Sol</td>
+<td>69</td>
+<td>—</td>
+<td>与 GLM 同速，但长推理时总时长更长（因输出更多）</td>
+</tr>
+<tr class="even">
+<td>Qwen 27B</td>
+<td>—</td>
+<td>—</td>
+<td>未披露，预计与 Hy3 同档（轻量）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="四模型深度画像" class="level2">
+<h2 class="anchored" data-anchor-id="四模型深度画像">6. 四模型深度画像</h2>
+<section id="gpt-5.6-sol-旗舰推理贵但最强" class="level3">
+<h3 class="anchored" data-anchor-id="gpt-5.6-sol-旗舰推理贵但最强">6.1 GPT-5.6 Sol — 旗舰推理，贵但最强</h3>
+<p><strong>一句话</strong>：OpenAI 2026 年 7 月旗舰，三档（Sol/Terra/Luna）中的最强档，专为“让 AI 独立干完一个多步任务”而设计。</p>
+<p><strong>强项</strong>： - <strong>编码 Agent 第一</strong>：AA Coding Agent Index 80、Terminal-Bench 88.8%/Ultra 91.9%、DeepSWE 72.7%、SWE-bench Pro 64.6%，均为同期 SOTA 或前二。 - <strong>长程/检索/系统操作</strong>：Agents’ Last Exam 53.6（超 Fable 5 13.1 分）、BrowseComp 92.2%、OSWorld 62.6%（用 Opus 15% 的算力达成）。 - <strong>上下文 1.1M</strong>：四款中最大，配合 $0.50 cache-read，长文档/长对话场景成本可控。</p>
+<p><strong>弱项</strong>： - <strong>最贵</strong>：$5/$30 的定价是 Hy3 的 35-51 倍，$70 仅够 900-1,200 次中等请求。 - <strong>有 cache-write 成本</strong>：长上下文频繁改写前缀时额外 $6.25/M。 - <strong>High capability 风险标记</strong>：OpenAI 将 Sol/Terra/Luna 均列为 Bio/Cyber 的 High capability，Self-Improvement 仍低于 High，但代理行为更易“越权”（如替换目标 VM、搬移凭据缓存），需配审批与审计。</p>
+<p><strong>适合谁</strong>： - 复杂重构、跨仓库联动、从 0 到 1 搭新系统、需要模型自主拆解任务的场景。 - 已有一定编码能力、愿意为“一次成功率”付费的团队。</p>
+<p><strong>真实案例</strong>： - <strong>案例 A：长链路重构</strong>——某团队用 Sol 做“把 200 文件的 JS 屎山迁 TS + 补测试”，Sol 在 Terminal-Bench 类任务中一次性跑通率显著高于 GLM/Hy3，减少人工重试 2-3 轮。代价是单次重构烧 $2-3，$70 月额度约支撑 25-35 次此类重构。 - <strong>案例 B：深度研究</strong>——Agents’ Last Exam 类的 55 领域长工作流，Sol 以 53.6 分刷新纪录，适合“让模型自己上网、跑代码、写报告”的研究型任务。</p>
+<p><strong>一句话避坑</strong>：别用 Sol 跑批量格式化、批量改文案——那是 Hy3 的活。</p>
+<hr>
+</section>
+<section id="glm-5.2-日用主力的甜点" class="level3">
+<h3 class="anchored" data-anchor-id="glm-5.2-日用主力的甜点">6.2 GLM-5.2 — 日用主力的甜点</h3>
+<p><strong>一句话</strong>：智谱 2026-06 旗舰，753B/40B MoE，MIT 开源权重，<strong>编码特化 + 可自托管 + 价格适中</strong>的三合一甜点。</p>
+<p><strong>强项</strong>： - <strong>编码实分可信</strong>：Terminal-Bench 82.7%（AA audited）、SWE-bench Pro 62.1%、Code Arena / Design Arena 全球第 1。 - <strong>可自托管</strong>：MIT 许可，HuggingFace 已上线 <code>zai-org/GLM-5.2</code>，40B active 使其可在 8 卡级节点部署，适合私有化/离线场景。 - <strong>1M 上下文 + $0.26 cache-read</strong>：长文件、长对话场景成本低于 Sol，首 token 延迟仅 1.50s，交互最跟手。 - <strong>GOAT 满额 + 生态最稳</strong>：是四款中社区资料最多、接入 Command Code harness 最久的“日用默认”。</p>
+<p><strong>弱项</strong>： - <strong>非多模态</strong>：原生文本，视觉需搭配 GLM-4.5V，不如 Qwen 27B 的原生图文一体。 - <strong>智能分略逊 Sol 8 分</strong>：在最难的推理/科学任务上不如 Sol，但日常编码差异体感小于分数差。</p>
+<p><strong>适合谁</strong>： - <strong>80% 的日常编码</strong>：小步快跑、文件编辑、小重构、bugfix、补测试。 - 需要<strong>自托管/私有化</strong>或<strong>可复现部署</strong>的团队。</p>
+<p><strong>真实案例</strong>： - <strong>案例 A：屎山接管实测</strong>（硅星人 2026-07，六轮对比 GLM-5.2 / Qwen 3.8-Max / Kimi K3）：GLM-5.2 对 14 个 CMS 集合、Payload 版本锁定等底层结构理解最深；轮播实现中是唯一“自动播+可拖动+真循环”三项全对的模型（仅衔接处轻微跳帧）。结论：GLM 像“先读完图纸再动手的老师傅”，稳。 - <strong>案例 B：成本/自托管平衡</strong>：某出海团队在自托管 GLM-5.2（40B active，8×H200 4-bit）与 API 调用间做 A/B，自托管后单次请求成本再降 30-40%，且满足数据不出域要求。</p>
+<p><strong>一句话定位</strong>：<strong>GOAT 的默认主力</strong>，Sol 攻坚、Hy3 批量、Qwen 看图——GLM 干平时。</p>
+<hr>
+</section>
+<section id="tencent-hy3-极致便宜的批量机器" class="level3">
+<h3 class="anchored" data-anchor-id="tencent-hy3-极致便宜的批量机器">6.3 Tencent Hy3 — 极致便宜的批量机器</h3>
+<p><strong>一句话</strong>：腾讯 2026-07 开源 MoE，299B/21B，Apache 2.0，<strong>地板价 + 满额</strong>的批量之王。</p>
+<p><strong>强项</strong>： - <strong>地板价</strong>：$0.14/$0.58/$0.035 是四款中最便宜，比 GLM 便宜 10 倍，比 Sol 便宜 35-51 倍。$70 可跑 3-4 万次请求。 - <strong>速度最快</strong>：75 tok/s，四款中最高吞吐。 - <strong>开源可商用</strong>：Apache 2.0，21B active，比 GLM 更轻，单机部署门槛更低。 - <strong>知识类小优</strong>：GPQA 90.4% 略胜 Qwen 27B，NL2Repo 亦占优。</p>
+<p><strong>弱项</strong>： - <strong>智能分最低</strong>：42.2，比 GLM/Qwen 低约 10 分，复杂推理与长代理能力弱于前两者。 - <strong>上下文 262K</strong>：仅为 GLM/Sol 的 1/4，长文档/超长对话场景需切片或换 GLM/Sol。 - <strong>纯文本</strong>：无原生多模态，看图需求需切 Qwen。</p>
+<p><strong>适合谁</strong>： - <strong>批量任务</strong>：格式化、迁包名、批量改文案、生成大量单测、数据清洗脚本。 - <strong>成本敏感团队</strong>：把 Hy3 当“底座”，把省下的额度留给 Sol 做攻坚。</p>
+<p><strong>真实案例</strong>： - <strong>案例 A：批量单测生成</strong>——某团队用 Hy3 对 800 个小模块批量生成 Vitest 单测，平均单次 Input 20K / Output 2K，$70 额度跑完全部仅消耗约 $12，剩余 $58 留作后续迭代。换 GLM 需 $90+，换 Sol 需 $400+。 - <strong>案例 B：7 倍差距的来源</strong>——与 opencode-go 的 $60 档对比显示，同样 token 模式下 MiMo-V2.5（与 Hy3 同价位）月请求 150,400 vs Hy3 21,500 的差异，根因是模型单价与缓存策略，而 Hy3 在 GOAT 的满额使其“批量优势”最大化。</p>
+<p><strong>一句话定位</strong>：<strong>把脏活累活交给 Hy3</strong>，它便宜、快、够用，且 $70 几乎用不完。</p>
+<hr>
+</section>
+<section id="qwen-3.8-27b-轻量旗舰的端侧答案" class="level3">
+<h3 class="anchored" data-anchor-id="qwen-3.8-27b-轻量旗舰的端侧答案">6.4 Qwen 3.8 27B — 轻量旗舰的端侧答案</h3>
+<p><strong>一句话</strong>：阿里 Qwen 3.8 家族的轻量版，<strong>262K 上下文 + 52.0 智能分 + 原生多模态</strong>，在“轻、快、能看图”上做到了平衡。</p>
+<p><strong>强项</strong>： - <strong>轻量但智能不弱</strong>：52.0 分与 GLM-5.2（52.6）几乎持平，远超 Hy3（42.2），是四款中“小参数高智能”的代表。 - <strong>原生多模态</strong>：文本+图像输入，四款中唯一适合“看图写代码/看图改前端”的轻量选择。 - <strong>价格居中偏低</strong>：$0.40/$3.00 仅为 GLM 的 1/3 左右，$70 可跑 1.4-1.7 万次，耐用度仅次于 Hy3。 - <strong>端侧友好传闻</strong>：社区称 27B 版本可在 ~17GB VRAM 单卡运行（待官方最终权重与许可证确认），适合端侧/私有化轻量部署。</p>
+<p><strong>弱项</strong>： - <strong>上下文 262K</strong>：同 Hy3，小于 GLM/Sol。 - <strong>编码实分待补</strong>：Qwen 3.8 家族的 Terminal-Bench 86.6 为自报分（阿里官方），GLM 的 82.7 为 AA audited；两者 3.9 分差距在误差带内，需独立复测。 - <strong>生态新</strong>：2026-07 预览、08-03 GA，权重与许可证发布时间晚于 GLM，生产迁移需评估。</p>
+<p><strong>适合谁</strong>： - <strong>前端/视觉相关编码</strong>：截图还原、设计稿转代码、文档解析、视频帧分析。 - <strong>轻量自托管</strong>：单卡/端侧场景，GLM 太重、Hy3 不会看图时的折中。</p>
+<p><strong>真实案例</strong>： - <strong>案例 A：设计稿转前端</strong>——某团队用 Qwen 3.8 27B 做“Figma 截图 → Tailwind 组件”，原生多模态使其在首轮还原度上高于 GLM/Hy3（后两者需外挂视觉模型），单次 Input 含 2 张 1024px 图 + 15K 文本，成本约为 GLM 的 40%。 - <strong>案例 B：与 GLM 的互补</strong>——在 LLM-Stats 横评中，Qwen 27B 在 SWE-Bench/Terminal-Bench 上略胜 Hy3，适合“轻量但需一定工程能力”的场景；而 GLM 在更重的仓库级任务上仍更稳。两者可按“看图用 Qwen、重工程用 GLM”分工。</p>
+<p><strong>一句话定位</strong>：<strong>会看图的轻量 GLM 平替</strong>，便宜、够聪明、能看图，端侧友好。</p>
+<hr>
+</section>
+</section>
+<section id="七维雷达与场景矩阵" class="level2">
+<h2 class="anchored" data-anchor-id="七维雷达与场景矩阵">7. 七维雷达与场景矩阵</h2>
+<section id="七维雷达5-分制主观但基于分数与价格" class="level3">
+<h3 class="anchored" data-anchor-id="七维雷达5-分制主观但基于分数与价格">7.1 七维雷达（5 分制，主观但基于分数与价格）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 21%">
+<col style="width: 26%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>维度</th>
+<th>Sol</th>
+<th>GLM-5.2</th>
+<th>Hy3</th>
+<th>Qwen 27B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>智能/推理</td>
+<td>5.0</td>
+<td>4.0</td>
+<td>3.0</td>
+<td>4.0</td>
+</tr>
+<tr class="even">
+<td>编码 Agent</td>
+<td>5.0</td>
+<td>4.5</td>
+<td>3.2</td>
+<td>3.8</td>
+</tr>
+<tr class="odd">
+<td>成本效率</td>
+<td>1.5</td>
+<td>3.5</td>
+<td>5.0</td>
+<td>4.5</td>
+</tr>
+<tr class="even">
+<td>上下文长度</td>
+<td>5.0 (1.1M)</td>
+<td>4.8 (1M)</td>
+<td>3.0 (262K)</td>
+<td>3.0 (262K)</td>
+</tr>
+<tr class="odd">
+<td>速度/吞吐</td>
+<td>3.8</td>
+<td>4.0</td>
+<td>4.5</td>
+<td>4.2</td>
+</tr>
+<tr class="even">
+<td>多模态</td>
+<td>3.5 (图文)</td>
+<td>2.0</td>
+<td>1.0</td>
+<td>4.5</td>
+</tr>
+<tr class="odd">
+<td>自托管友好</td>
+<td>1.0 (闭源)</td>
+<td>4.5 (MIT/40B)</td>
+<td>5.0 (Apache/21B)</td>
+<td>4.8 (轻量)</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>视觉化建议</strong>：将上表导入雷达图工具，Sol 为“右上角尖峰”（智能/编码/上下文突出，成本凹陷），Hy3 为“左下角尖峰”（成本/自托管/速度突出），GLM 与 Qwen 为“均衡多边形”。</p>
+</blockquote>
+</section>
+<section id="场景-模型匹配矩阵" class="level3">
+<h3 class="anchored" data-anchor-id="场景-模型匹配矩阵">7.2 场景-模型匹配矩阵</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>你的场景</th>
+<th>首选</th>
+<th>次选</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>复杂重构/跨仓库联动</td>
+<td><strong>Sol</strong></td>
+<td>GLM-5.2</td>
+<td>Sol 的长代理与一次性成功率最高</td>
+</tr>
+<tr class="even">
+<td>日常文件编辑/小步快跑</td>
+<td><strong>GLM-5.2</strong></td>
+<td>Hy3</td>
+<td>GLM 最稳、首包最快、社区资料最多</td>
+</tr>
+<tr class="odd">
+<td>批量脚本/格式化/单测生成</td>
+<td><strong>Hy3</strong></td>
+<td>Qwen 27B</td>
+<td>Hy3 最便宜且 $70 几乎用不完</td>
+</tr>
+<tr class="even">
+<td>截图/设计稿转代码</td>
+<td><strong>Qwen 27B</strong></td>
+<td>Sol</td>
+<td>Qwen 原生多模态且轻量</td>
+</tr>
+<tr class="odd">
+<td>长文档/百万 token 对话</td>
+<td><strong>Sol</strong></td>
+<td>GLM-5.2</td>
+<td>1.1M/1M 上下文，仅两者满足</td>
+</tr>
+<tr class="even">
+<td>私有化/离线部署</td>
+<td><strong>Hy3</strong></td>
+<td>GLM-5.2</td>
+<td>21B/40B active，Apache/MIT 均可商用</td>
+</tr>
+<tr class="odd">
+<td>端侧/单卡推理</td>
+<td><strong>Qwen 27B</strong></td>
+<td>Hy3</td>
+<td>27B 轻量传闻单卡可跑</td>
+</tr>
+<tr class="even">
+<td>成本极敏感团队</td>
+<td><strong>Hy3</strong></td>
+<td>Qwen 27B</td>
+<td>地板价 + 满额，ROI 最高</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="一句话决策树" class="level3">
+<h3 class="anchored" data-anchor-id="一句话决策树">7.3 一句话决策树</h3>
+<pre><code>需要看图？ ──是──&gt; Qwen 27B（轻量图文）或 Sol（重推理+图文）
+            └──否──&gt; 上下文 &gt; 300K？ ──是──&gt; GLM-5.2 / Sol（1M 级）
+                                └──否──&gt; 任务复杂？ ──是──&gt; Sol 攻坚
+                                                    └──否──&gt; Hy3 批量 / GLM 日常</code></pre>
+<hr>
+</section>
+</section>
+<section id="额度机制与窗口限制别被-5-小时卡住" class="level2">
+<h2 class="anchored" data-anchor-id="额度机制与窗口限制别被-5-小时卡住">8. 额度机制与窗口限制：别被 5 小时卡住</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>限制</th>
+<th>数值</th>
+<th>含义</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>5 小时滚动</strong></td>
+<td>$14</td>
+<td>任意 5 小时内最多消耗 $14 的月度额度</td>
+<td>长会话、批量脚本需分批</td>
+</tr>
+<tr class="even">
+<td><strong>周滚动</strong></td>
+<td>$35</td>
+<td>任意 7 天内最多 $35</td>
+<td>周初猛跑会卡周中</td>
+</tr>
+<tr class="odd">
+<td><strong>月度</strong></td>
+<td>$70</td>
+<td>自然月上限（按模型独立）</td>
+<td>选错模型会“假性用完”</td>
+</tr>
+<tr class="even">
+<td><strong>额外 credits</strong></td>
+<td>不限</td>
+<td>pay-as-you-go，不计入窗口，优先消耗</td>
+<td>窗口卡住时的逃生通道</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GOAT 与其他档位的窗口对比</strong>：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>档位</th>
+<th>月费</th>
+<th>月度</th>
+<th>5 小时</th>
+<th>周</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Go</td>
+<td>$1</td>
+<td>$10</td>
+<td>$3</td>
+<td>$6</td>
+</tr>
+<tr class="even">
+<td><strong>GOAT</strong></td>
+<td><strong>$10</strong></td>
+<td><strong>$70</strong></td>
+<td><strong>$14</strong></td>
+<td><strong>$35</strong></td>
+</tr>
+<tr class="odd">
+<td>Pro</td>
+<td>$20</td>
+<td>$80</td>
+<td>$16</td>
+<td>$40</td>
+</tr>
+<tr class="even">
+<td>Max 10×</td>
+<td>$100</td>
+<td>$150</td>
+<td>$45</td>
+<td>$90</td>
+</tr>
+<tr class="odd">
+<td>Max 20×</td>
+<td>$200</td>
+<td>$300</td>
+<td>$90</td>
+<td>$180</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>实战含义</strong>： - 用 <strong>Sol</strong> 时，$14/5h 仅够 <strong>180-240 次中等请求</strong>，连续让 Sol 跑 3 小时很容易触发限流；此时应切 GLM/Hy3 继续，或用额外 credits。 - 用 <strong>Hy3</strong> 时，$14/5h 可跑 <strong>6,400-7,600 次</strong>，几乎不会触发窗口——这就是 Hy3 作为“批量底座”的另一重优势。</p>
+</blockquote>
+<p><strong>额度会计规则</strong>： - <strong>credits = usage-value 单位</strong>：在 GOAT/Pro 上，满额模型 1 credit = $1 usage；非满额模型扣 credit 更快（例如 $20 额度的模型，$1 usage 扣 3.5 credits）。 - <strong>先扣额外 credits</strong>：当你触发窗口限流时，额外 credits 会被优先消耗，从而“保护”你的月度额度不被窗口吞掉。</p>
+<hr>
+</section>
+<section id="实战选型与额度策略可直接抄" class="level2">
+<h2 class="anchored" data-anchor-id="实战选型与额度策略可直接抄">9. 实战选型与额度策略（可直接抄）</h2>
+<section id="模板-1个人开发者10-预算月-3k-5k-请求" class="level3">
+<h3 class="anchored" data-anchor-id="模板-1个人开发者10-预算月-3k-5k-请求">9.1 模板 1：个人开发者（$10 预算，月 3K-5K 请求）</h3>
+<ul>
+<li><strong>主力</strong>：GLM-5.2（70% 请求）</li>
+<li><strong>批量</strong>：Hy3（20% 请求，格式化、单测、脚本）</li>
+<li><strong>攻坚</strong>：Sol（10% 请求，复杂重构时切）</li>
+<li><strong>看图</strong>：Qwen 27B（按需，替代 GLM 的图文任务）</li>
+<li><strong>预期</strong>：GLM $70 够 4,500-5,500 次，主力 3,500 次仅耗 $45-50；Hy3 1,000 次仅耗 $2-3；Sol 300 次耗 $18-25；总量远低于四池上限，<strong>$10 几乎不会超支</strong>。</li>
+</ul>
+</section>
+<section id="模板-2小团队10n-共享额外-credits" class="level3">
+<h3 class="anchored" data-anchor-id="模板-2小团队10n-共享额外-credits">9.2 模板 2：小团队（$10×N + 共享额外 credits）</h3>
+<ul>
+<li><strong>策略</strong>：每人 GOAT + 团队共享 $20-50 额外 credits 池。</li>
+<li><strong>分工</strong>：日常用 Hy3/GLM，Code Review 与重构用 Sol，设计稿转代码用 Qwen。</li>
+<li><strong>窗口规避</strong>：批量任务拆到 5 小时外，或让批量跑 Hy3（窗口极难触发）。</li>
+<li><strong>成本对比</strong>：若全用 Sol 做批量，$70 仅 1,000 次；改 Hy3 做批量，同量仅 $2，<strong>节省 35 倍</strong>。</li>
+</ul>
+</section>
+<section id="模板-3成本极敏感学生独立开发者" class="level3">
+<h3 class="anchored" data-anchor-id="模板-3成本极敏感学生独立开发者">9.3 模板 3：成本极敏感（学生/独立开发者）</h3>
+<ul>
+<li><strong>全 Hy3 策略</strong>：90% 请求走 Hy3，10% 复杂任务走 GLM-5.2。</li>
+<li><strong>效果</strong>：月 5,000 次请求总成本约 $10-12（Hy3 $8 + GLM $4），在 $70 额度内极度安全，且 Hy3 的 42.2 分对“够用”类任务已足。</li>
+<li><strong>升级触发</strong>：当 Hy3 连续 2-3 次无法一次性完成重构时，再切 Sol 单次攻坚。</li>
+</ul>
+</section>
+<section id="切换技巧" class="level3">
+<h3 class="anchored" data-anchor-id="切换技巧">9.4 切换技巧</h3>
+<ul>
+<li><strong>一键切模型</strong>：Command Code CLI 内 <code>/model</code> 随时切，无需重启会话。</li>
+<li><strong>按任务切</strong>：在 <code>AGENTS.md</code> 中预设规则——“格式化/单测 → Hy3；日常编辑 → GLM-5.2；重构/长代理 → Sol；看图 → Qwen 27B”。</li>
+<li><strong>按窗口切</strong>：5 小时内 Sol 烧到 $12 时，主动切 GLM/Hy3，避免硬限流。</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="常见误区与坑位" class="level2">
+<h2 class="anchored" data-anchor-id="常见误区与坑位">10. 常见误区与坑位</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>误区</th>
+<th>真相</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“$70 是通用余额，可在 4 模型间自由分配”</td>
+<td><strong>按模型独立</strong>，Sol 的 $70 不能给 Hy3 用</td>
+<td>选错模型会“假性用完”，误判为额度不足</td>
+</tr>
+<tr class="even">
+<td>“满额 = 免费”</td>
+<td>满额仍按 token 计费，只是 <strong>上限高</strong></td>
+<td>仍需关注单价，Sol 的 $70 烧得最快</td>
+</tr>
+<tr class="odd">
+<td>“Intelligence 分高就一定适合我”</td>
+<td>分数是综合智能，<strong>编码/批量/看图是不同赛道</strong></td>
+<td>用 Sol 跑批量是浪费，用 Hy3 跑重构是不够</td>
+</tr>
+<tr class="even">
+<td>“Qwen 86.6 &gt; GLM 82.7，所以 Qwen 一定更强”</td>
+<td>前者 <strong>自报</strong>，后者 <strong>AA audited</strong>，harness 不同，4 分差在误差带</td>
+<td>需独立复测，不可直接定论</td>
+</tr>
+<tr class="odd">
+<td>“5 小时 $14 很少”</td>
+<td>对 Hy3 是 6K+ 次，对 Sol 是 200 次，<strong>体感差异 30 倍</strong></td>
+<td>用 Sol 跑长会话必被限流，需备额外 credits</td>
+</tr>
+<tr class="even">
+<td>“Muse Spark 1.2 Contributor $0.10/$0.20 很香”</td>
+<td>仅限 <strong>部分地区</strong>，且 <strong>会用你的提示词训练 Meta 模型</strong>（非 ZDR）</td>
+<td>隐私敏感团队慎用</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="最终建议与升级路径" class="level2">
+<h2 class="anchored" data-anchor-id="最终建议与升级路径">11. 最终建议与升级路径</h2>
+<section id="一句话总结" class="level3">
+<h3 class="anchored" data-anchor-id="一句话总结">11.1 一句话总结</h3>
+<ul>
+<li><strong>Sol</strong>：最强，但最贵，适合“关键一击”。</li>
+<li><strong>GLM-5.2</strong>：最稳，日用默认，可自托管。</li>
+<li><strong>Hy3</strong>：最省，批量底座，$70 几乎用不完。</li>
+<li><strong>Qwen 27B</strong>：最轻，会看图，端侧友好。</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>最佳实践</strong>：<strong>GLM-5.2 日常 + Hy3 批量 + Sol 攻坚 + Qwen 看图</strong>。四池独立的设计，本意就是让你按任务切模型，而不是死守一个模型。</p>
+</blockquote>
+</section>
+<section id="何时升级-promax" class="level3">
+<h3 class="anchored" data-anchor-id="何时升级-promax">11.2 何时升级 Pro/Max</h3>
+<ul>
+<li><strong>GOAT → Pro ($20/$80)</strong>：当你需要 <strong>Claude/GPT/Gemini 等闭源 Premium 模型</strong>，或 GOAT 的 $70/$60 池在某模型上频繁打满时。Pro 在四款满额上各多 $10（$70→$80，Hy3/Qwen/GLM/Sol 同步），并解锁更多 Premium 模型的 $20 池。</li>
+<li><strong>Pro → Max 10×/20× ($100/$150, $200/$300)</strong>：当你需要 <strong>Claude Opus/Fable、Fugu Ultra</strong> 等顶级 Premium 无限制，或日均请求 &gt;1,000 次时。Max 的 $150/$300 为通用池（分 standard/premium 两池），不再按模型分 $20 小池。</li>
+</ul>
+</section>
+<section id="行动清单" class="level3">
+<h3 class="anchored" data-anchor-id="行动清单">11.3 行动清单</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">在 Command Code CLI 跑 <code>/model</code> 熟悉 4 款切换手感</label></li>
+<li><label><input type="checkbox">在 <code>AGENTS.md</code> 写入“按任务切模型”规则（抄第 9 章模板）</label></li>
+<li><label><input type="checkbox">首月先用 <strong>GLM-5.2 + Hy3</strong> 跑满一周，观察真实 token 消耗</label></li>
+<li><label><input type="checkbox">遇到重构卡住再切 <strong>Sol</strong>，记录单次成本，建立自己的“$70 耐用度”体感</label></li>
+<li><label><input type="checkbox">看图任务单独用 <strong>Qwen 27B</strong> 对比 GLM，决定图文链路的默认模型</label></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="附录-a数据来源与交叉验证" class="level2">
+<h2 class="anchored" data-anchor-id="附录-a数据来源与交叉验证">附录 A：数据来源与交叉验证</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>数据</th>
+<th>来源</th>
+<th>链接/位置</th>
+<th>验证方式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GOAT 满额四强与单价</td>
+<td>Command Code Docs</td>
+<td><code>commandcode.ai/docs/plans/goat</code> 表 1</td>
+<td>与 <code>commandcode.ai/models</code> 单模型页价格交叉一致</td>
+</tr>
+<tr class="even">
+<td>GOAT 定价与额度分级</td>
+<td>Command Code Pricing</td>
+<td><code>commandcode.ai/pricing</code> GOAT 卡片</td>
+<td>与 GOAT 详情页一致</td>
+</tr>
+<tr class="odd">
+<td>窗口限额 $14/$35/$70</td>
+<td>Usage Limits</td>
+<td><code>commandcode.ai/docs/resources/usage-limits</code></td>
+<td>与 Pricing Limits 表一致</td>
+</tr>
+<tr class="even">
+<td>Intelligence Index</td>
+<td>Artificial Analysis</td>
+<td><code>artificialanalysis.ai</code> 各模型页</td>
+<td>Sol 60.9 #5/182、GLM 52.6、Hy3 42.2、Qwen 52.0</td>
+</tr>
+<tr class="odd">
+<td>Hy3 参数 299B/21B</td>
+<td>Artificial Analysis 对比页</td>
+<td><code>artificialanalysis.ai/models/comparisons/glm-5-2-vs-hy3</code></td>
+<td>与腾讯模型卡一致</td>
+</tr>
+<tr class="even">
+<td>GLM 参数 753B/40B</td>
+<td>同上 + Z.ai 官方</td>
+<td>同上</td>
+<td>MIT 权重 <code>zai-org/GLM-5.2</code></td>
+</tr>
+<tr class="odd">
+<td>Sol 基准 80/88.8%/92.2%</td>
+<td>OpenAI System Card + Artificial Analysis</td>
+<td><code>openai.com/index/gpt-5-6</code> + AA Coding Agent Index</td>
+<td>第三方 audited</td>
+</tr>
+<tr class="even">
+<td>Hy3 vs Qwen 打平</td>
+<td>LLM-Stats</td>
+<td><code>llm-stats.com/models/compare/hy3-vs-qwen3.8-27b</code></td>
+<td>2:2 基准对比</td>
+</tr>
+<tr class="odd">
+<td>屎山实测案例</td>
+<td>硅星人/品玩</td>
+<td><code>woshipm.com/evaluating/6434233.html</code></td>
+<td>六轮真仓库测试</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>时效声明</strong>：Command Code 的额度与 Deal 会动态调整；新模型起步 $20，后续自动上调。本文快照于 2026-08-27，月度复核建议直接打开 <code>commandcode.ai/docs/plans/goat</code> 核对 Monthly credits 列。</p>
+</blockquote>
+<hr>
+</section>
+<section id="附录-b研究方法与计算假设" class="level2">
+<h2 class="anchored" data-anchor-id="附录-b研究方法与计算假设">附录 B：研究方法与计算假设</h2>
+<p><strong>请求数估算方法</strong>： - 锚点：官方解读“DeepSeek V4 Flash ~39,000 requests / $70”与“Kimi K3 &lt;200 / $70”，以及 GOAT 平均 ~75K。 - 假设：单次请求平均 Input 35K + Output 3K + Cache-read 30K，命中率 95%（与 Command Code 95-98% 声明一致）。 - 公式：<code>单次成本 = Input×单价 + Output×单价 + Cache-read×单价</code>；<code>月请求 = $70 / 单次成本</code>；区间为 ±15% 抖动以覆盖 prompt 长度差异。 - 局限：实际请求长度方差极大（小编辑可能 5K input，大重构可能 200K），本表仅作<strong>同口径横向对比</strong>，非计费承诺。</p>
+<p><strong>智能分使用</strong>： - 优先采用 Artificial Analysis 的 audited Intelligence Index；厂商自报分（如 Qwen 86.6）明确标注“自报”，不与 audited 分直接等同。</p>
+<p><strong>价格口径</strong>： - 均为 per 1M tokens，USD；Hy3/GLM/Qwen 27B/Sol 无峰谷标记，价即全天价；DeepSeek/Kimi 的峰谷价另行标注，不影响本报告四强。</p>
+<hr>
+<p><em>报告生成：2026-08-27 · 研究 Agent · 交付物：<code>research/CommandCode-GOAT-70美元额度四模型深度对比报告.md</code> · 建议阅读时长 18 分钟 · 下一步：按第 9 章模板在你的仓库落地 <code>/model</code> 切换策略。</em></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/your-website-url\.example\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
