@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-08-29">
+
+<title>Agent 和 Harness 到底有什么区别？</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">知有誰</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Agent 和 Harness 到底有什么区别？</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">资讯</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="agent-和-harness-到底有什么区别" class="level1">
+<h1>Agent 和 Harness 到底有什么区别？</h1>
+<blockquote class="blockquote">
+<p>面向读者的 AI Agent 基础科普</p>
+<p>调研日期：2026-08-29</p>
+<p>说明：<code>agent harness</code> 尚无全行业统一定义。本文综合 Anthropic、OpenAI、LangChain、MCP 等官方资料，采用一套便于理解和讨论的工作性定义。产品功能和内置角色变化很快，具体情况以各产品最新文档为准。</p>
+</blockquote>
+<section id="先说结论" class="level2">
+<h2 class="anchored" data-anchor-id="先说结论">先说结论</h2>
+<p><strong>Agent 是执行任务的主体，Harness 是让这个主体能够持续、可控地工作的外层系统。</strong> 本文知道业界也常把整套应用称为 Agent，但为了把各层讲清楚，下文会把执行体和外层设施分开讨论。</p>
+<p>再说得具体一点：</p>
+<ul>
+<li>模型（model)负责根据当前信息判断下一步，例如“先搜索报错位置”。</li>
+<li><strong>Agent</strong>围绕目标反复进行“判断、行动、观察”，直到完成任务或必须停下。</li>
+<li><strong>Harness</strong>准备模型需要的上下文，提供工具，执行工具调用，保存状态，控制权限，并管理整个循环。</li>
+</ul>
+<p>可以把模型想成发动机，把 Agent 想成正在开车完成任务的司机，把 Harness 想成汽车本身及其控制系统。发动机提供动力，司机决定往哪里走；方向盘、刹车、仪表、导航和安全限制，则让这趟行程真正可行。</p>
+<p>这个类比并不严格，但足以解释一个常见误会：能力很强的模型不等于好用的 Agent。同一个模型放进不同的 Harness，能看到的资料、可用的工具、犯错后的恢复能力都可能不同，最终表现自然也会不同。</p>
+</section>
+<section id="一个-agent-是怎样完成任务的" class="level2">
+<h2 class="anchored" data-anchor-id="一个-agent-是怎样完成任务的">一个 Agent 是怎样完成任务的</h2>
+<p>假设你对一个编程工具说：</p>
+<blockquote class="blockquote">
+<p>修复登录接口偶尔返回 500 的问题，并运行测试。</p>
+</blockquote>
+<p>一次典型执行大致如下：</p>
+<ol type="1">
+<li>Harness 收到任务，读取项目规则、当前会话和允许使用的工具。</li>
+<li>模型看到这些信息，判断应该先搜索登录接口和错误处理代码。</li>
+<li>模型生成一个结构化的工具请求，例如调用代码搜索工具。</li>
+<li>Harness 检查工具是否存在、参数是否正确、操作是否越权，然后真正执行搜索。</li>
+<li>搜索结果作为新的“观察”返回给模型。</li>
+<li>模型根据结果决定读取文件、编写复现测试、修改代码或继续调查。</li>
+<li>Harness 依次执行这些操作，记录状态，并在危险操作前请求批准。</li>
+<li>测试通过后，Agent 输出修改说明；如果工具持续失败、权限不足或达到轮数上限，Harness 会让任务停止。</li>
+</ol>
+<p>整个过程可以压缩成一个循环：</p>
+<pre class="text"><code>目标
+  ↓
+模型判断下一步
+  ↓
+请求调用工具
+  ↓
+Harness 检查并执行
+  ↓
+环境返回结果
+  ↓
+Harness 更新上下文和状态
+  ↺ 继续判断，直到完成或停止</code></pre>
+<p>模型通常不会亲自读取磁盘、运行命令或访问数据库。它生成工具名和参数，真正的执行由 Harness、本地程序或外部服务完成。因此，“模型调用了工具”是方便交流的简称，更严谨的说法是：<strong>模型选择并请求调用工具，Harness 验证和执行调用，再把结果交还模型。</strong></p>
+</section>
+<section id="agent-是什么" class="level2">
+<h2 class="anchored" data-anchor-id="agent-是什么">Agent 是什么</h2>
+<p>Agent 原本就是人工智能里的老概念，并非大模型时代才出现。传统定义强调两件事：感知环境，以及对环境采取行动。<a href="https://arxiv.org/html/2407.01502">《AI Agents That Matter》</a>将传统 AI 中的 Agent 概括为“能够感知环境并对环境采取行动的实体”。照这个宽泛定义，机器人、游戏角色甚至简单控制器都可能算 Agent。</p>
+<p>今天人们谈论的通常是 <strong>LLM Agent</strong>，即以大语言模型（Large Language Model，简称 LLM）作为动态决策组件的 Agent。Anthropic 在<a href="https://www.anthropic.com/research/building-effective-agents">《Building effective agents》</a>中给出了一条很实用的分界：</p>
+<ul>
+<li>Workflow 通过预先写好的代码路径组织模型和工具。</li>
+<li>Agent 则由模型动态决定过程和工具用法，对“怎样完成任务”保有一定控制权。</li>
+</ul>
+<p>据此，本文采用下面的定义：</p>
+<blockquote class="blockquote">
+<p><strong>在本文的产品分层中，LLM Agent 指由模型驱动、围绕目标持续观察状态、选择行动并接收反馈的执行体；负责承载和控制这一过程的外层设施称为 Harness。</strong></p>
+</blockquote>
+<p>这个定义里有三个关键词。</p>
+<p><strong>第一，目标。</strong> Agent 不是漫无目的地生成文字，而是要完成某件事，例如订票、整理资料或修复软件缺陷。</p>
+<p><strong>第二，反馈。</strong> Agent 会看到工具结果、测试报错或用户补充的信息，而不是只根据最初的一句话回答一次。</p>
+<p><strong>第三，循环。</strong> Agent 根据新情况继续选择下一步。工具不是逻辑上的绝对必要条件，但现实中的 Agent 通常需要工具才能影响外部世界。</p>
+<p>Agent 也不一定“完全自主”。有些 Agent 可以连续工作很久，有些每次修改文件都要用户批准。Agent 的自主程度有高有低，并不存在非黑即白的统一门槛。</p>
+<p>这里还有一个容易纠结的细节：Agent Loop（Agent 循环）在概念上描述 Agent 反复“判断、行动、观察”的行为，在工程上则通常由 Harness 实现和控制。</p>
+</section>
+<section id="harness-是什么" class="level2">
+<h2 class="anchored" data-anchor-id="harness-是什么">Harness 是什么</h2>
+<p><code>Harness</code> 原意是挽具、安全带或线束。放在软件语境里，它表示一套包在核心组件外面、负责连接和控制的设施。测试领域早就有 <code>test harness</code>，即负责准备环境、运行测试和收集结果的一套测试执行与控制设施。</p>
+<p><code>Agent harness</code> 至今没有一份所有厂商都遵循的标准定义。Anthropic 将 Claude Agent SDK 称为一种通用 Agent Harness，并特别提到工具使用、上下文管理和压缩等能力。LangChain 的<a href="https://docs.langchain.com/oss/python/concepts/products">产品分层文档</a>则把 Harness 描述为“带有明确取舍、开箱即用”的框架，常见能力包括规划、子 Agent、文件系统和 token 管理。Token 是模型处理文本时使用的基本计量单位，一个汉字、词或标点可能对应一个或多个 token。</p>
+<p>本文采用下面的工作性定义：</p>
+<blockquote class="blockquote">
+<p><strong>Agent Harness 是围绕模型搭建的执行与控制层。它把提示词、工具、上下文、状态和 Agent 循环组装起来，并负责权限、停止条件、错误恢复与运行记录，使 Agent 能够真正持续工作。</strong></p>
+</blockquote>
+<p>一套 Harness 可能包含以下能力，具体组合因产品而异：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>能力</th>
+<th>具体做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>上下文组装</td>
+<td>把用户任务、系统规则、项目资料和工具说明整理后交给模型</td>
+</tr>
+<tr class="even">
+<td>Agent 循环</td>
+<td>在“模型判断、工具执行、结果回填”之间反复运行</td>
+</tr>
+<tr class="odd">
+<td>工具调度</td>
+<td>校验参数，调用文件、终端、浏览器、搜索或外部 API（应用程序接口）</td>
+</tr>
+<tr class="even">
+<td>权限控制</td>
+<td>决定哪些操作允许、拒绝或必须先询问用户</td>
+</tr>
+<tr class="odd">
+<td>状态管理</td>
+<td>保存任务进度、文件变化、会话记忆和待办事项</td>
+</tr>
+<tr class="even">
+<td>上下文压缩</td>
+<td>对过长历史做摘要、裁剪或按需检索，避免超出上下文窗口</td>
+</tr>
+<tr class="odd">
+<td>错误恢复</td>
+<td>处理工具失败、超时、进程中断和重复循环</td>
+</tr>
+<tr class="even">
+<td>停止条件</td>
+<td>在任务完成、达到轮数上限、超出预算或遭遇阻塞时停下</td>
+</tr>
+<tr class="odd">
+<td>可观测性</td>
+<td>保存日志、轨迹、耗时和成本，便于调试与评估</td>
+</tr>
+<tr class="even">
+<td>多 Agent 调度（可选）</td>
+<td>把子任务交给不同 Agent，并汇总它们的结果</td>
+</tr>
+</tbody>
+</table>
+<p>Anthropic 对长时间运行 Agent 的<a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">实验</a>很能说明问题：即使模型和工具不变，只要 Harness 让不同会话通过进度文件、Git 版本记录、功能清单和测试结果交接，Agent 就更不容易重复劳动、半途丢失状态或过早宣布完成。</p>
+</section>
+<section id="两者的边界为什么总是说不清" class="level2">
+<h2 class="anchored" data-anchor-id="两者的边界为什么总是说不清">两者的边界为什么总是说不清</h2>
+<p>因为 <code>Agent</code> 这个词经常同时指三种不同的东西：</p>
+<ol type="1">
+<li><strong>架构概念</strong>：会观察、决策和行动的系统。</li>
+<li><strong>运行实例</strong>：眼下正在处理某个任务的一次 Agent 会话。</li>
+<li><strong>商品名称</strong>：厂商口中的“Coding Agent”或“Research Agent”产品。</li>
+</ol>
+<p>一个完整产品也可能同时跨越多层。Claude Code、OpenCode 和 Codex CLI 都可以被市场称为 Coding Agent；但从软件架构看，它们又提供界面、工具、权限、上下文和执行循环，因此整个产品也可视作 Harness。产品里面再配置 <code>Explore</code>、<code>Plan</code> 或 <code>Reviewer</code> 等具体 Agent。</p>
+<p>所以，“Claude Code 是 Agent 还是 Harness？”没有唯一答案：</p>
+<ul>
+<li>指整个软件产品时，它是一套 Coding Agent 产品，也承担 Harness 的职责。</li>
+<li>指产品里正在完成任务的执行体时，那是 Agent。</li>
+<li>指 Claude Sonnet、Opus 等负责生成下一步的组件时，那是模型。</li>
+</ul>
+<p>这不是故意玩文字游戏，而是观察层级不同。遇到模糊宣传时，与其追问它到底“算不算 Agent”，不如看四件事：<strong>谁决定下一步、谁执行工具、谁保存状态、谁控制权限。</strong></p>
+</section>
+<section id="不要再混淆这些术语" class="level2">
+<h2 class="anchored" data-anchor-id="不要再混淆这些术语">不要再混淆这些术语</h2>
+<section id="model模型" class="level3">
+<h3 class="anchored" data-anchor-id="model模型">Model：模型</h3>
+<p>模型是接收输入并生成输出的参数化计算组件。在 Agent 系统中，它通常负责理解信息、推理并提出下一步，但不会天然获得磁盘、浏览器或数据库权限。</p>
+<p>推荐说法是“这个 Agent 使用某模型作为决策核心”，而不是“这个模型自己打开终端改了文件”。</p>
+</section>
+<section id="tool工具" class="level3">
+<h3 class="anchored" data-anchor-id="tool工具">Tool：工具</h3>
+<p>Tool 是暴露给 Agent 的可调用能力，通常有名称、说明、输入参数和返回结果。例如读取文件、搜索网页、运行测试、查询数据库和操作浏览器。Tool 也可以调用外部 API，与其他软件交换数据或请求服务。</p>
+<p>工具解决的是“能做什么动作”。模型选择动作，Harness 或工具服务执行动作。</p>
+</section>
+<section id="mcp工具和上下文的连接协议" class="level3">
+<h3 class="anchored" data-anchor-id="mcp工具和上下文的连接协议">MCP：工具和上下文的连接协议</h3>
+<p>MCP 全称 <strong>Model Context Protocol</strong>，中文常译为“模型上下文协议”。它采用客户端与服务器结构，让 AI 应用发现和访问外部的工具、资源与提示模板。</p>
+<p>根据 <a href="https://modelcontextprotocol.io/docs/learn/architecture">MCP 官方架构文档</a>，MCP 只规定上下文怎样交换，不规定应用怎样使用模型或管理上下文。因此：</p>
+<ul>
+<li>MCP 不是 Agent。</li>
+<li>MCP Server 也不必是 Agent。</li>
+<li>Tool 可以不通过 MCP 提供。</li>
+<li>MCP Server 可以一次提供多个 Tool，也可以提供只读资源和提示模板。</li>
+</ul>
+<p>更完整的说法是：“AI 应用中的 MCP Client（客户端）连接 MCP Server（服务器），获取其工具、资源或提示模板；Harness 再按需把这些能力纳入 Agent 的上下文和可用工具。”</p>
+</section>
+<section id="skill供-agent-使用的任务知识或操作规程" class="level3">
+<h3 class="anchored" data-anchor-id="skill供-agent-使用的任务知识或操作规程">Skill：供 Agent 使用的任务知识或操作规程</h3>
+<p>Skill 并无全行业统一格式。本文以下专指 <a href="https://agentskills.io/specification">Agent Skills 规范</a>中的 Skill：它至少是一个包含 <code>SKILL.md</code> 的目录，还可附带脚本、参考资料和模板。它主要教 Agent “遇到这类任务应该怎么做”。</p>
+<p>Tool 和 Skill 的区别可以概括为：</p>
+<ul>
+<li>Tool 解决“可以执行什么动作”。</li>
+<li>Skill 解决“这类工作应该按照什么方法完成”。</li>
+</ul>
+<p>例如，终端是 Tool；一份要求“先复现故障，再修改代码，最后运行测试”的调试规程则是 Skill。</p>
+</section>
+<section id="workflow预先规定路径的流程" class="level3">
+<h3 class="anchored" data-anchor-id="workflow预先规定路径的流程">Workflow：预先规定路径的流程</h3>
+<p>Workflow 的主要步骤和分支由开发者提前写好。例如，发票处理系统固定执行“识别内容、校验金额、人工审批、写入财务系统”。流程中可以调用模型，但模型通常不能任意改变总体路径。</p>
+<p>Agent 与 Workflow 可以混用。探索和修复代码可以由 Agent 动态决定，测试、审查和发布门禁则适合使用确定性 Workflow。</p>
+</section>
+<section id="frameworkruntime-和-scaffold" class="level3">
+<h3 class="anchored" data-anchor-id="frameworkruntime-和-scaffold">Framework、Runtime 和 Scaffold</h3>
+<p>这三个词也经常重叠。为了方便讨论，可以这样区分：</p>
+<ul>
+<li><strong>Framework（框架）</strong>提供构建 Agent 的通用抽象，例如模型接口、工具封装、消息类型和 Agent 循环。</li>
+<li><strong>Runtime（运行时）</strong>承载实际执行，通常负责生命周期和调度，并可能提供持久化、暂停恢复与并发能力。</li>
+<li><strong>Scaffold（脚手架）</strong>多见于论文和评测，泛指围绕基础模型搭建的提示、工具接口、循环和重试结构。</li>
+</ul>
+<p>Harness 往往比 Framework 更“有主见”：它不只提供零件，还预先选好常用工具、提示、子 Agent 和上下文策略。但这只是工作性区分，不同项目完全可能同时自称 Framework、Runtime 和 Harness。</p>
+</section>
+</section>
+<section id="常见的-harness-有哪些" class="level2">
+<h2 class="anchored" data-anchor-id="常见的-harness-有哪些">常见的 Harness 有哪些</h2>
+<p>下面按用途分类，而不是把所有带“Agent”字样的产品塞进同一张排行榜。</p>
+<section id="可以直接使用的-coding-agent-产品" class="level3">
+<h3 class="anchored" data-anchor-id="可以直接使用的-coding-agent-产品">可以直接使用的 Coding Agent 产品</h3>
+<p>这些产品通常已经包含界面、Agent 循环、文件与终端工具、权限和上下文管理，因此也承担 Harness 的职责。表中的 CLI 是命令行界面，IDE 是集成开发环境，SDK 是供开发者调用的软件开发工具包。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>产品</th>
+<th>形态与特点</th>
+<th>官方资料</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OpenCode</td>
+<td>开源 Coding Agent 产品，提供终端界面、网页端、IDE、服务器和 SDK；支持主 Agent、子 Agent、权限、Skill 与 MCP</td>
+<td><a href="https://opencode.ai/docs/">文档</a> · <a href="https://opencode.ai/docs/agents/">Agents</a></td>
+</tr>
+<tr class="even">
+<td>Claude Code</td>
+<td>Anthropic 的 Agent 化编程工具，可在终端、IDE、桌面和浏览器中读取代码、编辑文件、运行命令，并支持子 Agent</td>
+<td><a href="https://code.claude.com/docs/en/overview">概览</a> · <a href="https://code.claude.com/docs/en/sub-agents">Subagents</a></td>
+</tr>
+<tr class="odd">
+<td>Codex CLI / Codex</td>
+<td>OpenAI 的代码任务产品族；CLI 负责本地代码库操作，另有 IDE 与云端运行形态</td>
+<td><a href="https://github.com/openai/codex">Codex CLI 仓库</a></td>
+</tr>
+<tr class="even">
+<td>Gemini CLI</td>
+<td>Google 的开源终端 Agent，面向编码和通用任务，支持工具、MCP 与扩展</td>
+<td><a href="https://geminicli.com/docs/">文档</a> · <a href="https://github.com/google-gemini/gemini-cli">仓库</a></td>
+</tr>
+<tr class="odd">
+<td>Aider</td>
+<td>面向 Git 和终端的 AI 结对编程工具，结构相对轻量</td>
+<td><a href="https://aider.chat/docs/">文档</a></td>
+</tr>
+<tr class="even">
+<td>Cline</td>
+<td>以编辑器为主要入口，提供文件、终端、浏览器、MCP 和 Plan/Act 等模式</td>
+<td><a href="https://docs.cline.bot/">文档</a></td>
+</tr>
+<tr class="odd">
+<td>Continue</td>
+<td>开源 IDE 扩展与 CLI，可配置模型、上下文和代码 Agent</td>
+<td><a href="https://docs.continue.dev/">文档</a> · <a href="https://github.com/continuedev/continue">仓库</a></td>
+</tr>
+<tr class="even">
+<td>Cursor</td>
+<td>带完整 Agent 能力的 AI IDE，提供代码编辑、终端和计划模式等功能</td>
+<td><a href="https://cursor.com/docs">文档</a></td>
+</tr>
+<tr class="odd">
+<td>GitHub Copilot coding agent</td>
+<td>在 GitHub 托管环境中处理 Issue（问题单）、修改仓库并创建 Pull Request（合并请求）的云端 Agent</td>
+<td><a href="https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent">文档</a></td>
+</tr>
+<tr class="even">
+<td>SWE-agent / mini-SWE-agent</td>
+<td>面向软件工程研究和 SWE-bench（真实软件缺陷修复评测集）任务的开源 Agent Harness，强调 Agent 与计算机之间的接口设计</td>
+<td><a href="https://github.com/SWE-agent/SWE-agent">SWE-agent</a> · <a href="https://github.com/SWE-agent/mini-swe-agent">mini-SWE-agent</a></td>
+</tr>
+<tr class="odd">
+<td>OpenHands</td>
+<td>同时提供可用产品、软件 Agent SDK、服务器和沙箱，覆盖本地及托管运行</td>
+<td><a href="https://docs.openhands.dev/overview/introduction">文档</a></td>
+</tr>
+</tbody>
+</table>
+<p>这张表列的是代表性项目，不是穷举，也不表示它们处于同一层级。例如 Cursor 是完整 IDE，Codex CLI 是终端工具，GitHub Copilot coding agent 是托管执行服务，SWE-agent 更偏研究用途。</p>
+</section>
+<section id="用来构建-agent-的框架和-harness" class="level3">
+<h3 class="anchored" data-anchor-id="用来构建-agent-的框架和-harness">用来构建 Agent 的框架和 Harness</h3>
+<p>如果目标不是直接让 AI 修改代码，而是开发自己的客服、研究、数据或业务 Agent，常见选择包括：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>项目</th>
+<th>更准确的定位</th>
+<th>官方资料</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OpenAI Agents SDK</td>
+<td>轻量 Agent Framework，提供 Agent、工具、任务移交（Handoff）、护栏检查（Guardrail）、会话状态（Session）、运行追踪（Tracing）和内置循环</td>
+<td><a href="https://openai.github.io/openai-agents-python/">文档</a></td>
+</tr>
+<tr class="even">
+<td>Claude Agent SDK</td>
+<td>基于 Claude Code 能力构建自定义 Agent 的 SDK，也被 Anthropic 称为通用 Agent Harness</td>
+<td><a href="https://platform.claude.com/docs/en/agent-sdk/overview">文档</a></td>
+</tr>
+<tr class="odd">
+<td>Deep Agents</td>
+<td>LangChain 生态中的开箱即用 Harness，内置规划、文件系统、子 Agent 和上下文管理</td>
+<td><a href="https://docs.langchain.com/oss/python/deepagents/overview">文档</a></td>
+</tr>
+<tr class="even">
+<td>LangChain</td>
+<td>较高层的 Agent Framework，提供模型、工具、Agent 循环和中间件抽象</td>
+<td><a href="https://docs.langchain.com/oss/python/langchain/overview">文档</a></td>
+</tr>
+<tr class="odd">
+<td>LangGraph</td>
+<td>偏底层的编排框架与 Runtime，强调图状态、持久化、人工介入和长时运行</td>
+<td><a href="https://docs.langchain.com/oss/python/langgraph/overview">文档</a></td>
+</tr>
+<tr class="even">
+<td>AutoGen</td>
+<td>微软推出的单 Agent 与多 Agent 应用框架，以消息交互和 AgentChat 抽象见长</td>
+<td><a href="https://microsoft.github.io/autogen/stable/">文档</a></td>
+</tr>
+<tr class="odd">
+<td>CrewAI</td>
+<td>以 Crew 和 Flow 组织多 Agent 与确定性流程的框架及平台</td>
+<td><a href="https://docs.crewai.com/en/introduction">文档</a></td>
+</tr>
+<tr class="even">
+<td>Semantic Kernel</td>
+<td>微软的模型与 Agent 集成 SDK，提供插件、Agent 和编排能力</td>
+<td><a href="https://learn.microsoft.com/en-us/semantic-kernel/overview/">文档</a></td>
+</tr>
+</tbody>
+</table>
+<p>框架与成品 Harness 不适合直接横向比较。选择 Claude Code 是在选择一个可立即工作的编程产品；选择 LangGraph，则通常意味着开发者准备自己定义状态、节点、工具和运行逻辑。</p>
+</section>
+</section>
+<section id="常见的-agent-有哪些" class="level2">
+<h2 class="anchored" data-anchor-id="常见的-agent-有哪些">常见的 Agent 有哪些</h2>
+<p>Agent 可以按任务角色分类。下面这些名称不是统一标准，而是常见的职责划分：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Agent 类型</th>
+<th>主要职责</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coding / Builder Agent</td>
+<td>修改代码、实现功能、运行构建和测试</td>
+</tr>
+<tr class="even">
+<td>Explore Agent</td>
+<td>只读搜索代码库，定位文件、依赖和调用关系</td>
+</tr>
+<tr class="odd">
+<td>Planner Agent</td>
+<td>分析目标、拆解任务并提出执行顺序</td>
+</tr>
+<tr class="even">
+<td>Reviewer Agent</td>
+<td>审查代码或文档，寻找错误、风险和遗漏</td>
+</tr>
+<tr class="odd">
+<td>Test Agent</td>
+<td>复现故障、设计测试并核对结果</td>
+</tr>
+<tr class="even">
+<td>Research Agent</td>
+<td>检索资料、核对来源并整理结论</td>
+</tr>
+<tr class="odd">
+<td>Browser Agent</td>
+<td>操作网页，填写表单或完成跨页面任务</td>
+</tr>
+<tr class="even">
+<td>Data Agent</td>
+<td>查询数据库、运行分析并生成报告</td>
+</tr>
+<tr class="odd">
+<td>Orchestrator Agent</td>
+<td>拆分任务、调度其他 Agent 并汇总结果</td>
+</tr>
+<tr class="even">
+<td>Customer Support Agent</td>
+<td>查询用户和订单信息，处理客服问题</td>
+</tr>
+</tbody>
+</table>
+<p>一个角色名称不一定代表一个完全独立的 Agent。有些产品只是切换系统提示词、模型或权限；有些会创建拥有独立上下文和生命周期的子 Agent；还有些只是让同一个 Agent 进入不同模式。</p>
+<p>以 OpenCode 为例，其<a href="https://opencode.ai/docs/agents/">官方文档</a>把 <code>Build</code> 和 <code>Plan</code> 列为主 Agent，把 <code>General</code>、<code>Explore</code> 和 <code>Scout</code> 列为子 Agent：</p>
+<ul>
+<li><code>Build</code> 可以使用完整开发工具，适合真正修改项目。</li>
+<li><code>Plan</code> 默认限制写文件和终端操作，适合分析与规划。</li>
+<li><code>Explore</code> 是只读代码库探索 Agent。</li>
+<li><code>Scout</code> 用于外部文档和依赖研究。</li>
+</ul>
+<p>这里的 Agent 本质上是不同的模型、提示词、工具权限和运行方式的组合。OpenCode 本身则提供承载它们的 Harness。</p>
+</section>
+<section id="判断一个东西属于哪一层" class="level2">
+<h2 class="anchored" data-anchor-id="判断一个东西属于哪一层">判断一个东西属于哪一层</h2>
+<p>看到新产品或新术语时，可以按下面的问题判断：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>判断问题</th>
+<th>承担该职责的组件通常属于</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>谁根据当前情况决定下一步？</td>
+<td>Model 或 Agent</td>
+</tr>
+<tr class="even">
+<td>谁围绕目标持续进行“判断－行动－观察”？</td>
+<td>Agent</td>
+</tr>
+<tr class="odd">
+<td>谁真正读取文件、调用 API 或运行命令？</td>
+<td>Tool、工具服务或 Runtime</td>
+</tr>
+<tr class="even">
+<td>谁准备上下文、执行工具并控制权限？</td>
+<td>Harness</td>
+</tr>
+<tr class="odd">
+<td>谁规定固定步骤和分支？</td>
+<td>Workflow</td>
+</tr>
+<tr class="even">
+<td>谁提供开发用的通用抽象？</td>
+<td>Framework / SDK</td>
+</tr>
+<tr class="odd">
+<td>谁负责持久运行、暂停恢复和调度？</td>
+<td>Runtime</td>
+</tr>
+<tr class="even">
+<td>谁负责连接外部工具与资源？</td>
+<td>MCP 等协议或集成层</td>
+</tr>
+<tr class="odd">
+<td>谁教 Agent 按什么方法处理一类任务？</td>
+<td>Skill</td>
+</tr>
+</tbody>
+</table>
+<p>真实产品往往横跨几层，这张表的目的不是强行给产品贴唯一标签，而是弄清每一部分实际负责什么。</p>
+</section>
+<section id="为什么-harness-越来越重要" class="level2">
+<h2 class="anchored" data-anchor-id="为什么-harness-越来越重要">为什么 Harness 越来越重要</h2>
+<p>早期讨论常把 Agent 成败归因于模型够不够聪明。实际应用很快暴露出另一面：模型可能会选错工具、忘记目标、重复尝试、在长任务中丢失状态，或者未经验证就宣布完成。</p>
+<p>Harness 正是在处理这些“把一次聪明回答变成可靠工作过程”的问题：</p>
+<ul>
+<li>好的工具说明能减少参数错误。</li>
+<li>合理的权限系统能阻止危险操作。</li>
+<li>测试和环境反馈能让 Agent 发现自己做错了。</li>
+<li>状态持久化能让长任务跨会话继续。</li>
+<li>上下文压缩和按需检索能降低信息过载。</li>
+<li>固定的发布门禁能避免把高风险步骤交给模型自由决定。</li>
+</ul>
+<p>因此，评估一个 Agent 产品不能只看它用了哪个模型。还要看它给模型配了什么工具、怎样组织上下文、如何验证结果、出了错能否恢复，以及用户能否看见和控制它的行动。</p>
+</section>
+<section id="最后记住这张关系图" class="level2">
+<h2 class="anchored" data-anchor-id="最后记住这张关系图">最后记住这张关系图</h2>
+<pre class="text"><code>用户界面 / 产品
+└── Agent Harness
+    ├── Agent
+    │   ├── Model
+    │   ├── Instructions
+    │   └── Agent loop
+    ├── Tools
+    ├── Skills
+    ├── Context and state
+    ├── Permissions and guardrails
+    ├── Runtime
+    └── MCP and other integrations</code></pre>
+<p>它不是所有系统都必须遵守的标准分层，但足以应付大多数讨论：</p>
+<blockquote class="blockquote">
+<p><strong>模型提供判断能力，Agent 围绕目标作出连续决策，Harness 则把模型、工具、上下文和控制机制组装成一个真正能工作的系统。</strong></p>
+</blockquote>
+<p>以后再看到某家公司宣传“全新 Agent”，先别急着被名字带着走。看看它究竟换了模型，增加了角色，接入了工具，还是改进了 Harness。把这几层拆开，绝大多数概念都会清楚很多。</p>
+</section>
+<section id="主要参考资料" class="level2">
+<h2 class="anchored" data-anchor-id="主要参考资料">主要参考资料</h2>
+<ol type="1">
+<li>Anthropic, <a href="https://www.anthropic.com/research/building-effective-agents">Building effective agents</a>, 2024-12-19.</li>
+<li>Anthropic, <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">Effective harnesses for long-running agents</a>, 2025-11-26.</li>
+<li>OpenAI, <a href="https://openai.github.io/openai-agents-python/">OpenAI Agents SDK</a>.</li>
+<li>LangChain, <a href="https://docs.langchain.com/oss/python/concepts/products">Runtimes, frameworks, and harnesses</a>.</li>
+<li>Model Context Protocol, <a href="https://modelcontextprotocol.io/docs/learn/architecture">Architecture overview</a>.</li>
+<li>Agent Skills, <a href="https://agentskills.io/specification">Specification</a>.</li>
+<li>OpenCode, <a href="https://opencode.ai/docs/agents/">Agents</a>.</li>
+<li>Anthropic, <a href="https://code.claude.com/docs/en/overview">Claude Code overview</a>.</li>
+<li>Kapoor et al., <a href="https://arxiv.org/html/2407.01502">AI Agents That Matter</a>, 2024.</li>
+<li>Yang et al., <a href="https://arxiv.org/html/2405.15793">SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering</a>, 2024.</li>
+<li>Yao et al., <a href="https://arxiv.org/html/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a>, 2022.</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/your-website-url\.example\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
