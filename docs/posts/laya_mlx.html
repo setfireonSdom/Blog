@@ -1,0 +1,2628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-21">
+
+<title>laya-mlx 使用教程”</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6033a600180109c3731f6a886c29932c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">知有誰</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">laya-mlx 使用教程”</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">教程</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 21, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="laya-mlx-使用教程" class="level1">
+<h1>laya-mlx 使用教程</h1>
+<blockquote class="blockquote">
+<p>整理自原仓库 <a href="https://github.com/mizorewww/laya-mlx" class="uri">https://github.com/mizorewww/laya-mlx</a>（Apache-2.0，2.5k stars）+ 上游 Laya 文档 + 本机实测。 核心内容（Python API、CLI <code>predict</code>、Snake、Router、内置预设）都在 <strong>Apple M4 / macOS 26 / Python 3.13.11 / MLX 0.32.2</strong> 上实测过，输出为真实结果； <code>convert</code>、视频导出和 benchmark 未在本机跑（需要下载额外权重或 ffmpeg），内容来自仓库文档，已标注。</p>
+<p>本版精修原则：每个概念按「定义 → 为什么 → 在本实现里对应什么 → 边界与误用」四步讲； 公式给出并逐符号解释；所有数字标注来源（本机实测 / 上游文档 / 第三方）；代码引用一律用<strong>函数名</strong>而不是行号（行号随版本失效）。</p>
+</blockquote>
+<hr>
+<section id="目录" class="level2">
+<h2 class="anchored" data-anchor-id="目录">目录</h2>
+<ol type="1">
+<li>这是什么</li>
+<li>核心概念与工作原理</li>
+<li>能做什么、不能做什么</li>
+<li>环境要求</li>
+<li>安装（三种方式 + 本机实录）</li>
+<li>三个模型怎么选</li>
+<li>第一个程序（跑通真实输出）</li>
+<li>输入格式详解（state + questions）</li>
+<li>出题与校准</li>
+<li>输出格式详解（每个字段什么意思）</li>
+<li>加载与推理参数全解</li>
+<li>命令行：predict / convert</li>
+<li>内置预设与邮件工具</li>
+<li>Router：多语言自动路由</li>
+<li>性能数据与调优</li>
+<li>权重转换（convert）</li>
+<li>Snake 终端游戏完全说明</li>
+<li>常见问题与报错对照表</li>
+<li>限制与诚实声明</li>
+<li>和上游 Laya、Jev 的关系</li>
+<li>文件地图与链接</li>
+</ol>
+<p>附录 A. 术语表</p>
+<hr>
+</section>
+<section id="这是什么" class="level2">
+<h2 class="anchored" data-anchor-id="这是什么">1. 这是什么</h2>
+<p><strong>laya-mlx 是 Laya「类型化决策模型」（typed decisions）在 Apple 芯片上的本地推理实现</strong>：用 MLX 运行，不依赖 PyTorch / Transformers，不联网，不调用云端 API。</p>
+<p><strong>「类型化决策」的定义。</strong> 调用方用一份材料（state）提出若干道题；每道题声明三件事——题型（<code>choice</code> / <code>score</code> / <code>noul</code>）、题面（<code>instructions</code>）、这道题允许的答案集合（<code>criteria</code>）。模型的工作是：在<strong>这道题自己的答案集合</strong>上输出一个归一化概率分布，并给出其中概率最大的答案。答案集合是<strong>请求时</strong>由调用方给定的，不是训练时写死的，所以换一套问题不需要重新训练；但反过来说，模型<strong>没有任何能力产生集合之外的答案</strong>——它不会写文字，也不会说「以上都不是」，除非你在 <code>criteria</code> 里放了这个选项。</p>
+<p><strong>输入输出契约：</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>内容</th>
+<th>形式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>输入</td>
+<td>state：要判断的材料</td>
+<td>字符串 / JSON 对象 / 消息列表（§8.1）</td>
+</tr>
+<tr class="even">
+<td>输入</td>
+<td>questions：问什么、允许答什么</td>
+<td><code>{问题名: {type, instructions, criteria}}</code>（§8.2）</td>
+</tr>
+<tr class="odd">
+<td>输出</td>
+<td>每道题一个条目</td>
+<td>概率分布 + 派生答案 + 置信度（§10）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>它不做的事</strong>（都是机制决定的，不是没配好）：</p>
+<ul>
+<li><strong>不生成文本。</strong> 没有自回归解码器，一次前向出结果，<code>output_tokens</code> 恒为 0。</li>
+<li><strong>不做开放问答。</strong> 答案必须落在一个你给的选项里。</li>
+<li><strong>不做多标签。</strong> 一道 <code>choice</code> 只返回一个标签；需要「同时判断几件事」就拆成多道 <code>noul</code> 题（§9.1）。</li>
+<li><strong>不做检索和推理链。</strong> 它只对 state 与你写的题面打分，没有工具、没有外部知识。</li>
+</ul>
+<p>三个题型（全部能力就这三种）：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>含义</th>
+<th>机制</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>choice</code></td>
+<td>在若干命名选项里单选</td>
+<td>在 K 个选项上输出类别分布，返回 <code>argmax</code></td>
+<td>该哪个部门处理？→ billing（p=1.0）</td>
+</tr>
+<tr class="even">
+<td><code>score</code></td>
+<td>在有序等级上打分</td>
+<td>在 K 个等级上输出分布，返回<strong>期望等级</strong> Σ i·p(i)</td>
+<td>多急？→ 1.8694（介于 “soon” 和 “critical” 之间）</td>
+</tr>
+<tr class="odd">
+<td><code>noul</code></td>
+<td>判断一个命题真假</td>
+<td>伯努利分布，只返回 P(true)</td>
+<td>客户要求退款吗？→ 0.9728</td>
+</tr>
+</tbody>
+</table>
+<p><strong>和 LLM 的核心区别：</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>传统 LLM</th>
+<th>Laya / laya-mlx</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>生成方式</td>
+<td>自回归逐 token</td>
+<td>一次前向，0 输出 token</td>
+</tr>
+<tr class="even">
+<td>输入</td>
+<td>一段 prompt</td>
+<td>state + 结构化问题定义</td>
+</tr>
+<tr class="odd">
+<td>输出</td>
+<td>自由文本（要解析、可能格式错）</td>
+<td>给定选项上的概率分布；结构上不可能出现「格式错误」，错的只可能是判断本身</td>
+</tr>
+<tr class="even">
+<td>答案范围</td>
+<td>整个世界（可能幻觉）</td>
+<td>只有你给的选项</td>
+</tr>
+<tr class="odd">
+<td>速度</td>
+<td>数百 ms–秒</td>
+<td>毫秒级（本机 M4 约 7–28 ms/问）</td>
+</tr>
+<tr class="even">
+<td>概率的含义</td>
+<td>采样随机性，不可信</td>
+<td>训练目标（RLCD）按「诚实报概率」给奖励；但发布权重是否校准是另一件事，见 §2.4、§9.3</td>
+</tr>
+</tbody>
+</table>
+<p>来源与定位：</p>
+<p>它来自上游项目 <a href="https://github.com/NandhaKishorM/laya">NandhaKishorM/laya</a>（Convai Innovations 的 Laya 模型家族）。本仓库是<strong>独立 MLX 移植</strong>：保留模型权重、prompt 格式、温度校准机制和输出 schema，只把推理换成 Apple MLX；训练与微调仍在上游，本仓库不发布新权重。</p>
+<hr>
+</section>
+<section id="核心概念与工作原理" class="level2">
+<h2 class="anchored" data-anchor-id="核心概念与工作原理">2. 核心概念与工作原理</h2>
+<p>这一节把后面各节会用到的概念一次讲清。读完这节，§8（输入）、§10（输出）、§11（参数）都只是查表。</p>
+<section id="四个对象statequestionscriteriainstructions" class="level3">
+<h3 class="anchored" data-anchor-id="四个对象statequestionscriteriainstructions">2.1 四个对象：state、questions、criteria、instructions</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>对象</th>
+<th>定义</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>state</code></td>
+<td>要判断的材料。可以是纯文本、JSON 对象、消息列表</td>
+<td>见 §8.1；会被序列化后拼进 prompt</td>
+</tr>
+<tr class="even">
+<td><code>questions</code></td>
+<td>一个字典，key 是问题名（原样回显），value 是一道题的完整定义</td>
+<td>见 §8.2 的校验表</td>
+</tr>
+<tr class="odd">
+<td><code>instructions</code></td>
+<td>题面。模型读到的就是这句话，它直接参与打分</td>
+<td>必须存在；非字符串会被自动转成 JSON</td>
+</tr>
+<tr class="even">
+<td><code>criteria</code></td>
+<td>这道题允许的答案集合</td>
+<td><code>choice</code>/<code>score</code> 必填；<code>noul</code> 可省略。见下</td>
+</tr>
+</tbody>
+</table>
+<p>三种题型的 <code>criteria</code> 含义不同：</p>
+<ul>
+<li><code>choice</code>：选项标签列表，或 <code>{标签: 说明}</code>。<strong>答案空间 = 你写的选项集合</strong>——选项没覆盖到的答案，模型只能硬挑一个最接近的，所以官方预设常带 <code>other</code> 兜底。</li>
+<li><code>score</code>：<strong>有序</strong>等级列表，从低到高。顺序即语义顺序，写反了模型学到的顺序感会失效。</li>
+<li><code>noul</code>：可以不写；写了就给 <code>{"true": 说明, "false": 说明}</code> 两个选项各加描述。<strong><code>noul</code> 的选项固定是 [false, true] 两个</strong>，加不了第三个；想表达「不确定」只能用概率接近 0.5 表达，或者改用 <code>choice</code> 加一个「不确定」选项。</li>
+</ul>
+</section>
+<section id="一次请求在内部长什么样" class="level3">
+<h3 class="anchored" data-anchor-id="一次请求在内部长什么样">2.2 一次请求在内部长什么样</h3>
+<p>每道题各自构成一条独立序列，模板是（<code>common.py</code> 的 <code>build_sequence</code>/<code>build_prefix</code>）：</p>
+<pre><code>[CLS] &lt;题型&gt; question: &lt;instructions&gt; [SEP] [MASK] 选项0 [MASK] 选项1 ... [SEP] &lt;state&gt; [SEP]</code></pre>
+<p>逐段解释：</p>
+<ul>
+<li><p><code>&lt;题型&gt;</code> 是 <code>choice</code> / <code>score</code> / <code>noul</code> 之一；模型带一个 3 类的类型嵌入，同一个问题换个题型是不同的问题。</p></li>
+<li><p><strong>每个选项前面有一个 <code>[MASK]</code> token，这就是该选项的「打分位」</strong>。编码器读完序列后，取每个打分位上的隐状态，过一个打分器（<code>model.py</code> 的 <code>DecisionModel</code>：2 层决策头 + <code>LayerNorm→Linear→GELU→Linear(1)</code>）得到一个实数分数（logit）。</p></li>
+<li><p><strong>分数只在本题的选项之间做 softmax</strong>（题内归一化）。题与题之间互不影响：所以「一次问 7 道题」和「分 7 次问」在判断逻辑上等价，只是合并成一次前向更快。</p></li>
+<li><p>越界或无效的打分位会被掩成 <code>-1e4</code>（softmax 后约等于 0）。</p></li>
+<li><p><strong>state 在序列末尾只出现一次，但每道题都重复一份</strong>。这就是为什么输入的 token 数 ≈ 题数 ×（题头 + state），而不是「所有题共享一份 state」。本机实测（同一段 36 字的 state，含标点）：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>题数</th>
+<th style="text-align: right;"><code>input_tokens</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: right;">62</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: right;">125</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: right;">187</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td style="text-align: right;">247</td>
+</tr>
+</tbody>
+</table>
+<p>大致每加一道题 +62 token。问 10 道题的成本约是问 1 道的 10 倍——题目要精挑，不要凑数（§9.1）。</p></li>
+</ul>
+</section>
+<section id="三种题型的数学定义" class="level3">
+<h3 class="anchored" data-anchor-id="三种题型的数学定义">2.3 三种题型的数学定义</h3>
+<p>记这道题有 K 个选项，模型输出的概率分布为 p(0..K−1)：</p>
+<ul>
+<li><strong><code>choice</code></strong>：p 是 K 个选项上的<strong>类别分布</strong>。返回 <code>choice = argmax p</code>，同时给你完整的 <code>probabilities</code>。K=1 时无意义，请至少给两个选项。</li>
+<li><strong><code>score</code></strong>：p 是 K 个<strong>有序</strong>等级上的分布。返回 <code>score = Σ i·p(i)</code>（第 i 级的编号从 0 开始），即<strong>期望等级</strong>，可以是小数。为什么用期望而不是 argmax：等级之间有序，「0.6 概率在 1 级、0.4 在 2 级」本身就在说「介于 1 和 2 之间」，取 argmax 会把这个信息丢掉。 本机实测量化验证：概率 <code>{0: 0.0302, 1: 0.3601, 2: 0.5186, 3: 0.0911}</code>，手算 Σ i·p(i) = 1.6706，模型返回 <code>score: 1.6705</code>（4 位小数舍入差）。</li>
+<li><strong><code>noul</code></strong>：一个<strong>伯努利</strong>分布，只返回 P(true) ∈ [0,1]；P(false) = 1 − P(true)。判定「是/不是」由<strong>你</strong>选阈值（不是模型的事），比如 <code>&gt;= 0.5</code> 算「是」。它的选项固定是 false/true 两个，选项描述可省略——所以这是三种题型里唯一不需要你设计答案集合的。</li>
+</ul>
+</section>
+<section id="概率置信度校准是三件事" class="level3">
+<h3 class="anchored" data-anchor-id="概率置信度校准是三件事">2.4 概率、置信度、校准是三件事</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>概念</th>
+<th>回答的问题</th>
+<th>在输出里</th>
+<th>会不会被温度缩放影响</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>概率分布 <code>probabilities</code></td>
+<td>模型在各选项之间怎么分配倾向</td>
+<td>每题都有</td>
+<td>会</td>
+</tr>
+<tr class="even">
+<td>置信度 <code>confidence</code></td>
+<td>这个分布有多集中</td>
+<td>每题都有</td>
+<td>会</td>
+</tr>
+<tr class="odd">
+<td>校准</td>
+<td>概率值本身可不可信</td>
+<td>不单独输出，要自己测</td>
+<td>会（校准就是来修它的）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>置信度的定义</strong>（<code>common.py</code> 的 <code>confidence_from_probs</code>、<code>agent.py</code>）：</p>
+<ul>
+<li><code>choice</code> / <code>score</code>：<code>confidence = 1 − H(p) / log(K)</code>，其中 H(p) 是香农熵 <code>−Σ p·log p</code>，K 是选项数。熵越小（分布越尖）置信度越高，取值 [0,1]；K&lt;2 时定义为 1。</li>
+<li><code>noul</code>：<code>confidence = max(p, 1−p)</code>。</li>
+</ul>
+<p>注意：<strong>置信度是分布集中度，不是正确率</strong>。模型可以「高置信度地答错」——分布很尖，但尖在错的选项上。§14 里的英文检查点崩坏（Hindi 上 ECE 0.855）就是极端例子。</p>
+<p><strong>校准的定义</strong>：预测概率与经验正确率是否一致。标准量度是 <strong>ECE（期望校准误差）</strong>：把预测概率分成若干桶（例如每 0.1 一桶），对每个桶算「桶内平均预测概率」与「桶内实际正确率」之差的绝对值，再按桶内样本占比加权平均。一个校准良好的模型，说自己 80% 把握的那些题里，应该真的约有 80% 答对。</p>
+<p><strong>本机检查点的校准状态（重要）</strong>：本机 <code>rl_agent_config.json</code> 里 <code>temperature: [1.0, 1.0, 1.0]</code>、<code>temperature_by_options: {}</code>，也就是说这个检查点<strong>没有做任何分桶温度缩放</strong>，属于「未校准」的发布状态。上游模型卡给出的数据：<code>laya-multilingual</code> 重拟合温度后平均 ECE 从 0.314 降到 0.106。结论：<strong>不要把它的概率当频率直接用</strong>，除非你按 §9.3 在自己的数据上校准。</p>
+</section>
+<section id="logits-温度-softmax" class="level3">
+<h3 class="anchored" data-anchor-id="logits-温度-softmax">2.5 logits → 温度 → softmax</h3>
+<p>打分器给每个选项一个实数 logit z(i)。出概率的完整链条是：</p>
+<pre><code>z(i) --除以温度 T--&gt; z(i)/T --softmax--&gt; p(i)</code></pre>
+<ul>
+<li><strong>温度 T 只改分布的尖锐程度</strong>：T&lt;1 更尖，T&gt;1 更平。<strong>它不改变选项排序</strong>，所以 <code>choice</code>/<code>argmax</code> 永远不受温度影响；受影响的只有 <code>probabilities</code> 与 <code>confidence</code>。</li>
+<li>本实现按 <strong>（题型，选项数）分桶</strong>取温度（<code>common.py</code> 的 <code>temp_bucket</code>）：<code>temperature_by_options</code> 里先找形如 <code>"choice:3-5"</code>、<code>"score:11+"</code> 的键（选项数分档：2 / 3–5 / 6–10 / 11+），找不到就用 <code>temperature[题型]</code>。</li>
+<li>校准就是「用一批带标注的数据，为每个桶拟合一个 T」，见 §9.3。</li>
+</ul>
+</section>
+<section id="rlcd-与诚实概率" class="level3">
+<h3 class="anchored" data-anchor-id="rlcd-与诚实概率">2.6 RLCD 与「诚实概率」</h3>
+<p><strong>RLCD = Reinforcement Learning for Calibrated Decisions</strong>，是这个模型家族的核心训练方法。要点：</p>
+<ul>
+<li>模型的输出是一组概率；训练时把这份概率交给一个<strong>严格适当评分规则</strong>（strictly proper scoring rule）——log 损失、球面损失，有序题用 RPS（ranked probability score）——算出奖励。</li>
+<li>「严格适当」的数学含义：在期望意义上，<strong>只有报出你真实相信的概率分布，才能最大化奖励</strong>。任何夸大或压低某个选项的做法，期望收益都更低。</li>
+<li>探索时给 logits 加零均值高斯噪声，用组均值基线做 REINFORCE（GRPO 风格）。</li>
+<li>因此模型在训练分布上<strong>没有动机虚报置信度</strong>。</li>
+</ul>
+<p>必须分清两件事：<strong>训练机制鼓励诚实 ≠ 发布出来的权重已经校准</strong>。校准是事后动作（温度缩放），取决于检查点配置和你的数据分布。本机检查点未做（§2.4）。</p>
+</section>
+<section id="token-预算与截断最容易踩坑的地方" class="level3">
+<h3 class="anchored" data-anchor-id="token-预算与截断最容易踩坑的地方">2.7 token 预算与截断（最容易踩坑的地方）</h3>
+<p>一条序列有两个长度上限（<code>rl_agent_config.json</code>）：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>配置</th>
+<th style="text-align: right;">本机 multilingual</th>
+<th style="text-align: right;">英文检查点</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>max_len</code></td>
+<td style="text-align: right;">1024</td>
+<td style="text-align: right;">512</td>
+<td>整条序列（题头 + state）的总上限</td>
+</tr>
+<tr class="even">
+<td><code>head_max_len</code></td>
+<td style="text-align: right;">256</td>
+<td style="text-align: right;">192</td>
+<td><strong>题头预算</strong>：题型词 + instructions + 全部选项</td>
+</tr>
+</tbody>
+</table>
+<p>分配规则（<code>common.py</code> 的 <code>build_prefix</code>，按顺序发生）：</p>
+<ol type="1">
+<li>每个选项文本最多保留 <strong>48 token</strong>；所有选项先各占一个 <code>[MASK]</code>。</li>
+<li>题头预算减去选项占用后，剩下的给 instructions；不够就先截 instructions。</li>
+<li>如果选项太多导致 <code>opt_budget &lt; 16</code>，每个选项被压到 <code>max(4, (head_max_len − 16) // 选项数)</code> token——<strong>选项一多，每个选项只剩三四个 token，语义会糊</strong>（§8.5）。</li>
+<li>题头之外的剩余额度给 state；state 超长时，<strong>默认保留开头、丢弃结尾</strong>（<code>build_sequence</code> 的 <code>truncate_left=False</code>）。</li>
+</ol>
+<p>第 4 条有个容易忽略的推论：<strong>state 太长时，丢的是结尾</strong>。如果你把「最近的对话」放在 state 末尾，超长时最先丢的就是它；想要保住最新内容，得自己先裁剪或调换顺序。</p>
+</section>
+<section id="三个一次一次前向一次调用一次批量" class="level3">
+<h3 class="anchored" data-anchor-id="三个一次一次前向一次调用一次批量">2.8 三个「一次」：一次前向、一次调用、一次批量</h3>
+<ul>
+<li><strong>一次前向</strong>：一批序列同时过编码器和决策头，得到全部题目的分数。计算上是一批矩阵运算，比逐题串行快得多。</li>
+<li><strong>一次调用</strong>：<code>predict(state, questions)</code> 里的所有题都在这一次前向里算完；内部按 <code>batch_size</code>（默认 16）分块。</li>
+<li><strong>一次批量</strong>：50 道题一次问，吞吐远高于 50 次 <code>predict</code>（官方 M3 Max 数据：multilingual 50 问 395 q/s；§15）。</li>
+</ul>
+<p>注意「一次调用」不等于「共享计算」：state 仍然每题目重复一份（§2.2），节省的是调度与编码器的批处理效率，不是 token 量。</p>
+<hr>
+</section>
+</section>
+<section id="能做什么不能做什么" class="level2">
+<h2 class="anchored" data-anchor-id="能做什么不能做什么">3. 能做什么、不能做什么</h2>
+<p><strong>适合：</strong></p>
+<ul>
+<li>客服工单分派、紧急度打分、退款/流失风险判断</li>
+<li>内容审核（垃圾、钓鱼、骚扰、违规严重度）</li>
+<li>LLM 输入护栏（越狱、提示注入、敏感信息）</li>
+<li>大批量文本分类、路由（给大模型选难度/领域）</li>
+<li>任何「读一段文字 → 做固定判断」的重复活，且要求快、便宜、离线、概率可用</li>
+</ul>
+<p><strong>不适合：</strong></p>
+<ul>
+<li>写作、聊天、翻译、总结、代码生成（它根本不生成文本）</li>
+<li>开放式问答（答案必须在你给的 <code>criteria</code> 里）</li>
+<li>多标签判断（要拆题，见 §9.1）</li>
+<li>对精度要求极高的零样本任务（见 §19）</li>
+</ul>
+<p>判断标准一句话：<strong>你能提前把要判断的问题列穷举、而且这件事要重复做很多次，才适合它</strong>。如果每段文字都需要现编不同的问题，说明你需要的其实是 LLM。</p>
+<hr>
+</section>
+<section id="环境要求" class="level2">
+<h2 class="anchored" data-anchor-id="环境要求">4. 环境要求</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>项目</th>
+<th>要求</th>
+<th>本机</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>芯片</td>
+<td>Apple Silicon（M 系列）</td>
+<td>Apple M4 ✅</td>
+</tr>
+<tr class="even">
+<td>系统</td>
+<td>macOS 14+</td>
+<td>macOS 26 ✅</td>
+</tr>
+<tr class="odd">
+<td>Python</td>
+<td>3.11+</td>
+<td>3.13.11 ✅</td>
+</tr>
+<tr class="even">
+<td>内存</td>
+<td>建议 8 GB 以上</td>
+<td>16 GB ✅</td>
+</tr>
+<tr class="odd">
+<td>磁盘</td>
+<td>每个模型约 0.6–0.8 GB</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p>注意：<code>mlx</code> 依赖限定 <code>sys_platform == 'darwin' and platform_machine == 'arm64'</code>（pyproject.toml），<strong>Intel Mac 和 Linux 装不上</strong>。那种环境请用上游 PyTorch 版 <code>pip install laya</code>。</p>
+<hr>
+</section>
+<section id="安装" class="level2">
+<h2 class="anchored" data-anchor-id="安装">5. 安装</h2>
+<section id="方式-apypi-直接装最简单" class="level3">
+<h3 class="anchored" data-anchor-id="方式-apypi-直接装最简单">方式 A：PyPI 直接装（最简单）</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install laya-mlx</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 想玩蛇 + 彩色界面再加 demo 附加项</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">'laya-mlx[demo]'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="方式-buv-建独立环境本机采用推荐" class="level3">
+<h3 class="anchored" data-anchor-id="方式-buv-建独立环境本机采用推荐">方式 B：uv 建独立环境（本机采用，推荐）</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> laya-snake <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> laya-snake</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> venv .venv <span class="at">--python</span> 3.13</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">VIRTUAL_ENV</span><span class="op">=</span>.venv <span class="ex">uv</span> pip install <span class="st">'laya-mlx[demo]'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">HF_HUB_OFFLINE</span><span class="op">=</span>0 <span class="ex">.venv/bin/hf</span> download aac6fef/laya-multilingual-mlx   <span class="co"># 提前下权重（约 678 MB，含 tokenizer）</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="方式-c从-github-源码装" class="level3">
+<h3 class="anchored" data-anchor-id="方式-c从-github-源码装">方式 C：从 GitHub 源码装</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">'git+https://github.com/mizorewww/laya-mlx.git'</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 或者克隆后开发模式：</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> repo clone mizorewww/laya-mlx <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> laya-mlx <span class="kw">&amp;&amp;</span> <span class="ex">uv</span> sync <span class="at">--extra</span> demo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="hf_hub_offline-的精确语义" class="level3">
+<h3 class="anchored" data-anchor-id="hf_hub_offline-的精确语义"><code>HF_HUB_OFFLINE</code> 的精确语义</h3>
+<ul>
+<li><code>HF_HUB_OFFLINE=1</code>：禁止 huggingface_hub 发起<strong>任何网络请求</strong>，包括每次加载前的「检查模型有没有新版本」。它<strong>不影响读取本地缓存</strong>，也不影响已下载权重的使用。</li>
+<li>本项目所有脚本在 <code>import laya_mlx</code> <strong>之前</strong>设置这个变量（<code>os.environ.setdefault</code>），所以加载只走本地缓存，本机实测 <strong>0.8–1.1 秒</strong>完成。不设时，如果所在网络访问 huggingface.co 受限，每次加载会先卡在版本检查上（本机网络实测 <strong>76 秒</strong>）。</li>
+<li>代价是：离线模式下<strong>不能下载新权重</strong>。要下新模型就临时加前缀 <code>HF_HUB_OFFLINE=0</code>：</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">HF_HUB_OFFLINE</span><span class="op">=</span>0 <span class="ex">.venv/bin/hf</span> download <span class="op">&lt;</span>模型名<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>如果你在 shell 启动文件里全局设过 <code>HF_HUB_OFFLINE=1</code>，上面的临时覆盖同样适用（环境变量前缀优先）。</li>
+</ul>
+</section>
+<section id="附加项extras说明" class="level3">
+<h3 class="anchored" data-anchor-id="附加项extras说明">附加项（extras）说明</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 49%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>extra</th>
+<th>内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>demo</code></td>
+<td>rich、Pillow</td>
+<td>Snake 游戏、彩色终端</td>
+</tr>
+<tr class="even">
+<td><code>dev</code></td>
+<td>pytest、ruff、build</td>
+<td>跑测试、开发</td>
+</tr>
+<tr class="odd">
+<td><code>reference</code></td>
+<td>torch、transformers、safetensors</td>
+<td>与上游 PyTorch 对拍</td>
+</tr>
+<tr class="even">
+<td><code>benchmark</code></td>
+<td>matplotlib、pyarrow</td>
+<td>基准测试与画图</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="本机实际装到的版本" class="level3">
+<h3 class="anchored" data-anchor-id="本机实际装到的版本">本机实际装到的版本</h3>
+<pre><code>laya-mlx 0.1.0   mlx 0.32.2   mlx-metal 0.32.2   numpy 2.5.3
+huggingface-hub 1.32.0   tokenizers 0.23.2   rich 15.0.0   pillow 12.3.0</code></pre>
+<p>首次加载会自动把权重下到 <code>~/.cache/huggingface/hub/</code>，之后<strong>完全离线</strong>（Snake 默认关闭 Hub 网络访问，<code>snake/policy.py</code> 的 <code>local_checkpoint</code>）。</p>
+<hr>
+</section>
+</section>
+<section id="三个模型怎么选" class="level2">
+<h2 class="anchored" data-anchor-id="三个模型怎么选">6. 三个模型怎么选</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>检查点（HF ID）</th>
+<th>编码器</th>
+<th style="text-align: right;">参数量</th>
+<th style="text-align: right;">上下文</th>
+<th>适合</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>convaiinnovations/laya</code></td>
+<td>ModernBERT-large</td>
+<td style="text-align: right;">421M</td>
+<td style="text-align: right;">512</td>
+<td>英文文本、护栏、邮件分派</td>
+</tr>
+<tr class="even">
+<td><code>convaiinnovations/laya-multilingual</code></td>
+<td>mmBERT-base</td>
+<td style="text-align: right;">322M</td>
+<td style="text-align: right;">1024（最高 8k）</td>
+<td><strong>中文等 100+ 语言，最快</strong></td>
+</tr>
+<tr class="odd">
+<td><code>convaiinnovations/laya-typed-decisions</code></td>
+<td>ModernBERT-large</td>
+<td style="text-align: right;">421M</td>
+<td style="text-align: right;">1024</td>
+<td>上游四个 typed-decisions 工作流（微调过）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结构差异</strong>（本机 <code>encoder/config.json</code> 实测）：</p>
+<ul>
+<li><code>laya-multilingual</code>：mmBERT-base，hidden 768、22 层、12 个注意力头、词表约 256k；每 3 层一个全局注意力，其余层是窗口 128 的局部注意力；位置编码用 RoPE，<strong>编码器上限 8192 token</strong>（实际 <code>max_len</code> 由检查点配置限制在 1024）。</li>
+<li><code>laya</code> / <code>laya-typed-decisions</code>：ModernBERT-large，隐藏维度更大，所以是 421M；上下文默认 512。</li>
+<li>参数量差 → 速度差：多语言版是三个里最快的（官方 M3 Max 单问 P50 7.39 ms vs 英文版 13.42 ms）。</li>
+</ul>
+<p><strong>底座 vs 微调检查点（选型前必须区分）：</strong></p>
+<ul>
+<li><code>laya</code> / <code>laya-multilingual</code> 是<strong>底座</strong>：上游 typed-decisions 基准上零样本接近随机（0.36 / 0.34，多数类基线 0.461）。它们适合当「可特化的底座」，在你的数据上微调或至少做校准（§9.3）。</li>
+<li><code>laya-typed-decisions</code> 是<strong>在该基准自己的训练集上微调过</strong>的检查点，0.766 的分数属于它；<strong>不能</strong>把这个数字当作零样本能力，也不能代表你的场景。</li>
+</ul>
+<p>已经转换成 MLX FP16 的版本（推荐直接用它，省得自己转）：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>原始</th>
+<th>MLX 版</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>convaiinnovations/laya</code></td>
+<td><code>aac6fef/laya-mlx</code></td>
+</tr>
+<tr class="even">
+<td><code>convaiinnovations/laya-multilingual</code></td>
+<td><code>aac6fef/laya-multilingual-mlx</code></td>
+</tr>
+<tr class="odd">
+<td><code>convaiinnovations/laya-typed-decisions</code></td>
+<td><code>aac6fef/laya-typed-decisions-mlx</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>中文输入必须用 multilingual</strong>——英文检查点在非拉丁文字上不是「变差」，是直接崩（高置信度答错，见 §14、§19）。</p>
+</section>
+<section id="第一个程序" class="level2">
+<h2 class="anchored" data-anchor-id="第一个程序">7. 第一个程序</h2>
+<p><code>examples/quickstart.py</code>（本项目已附带）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>os.environ.setdefault(<span class="st">"HF_HUB_OFFLINE"</span>, <span class="st">"1"</span>)  <span class="co"># 只用本地缓存，跳过联网检查</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> laya_mlx <span class="im">as</span> laya</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>root <span class="op">=</span> Path(<span class="va">__file__</span>).parent</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(<span class="st">"aac6fef/laya-multilingual-mlx"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> agent.predict(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    json.loads((root <span class="op">/</span> <span class="st">"state.json"</span>).read_text()),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    json.loads((root <span class="op">/</span> <span class="st">"questions.json"</span>).read_text()),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(json.dumps(result, indent<span class="op">=</span><span class="dv">2</span>, ensure_ascii<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>运行：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/python</span> examples/quickstart.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本机真实输出（整份 JSON，<code>output_tokens: 0</code> 就是它快的原因）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"model"</span><span class="fu">:</span> <span class="st">"laya-rl-agent"</span><span class="fu">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"answers"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"department"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"choice"</span><span class="fu">,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"confidence"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"act_probability"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">},</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"choice"</span><span class="fu">:</span> <span class="st">"billing"</span><span class="fu">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"probabilities"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"billing"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="dt">"technical"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">"sales"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">"other"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">}</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"urgency"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"score"</span><span class="fu">,</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"confidence"</span><span class="fu">:</span> <span class="fl">0.6391</span><span class="fu">,</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"act_probability"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">},</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"score"</span><span class="fu">:</span> <span class="fl">1.8694</span><span class="fu">,</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"legend"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"0"</span><span class="fu">:</span> <span class="st">"not urgent"</span><span class="fu">,</span> <span class="dt">"1"</span><span class="fu">:</span> <span class="st">"soon"</span><span class="fu">,</span> <span class="dt">"2"</span><span class="fu">:</span> <span class="st">"critical deadline or blocking issue"</span><span class="fu">},</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"probabilities"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"0"</span><span class="fu">:</span> <span class="fl">0.0033</span><span class="fu">,</span> <span class="dt">"1"</span><span class="fu">:</span> <span class="fl">0.1239</span><span class="fu">,</span> <span class="dt">"2"</span><span class="fu">:</span> <span class="fl">0.8728</span><span class="fu">}</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"refund"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"noul"</span><span class="fu">,</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"confidence"</span><span class="fu">:</span> <span class="fl">0.9728</span><span class="fu">,</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"act_probability"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">},</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"noul"</span><span class="fu">:</span> <span class="fl">0.9728</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"usage"</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">"input_tokens"</span><span class="fu">:</span> <span class="dv">257</span><span class="fu">,</span> <span class="dt">"output_tokens"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">}</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>每个字段的含义见 §10。最小十行版本：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> laya_mlx <span class="im">as</span> laya</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(<span class="st">"aac6fef/laya-multilingual-mlx"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> agent.predict(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"发票被重复扣款，请退款。"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"department"</span>: {<span class="st">"type"</span>: <span class="st">"choice"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"instructions"</span>: <span class="st">"Who should handle this?"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"criteria"</span>: [<span class="st">"billing"</span>, <span class="st">"technical"</span>, <span class="st">"sales"</span>]}},</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="st">"answers"</span>][<span class="st">"department"</span>][<span class="st">"choice"</span>])   <span class="co"># billing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>加载只走本地缓存、约 1 秒完成的原理见 §5 的 <code>HF_HUB_OFFLINE</code> 说明。</p>
+</blockquote>
+<hr>
+</section>
+<section id="输入格式详解" class="level2">
+<h2 class="anchored" data-anchor-id="输入格式详解">8. 输入格式详解</h2>
+<section id="state三种写法" class="level3">
+<h3 class="anchored" data-anchor-id="state三种写法">8.1 state：三种写法</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) 纯文本</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>agent.predict(<span class="st">"客户说发票被扣了两次，要求退款。"</span>, questions)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) 字典（推荐：字段清晰，题面可用反引号点名引用）</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>agent.predict({</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"from"</span>: <span class="st">"user@example.com"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"subject"</span>: <span class="st">"Duplicate charge on invoice #4411"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"body"</span>: <span class="st">"We were billed twice for March..."</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}, questions)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) 对话列表（消息列表，适合 agent 轨迹审查）</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>agent.predict([{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"..."</span>}, ...], questions)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>行为细节：</p>
+<ul>
+<li>字典/列表会被 <code>json.dumps(ensure_ascii=False)</code> 序列化后拼进 prompt（<code>common.py</code> 的 <code>serialize_state</code>）。中文不会被转义成 <code>\uXXXX</code>，字典的 key 顺序会被保留——<strong>顺序稳定，意味着 prompt 稳定</strong>。</li>
+<li>序列模板见 §2.2：state 在最末尾，每道题重复一份。</li>
+<li><strong>state 里出现的 <code>[MASK]</code> 字面量会被替换成空格</strong>（<code>build_sequence</code>）。原因：每个选项前的 <code>[MASK]</code> 是打分位，state 里混进同样的 token 会制造额外的「伪打分位」，污染结果。你自己写 state 文本时不用担心，代码已经处理。</li>
+<li>state 超长时默认<strong>保留开头、丢弃结尾</strong>（§2.7）。</li>
+</ul>
+</section>
+<section id="questions格式与校验规则" class="level3">
+<h3 class="anchored" data-anchor-id="questions格式与校验规则">8.2 questions：格式与校验规则</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>questions <span class="op">=</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"问题名"</span>: {          <span class="co"># 随便起，输出时原样带回；一个字典里想问几题都行</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"type"</span>: ...,         <span class="co"># 必须：choice / score / noul</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"instructions"</span>: ..., <span class="co"># 必须：题面（模型读的就是这句）</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"criteria"</span>: ...,     <span class="co"># 看题型（见下表）</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>规则写死在 <code>agent.py</code> 的 <code>Agent._to_internal</code>，违反会直接抛 <code>ValueError</code>：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>部分</th>
+<th>是否必须</th>
+<th>允许的写法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>type</code></td>
+<td><strong>必须</strong></td>
+<td><code>"choice"</code> / <code>"score"</code> / <code>"noul"</code></td>
+</tr>
+<tr class="even">
+<td><code>instructions</code></td>
+<td><strong>必须</strong></td>
+<td>字符串；给非字符串会被自动转成 JSON</td>
+</tr>
+<tr class="odd">
+<td><code>criteria</code>（choice）</td>
+<td><strong>必须</strong></td>
+<td>非空列表（字符串、不重复）<strong>或</strong>非空字典 <code>{标签: 说明}</code></td>
+</tr>
+<tr class="even">
+<td><code>criteria</code>（score）</td>
+<td><strong>必须</strong></td>
+<td>非空列表，<strong>按从低到高排序</strong></td>
+</tr>
+<tr class="odd">
+<td><code>criteria</code>（noul）</td>
+<td>可省略</td>
+<td>省略，或字典 <code>{"true": 说明, "false": 说明}</code></td>
+</tr>
+</tbody>
+</table>
+<p>三种题型最小写法：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 单选</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>{<span class="st">"type"</span>: <span class="st">"choice"</span>, <span class="st">"instructions"</span>: <span class="st">"该谁处理?"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> <span class="st">"criteria"</span>: [<span class="st">"财务"</span>, <span class="st">"技术"</span>, <span class="st">"销售"</span>]}</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 单选 + 每个选项带解释（字典写法，解释会拼进选项文本）</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>{<span class="st">"type"</span>: <span class="st">"choice"</span>, <span class="st">"instructions"</span>: <span class="st">"该谁处理?"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="st">"criteria"</span>: {<span class="st">"财务"</span>: <span class="st">"发票、付款、退款"</span>, <span class="st">"技术"</span>: <span class="st">"故障、报错"</span>, <span class="st">"销售"</span>: <span class="st">"报价、新合同"</span>}}</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 打分（顺序 = 语义顺序，从低到高）</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>{<span class="st">"type"</span>: <span class="st">"score"</span>, <span class="st">"instructions"</span>: <span class="st">"有多急?"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> <span class="st">"criteria"</span>: [<span class="st">"不急"</span>, <span class="st">"尽快"</span>, <span class="st">"很急"</span>]}</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 判断</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>{<span class="st">"type"</span>: <span class="st">"noul"</span>, <span class="st">"instructions"</span>: <span class="st">"客户是在要求退款吗?"</span>}</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 判断 + 给 true/false 加说明</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>{<span class="st">"type"</span>: <span class="st">"noul"</span>, <span class="st">"instructions"</span>: <span class="st">"这是钓鱼邮件吗?"</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a> <span class="st">"criteria"</span>: {<span class="st">"true"</span>: <span class="st">"诈骗邮件"</span>, <span class="st">"false"</span>: <span class="st">"正常邮件"</span>}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>渲染细节（<code>common.py</code> 的 <code>render_options</code>、<code>render_criterion</code>）：</p>
+<ul>
+<li><code>choice</code> 字典写法的选项文本是 <strong><code>标签: 说明</code></strong>；说明为 <code>None</code> 或空字符串时只渲染标签；<code>0</code> 和 <code>False</code> 是合法说明，不会被吞。</li>
+<li><code>score</code> 的选项文本是 <strong><code>level 0: 说明</code> / <code>level 1: 说明</code> …</strong>，编号从 0 开始，顺序即分数顺序。</li>
+<li><code>noul</code> 固定渲染为 <strong><code>false: ...</code> / <code>true: ...</code></strong> 两个选项；省略 <code>criteria</code> 时用默认话术（<code>false: no, the statement does not hold</code> / <code>true: yes, the statement holds</code>）。</li>
+<li>说明字段本身可以给结构化数据（dict/list/数字），会被压成 JSON 文本拼进选项（<code>render_criterion</code>）。</li>
+<li>选项文本每个最多 48 token；题头总预算见 §2.7。</li>
+</ul>
+</section>
+<section id="反引号引用-state-字段" class="level3">
+<h3 class="anchored" data-anchor-id="反引号引用-state-字段">8.3 反引号引用 state 字段</h3>
+<p>state 是字典时，题面里用<strong>反引号</strong>点名要读哪个字段（官方预设全部这么写）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>{<span class="st">"type"</span>: <span class="st">"noul"</span>,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a> <span class="st">"instructions"</span>: <span class="st">"Does `message` communicate time pressure or a deadline?"</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>先澄清一个常见误解：<strong>反引号没有任何解析机制</strong>，它就是题面里的普通字符。起作用的方式是文本层面的：<code>message</code> 与 state 的 key 同名，模型在训练数据里见过大量这种写法，于是学会把题面里的这个名字对到 state 的字段上。</p>
+<p>因此：题面里写的名字要与你 state 的 key <strong>完全一致</strong>（大小写、单复数一致）；state 是纯文本时，反引号只起到「这里是个字段名」的提示作用，没有对应关系可对。</p>
+<p>常用字段名（取决于你的 state 结构）：<code>message</code>、<code>body</code>、<code>prompt</code>、<code>post</code>、<code>request</code>。</p>
+</section>
+<section id="一次问多题" class="level3">
+<h3 class="anchored" data-anchor-id="一次问多题">8.4 一次问多题</h3>
+<p>一次 <code>predict</code> 里的所有问题<strong>共享同一份 state，并在一次前向里批量计算</strong>（内部按 <code>batch_size=16</code> 分块）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> agent.predict(state, {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"归谁管"</span>: {...}, <span class="st">"急不急"</span>: {...}, <span class="st">"要退款"</span>: {...}, <span class="st">"有流失风险"</span>: {...},</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>两个要点（§2.2 讲过机制，这里是操作含义）：</p>
+<ul>
+<li>多问几题<strong>不增加调用次数</strong>，但<strong>每道题都会重复一份 state</strong>，token 数近似线性增长。本机实测：1/2/3/4 题 = 62/125/187/247 input tokens。</li>
+<li>因此「多问几题」比「多调几次」吞吐高得多；但要克制——<strong>每道题都要付一份 state 的钱</strong>，只问你真要用的题。</li>
+</ul>
+</section>
+<section id="高级大选项集与-token-预算" class="level3">
+<h3 class="anchored" data-anchor-id="高级大选项集与-token-预算">8.5 高级：大选项集与 token 预算</h3>
+<p><code>head_max_len</code>（英文默认 192 / 多语言默认 256）是「题面 + 所有选项」的 token 预算。选项超过约 50 个时，每个选项只能分到 3–4 个 token，语义糊掉，准确率明显下降（上游实测 Banking77 的 77 分类：默认设置下 0.425 vs Jev 0.870）。</p>
+<p>两种处理方式：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 方式一：给选项更多空间（改前先验证效果）</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(<span class="st">"aac6fef/laya-multilingual-mlx"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>agent.cfg[<span class="st">"head_max_len"</span>] <span class="op">=</span> <span class="dv">512</span>     <span class="co"># 运行时读取，下一次 predict 生效</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>agent.cfg[<span class="st">"max_len"</span>] <span class="op">=</span> <span class="dv">1024</span>         <span class="co"># 同时保证总长不超过编码器上限</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>方式二：把大选项集拆成「先粗分类、再细分类」两次调用，每次选项都少而清晰。对绝大多数场景，方式二比硬调预算更稳。</p>
+<hr>
+</section>
+</section>
+<section id="出题与校准" class="level2">
+<h2 class="anchored" data-anchor-id="出题与校准">9. 出题与校准</h2>
+<p>这一节解决两个问题：<strong>题目怎么写</strong>，以及<strong>概率怎么才可信</strong>。这两件事决定了这套东西在你手里有没有用——模型只有在你给的选项里选的能力，选项设计错了，再准的模型也救不回来。</p>
+<section id="出题规则" class="level3">
+<h3 class="anchored" data-anchor-id="出题规则">9.1 出题规则</h3>
+<ol type="1">
+<li><strong>选项集合决定上限。</strong> 正确答案不在选项里 = 永远答不对。凡是可能出现的答案都要有归属，包括「以上都不是」——官方预设几乎都带一个兜底项。</li>
+<li><strong>选项要互斥。</strong> 语义重叠的选项（「尽快」「很急」）会让模型在两个近义项之间随机分票；写选项时用<strong>可区分的具体情景</strong>而不是程度副词（见第 4 条的 score 写法）。</li>
+<li><strong><code>choice</code> 选项数量控制在约 20 个以内。</strong> 超过会先撞上 token 预算问题（§8.5），不是模型聪明不聪明的问题。</li>
+<li><strong><code>score</code> 的每一级写具体情景，不写抽象程度。</strong> 这是官方明确要求，也对：写「对方明显不高兴，但还没翻脸」比写「3 级」信息量大得多。等级从低到高排列，2–10 级。</li>
+<li><strong><code>noul</code> 一个命题只问一件事。</strong> 不要写成「客户既要求退款又威胁投诉吗」——两件事同时成立/不成立的概率不是单一命题。另外尽量避免否定句和双重否定，否定式命题是这类模型最容易错的形态之一。</li>
+<li><strong>多标签就拆题。</strong> 一道 <code>choice</code> 只能选一个标签；要判断「同时具备哪些属性」，为每个属性写一道 <code>noul</code>，或者拆成多道 <code>choice</code>。</li>
+<li><strong>题面语言用模型训练语言。</strong> 英文检查点写英文；<code>multilingual</code> 可以写中文（本教程所有实测都是中文题面）。常见的稳妥组合是：<strong>英文题面 + 原始语言内容</strong>（内容不要翻译，翻译会引入你自己的理解）。</li>
+<li><strong>题目一旦定稿就别随意改。</strong> 原因见下一节。</li>
+</ol>
+</section>
+<section id="措辞敏感性同一件事换个问法就换个答案" class="level3">
+<h3 class="anchored" data-anchor-id="措辞敏感性同一件事换个问法就换个答案">9.2 措辞敏感性：同一件事，换个问法就换个答案</h3>
+<p>机制上这很容易理解：题面和选项文本<strong>都是模型输入的一部分</strong>（§2.2），改一个词就是换了一道题。下面是本机实测。</p>
+<p><strong>实验</strong>：同一段文字（“快递等了两周，包装还破了个角。客服回得快，但一句道歉都没有，真让人火大。”），同一个命题，四种问法，同一进程内各跑两次：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>问法（instructions）</th>
+<th style="text-align: right;">P(true)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>说话人在表达愤怒或不满吗?</td>
+<td style="text-align: right;">0.7353</td>
+</tr>
+<tr class="even">
+<td>说话人对某事感到不满吗?</td>
+<td style="text-align: right;">0.5837</td>
+</tr>
+<tr class="odd">
+<td>这段文字里有投诉或抱怨吗?</td>
+<td style="text-align: right;">0.7836</td>
+</tr>
+<tr class="even">
+<td>说话人有点生气吗?</td>
+<td style="text-align: right;">0.5796</td>
+</tr>
+</tbody>
+</table>
+<p>四种问法给出的概率在 0.58–0.78 之间，最高与最低差 0.20。注意它们<strong>都</strong>在 0.5 以上，所以「阈值 0.5」碰巧给出同一个结论——但生产上阈值常取 0.6 或更高：取 0.6 时，「说话人对某事感到不满吗?」（0.5837）和「说话人有点生气吗?」（0.5796）判「不是」，另外两种判「是」。<strong>同一件事、同一份数据，只因为你换了个问法，结论就翻转了。</strong></p>
+<p><strong>选项说明（criteria）同样参与判断</strong>：同一句问法「这段文字里有投诉或抱怨吗?」——</p>
+<ul>
+<li>不写 <code>criteria</code>：0.7836</li>
+<li>写 <code>criteria: {"true": "有投诉或抱怨", "false": "没有投诉或抱怨"}</code>：0.8301</li>
+</ul>
+<p><strong>可复现性</strong>（避免误判为随机性）：</p>
+<ul>
+<li>同一批次组合内，连续两次调用结果<strong>完全一致</strong>（上表数字重复两次不变）。上游验收也是同一口径：「相同输入与批形状下，公开 JSON 完全可重复」（<code>BENCHMARKS.md</code>）。</li>
+<li>不同批次组成会有千分位差异：同一道题在 6 题批次里是 0.7845，在 ≤4 题批次里是 0.7836。原因是批内 padding 到不同长度，FP16 的数值舍入路径略有不同。差异在 0.001 量级，不影响结论。</li>
+</ul>
+<p><strong>实践含义：</strong></p>
+<ul>
+<li>「某个措辞下是 0.83」不等于「事实是 0.83」，只等于「这个问法下的 0.83」。写文案、做审核阈值时，别把单一措辞的数值当客观事实。</li>
+<li>校准（下一节）必须在<strong>最终定稿的题目</strong>上做；改了题面或选项就要重测。</li>
+<li>同一个判断最好只用一套措辞做生产，别今天一个问法、明天一个问法，否则阈值没法定。</li>
+</ul>
+</section>
+<section id="校准让概率变得可用" class="level3">
+<h3 class="anchored" data-anchor-id="校准让概率变得可用">9.3 校准：让概率变得可用</h3>
+<p><strong>为什么需要。</strong> 本机检查点没有做温度缩放（§2.4），概率可能整体偏尖或偏平；上游数据是重拟合后 ECE 从 0.314 降到 0.106。校准只做一件事：<strong>修「概率数值的可信度」，不改「谁排第一」</strong>（温度不改变排序，§2.5）。</p>
+<p><strong>需要什么。</strong> 一批带人工标注的样本，30 条起步，覆盖你的场景、各种难度和各个等级。标注只标你真正关心的维度。</p>
+<p><strong>四个指标（先说清楚定义）：</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>指标</th>
+<th>定义</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>命中率 accuracy</td>
+<td><code>argmax</code> 与标注一致的比例</td>
+<td><code>choice</code></td>
+</tr>
+<tr class="even">
+<td>MAE</td>
+<td>期望等级与标注等级的差的绝对值平均</td>
+<td><code>score</code></td>
+</tr>
+<tr class="odd">
+<td>Brier</td>
+<td>概率向量与 one-hot 标注的平方误差平均，越低越好</td>
+<td>全部</td>
+</tr>
+<tr class="even">
+<td>ECE</td>
+<td>分桶后「平均预测概率 vs 实际正确率」的加权平均差（§2.4）</td>
+<td>全部</td>
+</tr>
+</tbody>
+</table>
+<p><strong>步骤：</strong></p>
+<ol type="1">
+<li><strong>测基线</strong>：在标注集上跑一遍，记录命中率/MAE/Brier/ECE。</li>
+<li><strong>拟合温度</strong>：按（题型，选项数）分桶，为每桶找一个温度 T（最小化 NLL 或 Brier）。温度只缩放概率，不动排序。</li>
+<li><strong>复测</strong>：用同一批数据看 ECE 是否下降；命中率理论上不变（argmax 不变），如果变了，说明实现有问题。</li>
+<li><strong>留出验证</strong>：换一批没参与拟合的样本再测一次。校准也可能过拟合。</li>
+</ol>
+<p><strong>边界（很重要）：</strong></p>
+<ul>
+<li>校准只能修概率的数值，<strong>不能把接近随机的排序修对</strong>。底座检查点零样本接近随机（§6），那种情况要先微调，再谈校准。</li>
+<li><code>noul</code> 的判定阈值应该由你的<strong>误判代价</strong>决定，不要默认 0.5：漏判代价高就降阈值，误报代价高就升阈值。校准之后才知道 0.3 和 0.7 各意味着什么。</li>
+<li>没有标注数据时，把 <code>confidence</code> 当粗排序参考，不要当概率使用。</li>
+</ul>
+</section>
+<section id="出题常见错误清单" class="level3">
+<h3 class="anchored" data-anchor-id="出题常见错误清单">9.4 出题常见错误清单</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>症状</th>
+<th>原因</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>某些正确答案永远不被选中</td>
+<td>选项集合没覆盖</td>
+<td>加选项或加兜底项 <code>other</code></td>
+</tr>
+<tr class="even">
+<td>两个选项概率总是接近</td>
+<td>选项语义重叠</td>
+<td>给每个选项写可区分的具体情景</td>
+</tr>
+<tr class="odd">
+<td><code>score</code> 结果总是中间值</td>
+<td>等级描述太抽象</td>
+<td>每级改成具体情景，拉大相邻级差异</td>
+</tr>
+<tr class="even">
+<td>模型在否定句上表现差</td>
+<td>否定式命题难以对齐</td>
+<td>改成正向问法（「是 X 吗」而不是「不是 X 吗」）</td>
+</tr>
+<tr class="odd">
+<td>高选项数时准确率骤降</td>
+<td>撞上题头 token 预算</td>
+<td>拆分选项集或调大预算（§8.5）</td>
+</tr>
+<tr class="even">
+<td>上线后阈值时灵时不灵</td>
+<td>改过题面/选项</td>
+<td>题目定稿后冻结，改了就重新校准（§9.2）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="输出格式详解" class="level2">
+<h2 class="anchored" data-anchor-id="输出格式详解">10. 输出格式详解</h2>
+<p>顶层结构：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"model"</span>: <span class="st">"laya-rl-agent"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"answers"</span>: { 每道题一个条目，key <span class="op">=</span> 你传入的问题名 },</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"usage"</span>: {<span class="st">"input_tokens"</span>: N, <span class="st">"output_tokens"</span>: <span class="dv">0</span>},</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>每个答案的公共字段：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>type</code></td>
+<td>题型（回显）</td>
+</tr>
+<tr class="even">
+<td><code>confidence</code></td>
+<td>分布集中度，不是正确率。<code>choice</code>/<code>score</code>：<code>1 − H(p)/log K</code>；<code>noul</code>：<code>max(p, 1−p)</code>（§2.4）</td>
+</tr>
+<tr class="odd">
+<td><code>action.act_probability</code></td>
+<td>独立的<strong>动作头</strong>输出，见下</td>
+</tr>
+<tr class="even">
+<td><code>probabilities</code></td>
+<td>该题的完整概率分布，保留 4 位小数</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>action.act_probability</code> 的完整定义</strong>（<code>model.py</code> 的 <code>DecisionModel</code>）：</p>
+<p>它来自一个和答案打分器并列的头：输入 = <code>[CLS]</code> 的隐状态 + 4 个统计特征（top-1 概率、top-1 与 top-2 的差值、归一化熵、选项数/255），过一个两层 MLP（<code>Linear(768+4→256) → GELU → Linear(256→类数)</code>），输出类数 = <code>len(act_costs)+1</code>。本机检查点 <code>act_costs = {"escalate": 0.5}</code> → 共 2 类；公开字段给的是 softmax 之后第 0 类的概率，即 <strong>P(act)</strong>：「直接作答」相对「升级处理」的估计。</p>
+<p>它不是「模型有多确定」，也别拿它当质量分数；它是上游为 agent 场景保留的动作决策字段，普通分类任务里可以忽略。</p>
+<p>三种题型各自的字段：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>题型</th>
+<th>特有字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>choice</code></td>
+<td><code>choice</code> + <code>probabilities{标签: 概率}</code></td>
+<td><code>choice</code> = 概率最大的标签</td>
+</tr>
+<tr class="even">
+<td><code>score</code></td>
+<td><code>score</code> + <code>legend{编号: 等级名}</code> + <code>probabilities{编号: 概率}</code></td>
+<td><code>score</code> 是<strong>期望等级</strong> Σ i·p(i)（§2.3）；<code>legend</code> 的 key 是字符串数字</td>
+</tr>
+<tr class="odd">
+<td><code>noul</code></td>
+<td><code>noul</code></td>
+<td>P(命题为真)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个容易引起困惑的显示细节：</strong></p>
+<ol type="1">
+<li><strong><code>probabilities</code> 合计不一定正好 1。</strong> 每项先各自四舍五入到 4 位小数再返回，所以合计可能是 99.99% 或 100.01%。本机实测例：<code>{"开心": 0.02, "生气": 0.4874, "难过": 0.4425, "焦虑": 0.0135, "惊讶": 0.0144, "中性": 0.0223}</code>，合计 1.0001。这是舍入，不是概率没归一化——内部 softmax 严格归一到 1。</li>
+<li><strong><code>usage.input_tokens</code> 是各题序列长度之和</strong>，不是在说「你的 state 有多长」。同一份 state，1/2/3/4 题分别是 62/125/187/247 tokens（§2.2 实测）。<code>output_tokens</code> 恒为 0。</li>
+</ol>
+</section>
+<section id="加载与推理参数全解" class="level2">
+<h2 class="anchored" data-anchor-id="加载与推理参数全解">11. 加载与推理参数全解</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aac6fef/laya-multilingual-mlx"</span>,  <span class="co"># 位置参数：HF ID 或本地目录</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    device<span class="op">=</span><span class="va">None</span>,        <span class="co"># None=MLX 默认；"gpu"/"metal" 或 "cpu"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    token<span class="op">=</span><span class="va">None</span>,         <span class="co"># HF token（私有仓库/限流用；也可用 HF_TOKEN 环境变量）</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    subfolder<span class="op">=</span><span class="va">None</span>,     <span class="co"># 从打包仓库取子目录，如 "multilingual"</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    dtype<span class="op">=</span><span class="st">"float16"</span>,    <span class="co"># float16 / float32 / bfloat16</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    revision<span class="op">=</span><span class="va">None</span>,      <span class="co"># 固定 HF 版本（可复现）</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    batch_size<span class="op">=</span><span class="dv">16</span>,      <span class="co"># 每次前向的问题数上限，超出自动分块</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">compile</span><span class="op">=</span><span class="va">False</span>,      <span class="co"># mx.compile 编译计算图（首次有编译开销）</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    pad_to_multiple<span class="op">=</span><span class="va">None</span>,  <span class="co"># 如 16：把序列长度补齐到 16 的倍数</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    cache_prompts<span class="op">=</span><span class="va">False</span>,   <span class="co"># 启用有界前缀缓存（≤128 题）</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>逐参数说明（默认值 / 取值 / 作用 / 什么时候改）：</p>
+<ul>
+<li><p><strong><code>dtype</code></strong>：权重与计算精度。默认 <code>"float16"</code>（2 字节/参数，快且省内存）。需要和上游 PyTorch 数值对齐时用 <code>"float32"</code>；<code>"bfloat16"</code> 可以传但<strong>不在发布验证矩阵</strong>里，遇到异常先换回 fp16/fp32。</p></li>
+<li><p><strong><code>batch_size</code></strong>：一次前向最多装几道题，超出自动切块。默认 16 是内存与吞吐的折中；官方测 50 题吞吐时用 64。题多、内存够就调大。</p></li>
+<li><p><strong><code>compile</code></strong>：用 <code>mx.compile</code> 把计算图编译起来，减少逐次调度开销。代价：<strong>首次调用有编译时间，且编译结果按输入形状特化</strong>——换了序列长度就可能重新编译。</p></li>
+<li><p><strong><code>pad_to_multiple</code></strong>：把序列长度补齐到某个倍数（如 16）。作用是<strong>减少形状种类</strong>，让 <code>compile</code> 的编译结果能覆盖更多批次；单独用没有意义。</p></li>
+<li><p><strong><code>cache_prompts</code></strong>：启用有界前缀缓存（<code>prepared.py</code> 的 <code>PrefixCache</code>，LRU 上限 128）。它缓存的是<strong>题目本身的 token 化前缀</strong>（题型 + 题面 + 选项 + 题头预算，作为 key），<strong>不缓存编码器输出、也不缓存预测</strong>。适合「同一批固定题目、不断换 state」的循环：题目前缀只 tokenize 一次，每次只重新编码 state。</p></li>
+<li><p><strong><code>device</code></strong>：<code>None</code> 用 MLX 默认（Apple GPU / Metal）；<code>"cpu"</code> 强制 CPU（调试用，慢）。</p></li>
+<li><p><strong><code>subfolder</code></strong>：<code>convaiinnovations/laya</code> 这个仓库打包了三个检查点，只下载你要的子目录：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(<span class="st">"convaiinnovations/laya"</span>, subfolder<span class="op">=</span><span class="st">"multilingual"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong><code>revision</code></strong>：锁定 HF 版本，保证可复现：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(<span class="st">"convaiinnovations/laya"</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                  revision<span class="op">=</span><span class="st">"c5d78730f3493e4fe16d61507ef4b78eef7318cf"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong><code>token</code></strong>：私有仓库或触发限流时用；也可以设环境变量 <code>HF_TOKEN</code>。</p></li>
+<li><p><strong>等价别名</strong>：<code>agent.predict(...)</code> 与 <code>agent.system_one(...)</code> 完全等价（<code>agent.py</code> 的 <code>predict = system_one</code>）。</p></li>
+<li><p><strong>运行时改预算</strong>：<code>head_max_len</code> / <code>max_len</code> 是每次 <code>predict</code> 时从 <code>agent.cfg</code> 读的，所以可以在加载后修改（见 §8.5）；但这属于改了推理条件，改前先验证效果。</p></li>
+</ul>
+<p>三个优化开关（<code>compile</code> / <code>pad_to_multiple</code> / <code>cache_prompts</code>）默认全关，联用是官方验证过的路径（Snake 场景约 +6.5%）。因为首次有编译开销、形状特化，<strong>短任务不一定划算，务必自己 A/B 后再上生产</strong>。</p>
+<hr>
+</section>
+<section id="命令行predict-convert" class="level2">
+<h2 class="anchored" data-anchor-id="命令行predict-convert">12. 命令行：predict / convert</h2>
+<section id="laya-mlx-predict" class="level3">
+<h3 class="anchored" data-anchor-id="laya-mlx-predict">12.1 <code>laya-mlx predict</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-mlx</span> predict <span class="dt">\</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--model</span> aac6fef/laya-multilingual-mlx <span class="dt">\</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--state-file</span> examples/state.json <span class="dt">\</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--questions</span> examples/questions.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>参数表：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--model</code></td>
+<td>HF ID 或本地目录（默认 <code>convaiinnovations/laya</code>）</td>
+</tr>
+<tr class="even">
+<td><code>--subfolder</code></td>
+<td>打包仓库的子目录</td>
+</tr>
+<tr class="odd">
+<td><code>--revision</code></td>
+<td>固定 HF 版本</td>
+</tr>
+<tr class="even">
+<td><code>--dtype {float32,float16,bfloat16}</code></td>
+<td>精度，默认 <code>float16</code></td>
+</tr>
+<tr class="odd">
+<td><code>--state "文本"</code> 或 <code>--state-file file.json</code></td>
+<td>二选一，必给</td>
+</tr>
+<tr class="even">
+<td><code>--questions file.json</code></td>
+<td>必给，题目定义</td>
+</tr>
+<tr class="odd">
+<td><code>--device {gpu,cpu}</code></td>
+<td>设备，默认 <code>gpu</code></td>
+</tr>
+<tr class="even">
+<td><code>--batch-size N</code></td>
+<td>批大小，默认 16</td>
+</tr>
+</tbody>
+</table>
+<p>纯文本状态：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-mlx</span> predict <span class="dt">\</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--model</span> aac6fef/laya-multilingual-mlx <span class="dt">\</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--state</span> <span class="st">'发票被重复扣款，请退款。'</span> <span class="dt">\</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--questions</span> examples/questions.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>输出是<strong>单行 JSON</strong>。想看清楚就接个 pretty-print：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-mlx</span> predict <span class="at">--model</span> aac6fef/laya-multilingual-mlx <span class="dt">\</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--state</span> <span class="st">'发票被重复扣款，请退款。'</span> <span class="at">--questions</span> examples/questions.json <span class="kw">|</span> <span class="ex">python</span> <span class="at">-m</span> json.tool</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 装了 jq 的话：... | jq .</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本机真实输出：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">"model"</span><span class="fu">:</span><span class="st">"laya-rl-agent"</span><span class="fu">,</span><span class="dt">"answers"</span><span class="fu">:{</span><span class="dt">"department"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"choice"</span><span class="fu">,</span><span class="dt">"confidence"</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">"action"</span><span class="fu">:{</span><span class="dt">"act_probability"</span><span class="fu">:</span><span class="dv">1</span><span class="fu">},</span><span class="dt">"choice"</span><span class="fu">:</span><span class="st">"billing"</span><span class="fu">,</span><span class="dt">"probabilities"</span><span class="fu">:{</span><span class="dt">"billing"</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span><span class="dt">"technical"</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">"sales"</span><span class="fu">:</span><span class="dv">0</span><span class="fu">,</span><span class="dt">"other"</span><span class="fu">:</span><span class="dv">0</span><span class="fu">}},</span><span class="dt">"urgency"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"score"</span><span class="fu">,</span><span class="dt">"confidence"</span><span class="fu">:</span><span class="fl">0.6391</span><span class="fu">,</span><span class="dt">"action"</span><span class="fu">:{</span><span class="dt">"act_probability"</span><span class="fu">:</span><span class="dv">1</span><span class="fu">},</span><span class="dt">"score"</span><span class="fu">:</span><span class="fl">1.8694</span><span class="fu">,</span><span class="dt">"legend"</span><span class="fu">:{</span><span class="dt">"0"</span><span class="fu">:</span><span class="st">"not urgent"</span><span class="fu">,</span><span class="dt">"1"</span><span class="fu">:</span><span class="st">"soon"</span><span class="fu">,</span><span class="dt">"2"</span><span class="fu">:</span><span class="st">"critical deadline or blocking issue"</span><span class="fu">},</span><span class="dt">"probabilities"</span><span class="fu">:{</span><span class="dt">"0"</span><span class="fu">:</span><span class="fl">0.0033</span><span class="fu">,</span><span class="dt">"1"</span><span class="fu">:</span><span class="fl">0.1239</span><span class="fu">,</span><span class="dt">"2"</span><span class="fu">:</span><span class="fl">0.8728</span><span class="fu">}},</span><span class="dt">"refund"</span><span class="fu">:{</span><span class="dt">"type"</span><span class="fu">:</span><span class="st">"noul"</span><span class="fu">,</span><span class="dt">"confidence"</span><span class="fu">:</span><span class="fl">0.9728</span><span class="fu">,</span><span class="dt">"action"</span><span class="fu">:{</span><span class="dt">"act_probability"</span><span class="fu">:</span><span class="dv">1</span><span class="fu">},</span><span class="dt">"noul"</span><span class="fu">:</span><span class="fl">0.9728</span><span class="fu">}},</span><span class="dt">"usage"</span><span class="fu">:{</span><span class="dt">"input_tokens"</span><span class="fu">:</span><span class="dv">257</span><span class="fu">,</span><span class="dt">"output_tokens"</span><span class="fu">:</span><span class="dv">0</span><span class="fu">}}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="laya-mlx-convert" class="level3">
+<h3 class="anchored" data-anchor-id="laya-mlx-convert">12.2 <code>laya-mlx convert</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-mlx</span> convert <span class="dt">\</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--model</span> convaiinnovations/laya <span class="dt">\</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--dtype</span> float16 <span class="dt">\</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> models/laya-mlx-fp16</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>参数：<code>--model / --subfolder / --revision / --dtype / --output</code>（<code>--output</code> 必填）。输出目录包含 <code>model.safetensors</code>、编码器与 agent 配置、tokenizer、<code>mlx_config.json</code>。<strong>已存在的目录不会被覆盖。</strong> 细节见 §16。</p>
+<hr>
+</section>
+</section>
+<section id="内置预设与邮件工具" class="level2">
+<h2 class="anchored" data-anchor-id="内置预设与邮件工具">13. 内置预设与邮件工具</h2>
+<p>导入即用（源码 <code>laya_mlx/presets.py</code>、<code>laya_mlx/email.py</code>）。预设就是普通的 <code>questions</code> 字典——<strong>可以直接复制出来改</strong>，不是黑盒：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>函数</th>
+<th>场景</th>
+<th>主要问题（id）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>triage_questions()</code></td>
+<td>客服工单分诊</td>
+<td><code>intent</code>(6选1)、<code>is_urgent</code>、<code>frustration</code>(4级)、<code>refund_requested</code>、<code>churn_risk</code></td>
+</tr>
+<tr class="even">
+<td><code>email_questions(categories=None)</code></td>
+<td>邮件分派 + 威胁过滤</td>
+<td><code>category</code>(可自定义)、<code>is_spam</code>、<code>is_phishing</code>、<code>urgency</code>、<code>needs_reply</code></td>
+</tr>
+<tr class="odd">
+<td><code>guard_questions()</code></td>
+<td>LLM 输入护栏</td>
+<td><code>jailbreak</code>、<code>prompt_injection</code>、<code>sensitive_data</code>、<code>harm_severity</code>(4级)、<code>topic</code></td>
+</tr>
+<tr class="even">
+<td><code>moderation_questions()</code></td>
+<td>内容审核</td>
+<td>毒性、骚扰、威胁、垃圾、违规严重度(4级)</td>
+</tr>
+<tr class="odd">
+<td><code>router_questions()</code></td>
+<td>给大模型做请求路由</td>
+<td>难度(4级)、领域(6选1)、是否需要工具、是否敏感</td>
+</tr>
+</tbody>
+</table>
+<p>示例（中文邮件 + 官方预设，multilingual 模型）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> laya_mlx <span class="im">as</span> laya</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> laya_mlx <span class="im">import</span> Router, triage_questions</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 用已缓存的 aac6fef 权重覆盖默认映射，避免再下一份 convaiinnovations/laya</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>router <span class="op">=</span> Router(models<span class="op">=</span>{<span class="st">"multilingual"</span>: <span class="st">"aac6fef/laya-multilingual-mlx"</span>})</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>state <span class="op">=</span> {<span class="st">"message"</span>: <span class="st">"发票被重复扣款，请退款。"</span>}</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> router.predict(state, triage_questions())</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="st">"answers"</span>][<span class="st">"intent"</span>][<span class="st">"choice"</span>])</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="st">"routing"</span>][<span class="st">"model"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本机真实输出：</p>
+<pre><code>intent: refund
+routing: multilingual | non-Latin script (han, 100% of letters); the English checkpoint cannot read it</code></pre>
+<p>邮件专用工具：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> laya_mlx <span class="im">import</span> clean_email_body, email_state, email_questions</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>body <span class="op">=</span> clean_email_body(<span class="st">"...原始邮件正文含引用历史/签名..."</span>)  <span class="co"># 去掉引用、签名、免责声明，截 3000 字</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>state <span class="op">=</span> email_state(subject<span class="op">=</span><span class="st">"重复扣款"</span>, body<span class="op">=</span>body, sender<span class="op">=</span><span class="st">"a@b.com"</span>)  <span class="co"># 生成规范 state 字典</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>questions <span class="op">=</span> email_questions()  <span class="co"># 或传自定义 categories={"billing": "账单相关", ...}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>语言检测工具与真实输出：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> laya_mlx <span class="im">import</span> detect_language, detect_script, is_english</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>detect_language(<span class="st">"发票被重复扣款"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># {'script': 'han', 'language': None, 'is_english': False, 'non_latin_fraction': 1.0}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>字段含义：<code>script</code> 是书写系统（han/latin/…），<code>language</code> 只在拉丁文字下可能给出语种，<code>is_english</code> 是针对「能不能交给英文检查点」的判断，<code>non_latin_fraction</code> 是非拉丁字符占比。Router 的判定逻辑见 §14。</p>
+<hr>
+</section>
+<section id="router多语言自动路由" class="level2">
+<h2 class="anchored" data-anchor-id="router多语言自动路由">14. Router：多语言自动路由</h2>
+<p>Router 解决的问题：三个检查点的语言能力不同，<strong>英文检查点遇到非拉丁文字不是变差，而是高置信度答错</strong>（上游数据：20 选项的 MASSIVE intent 上 Hindi 0.100、Korean 0.103，随机是 0.050；Hindi 上 ECE 0.855——它错得很自信）。所以路由的第一信号是<strong>书写系统检测</strong>，而不是语种识别。</p>
+<p><strong>检测与判定规则</strong>（<code>router.py</code> 的 <code>route</code>，<code>lang.py</code> 的 <code>analyse</code>）：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>检测结果</th>
+<th>路由到</th>
+<th>理由文本（真实输出）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>state 里没有字母（<code>script: unknown</code>）</td>
+<td><code>default</code>（默认 english）</td>
+<td><code>no letters detected in state; using default</code></td>
+</tr>
+<tr class="even">
+<td>非拉丁书写系统（如 han）</td>
+<td><code>multilingual</code></td>
+<td><code>non-Latin script (...); the English checkpoint cannot read it</code></td>
+</tr>
+<tr class="odd">
+<td>拉丁字母但判定不是英文</td>
+<td><code>multilingual</code></td>
+<td><code>Latin script but language looks like ..., not English</code></td>
+</tr>
+<tr class="even">
+<td>英文</td>
+<td><code>english</code></td>
+<td><code>English Latin text</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> laya_mlx <span class="im">import</span> Router</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>router <span class="op">=</span> Router()                      <span class="co"># 默认 max_loaded=1，LRU 换入换出</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> router.predict(<span class="st">"I was charged twice"</span>, questions)        <span class="co"># → english</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> router.predict(<span class="st">"发票被重复扣款"</span>, questions)              <span class="co"># → multilingual</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> router.predict(state, questions, model<span class="op">=</span><span class="st">"multilingual"</span>)  <span class="co"># 显式指定</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> router.predict(state, questions, task<span class="op">=</span><span class="st">"typed_decisions"</span>)<span class="co"># 显式任务</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="st">"routing"</span>])</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># {'model': 'multilingual', 'repo': 'convaiinnovations/laya/multilingual',</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  'reason': 'non-Latin script (han, 100% of letters); ...', 'detection': {...}}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>路由优先级</strong>（<code>route</code> 的判定顺序）：显式 <code>model</code> &gt; 显式 <code>task</code> &gt; 工作流检测（需 <code>auto_task_detection=True</code>）&gt; 显式 <code>lang</code> &gt; 脚本/语言检测 &gt; 默认（english）。</p>
+<p><code>routing</code> 字段（<code>RouteDecision</code>）：<code>model</code>（选了谁）、<code>repo</code>（对应仓库/子目录）、<code>reason</code>（为什么，可直接展示给用户）、<code>detection</code>（检测明细，显式指定时为 <code>None</code>）、<code>workflow</code>（命中的 typed-decisions 工作流名）。</p>
+<p>构造参数：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>Router(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    models<span class="op">=</span><span class="va">None</span>,              <span class="co"># 覆盖模型映射（值可为 "repo" 或 ("repo", "subfolder")）</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    device<span class="op">=</span><span class="va">None</span>, token<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    max_loaded<span class="op">=</span><span class="dv">1</span>,             <span class="co"># 常驻模型数，LRU 淘汰</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    default<span class="op">=</span><span class="st">"english"</span>,        <span class="co"># 检测不出文字时用谁</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    auto_task_detection<span class="op">=</span><span class="va">False</span>,<span class="co"># 按 question id 集合自动选 typed-decisions 工作流</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    standalone_repos<span class="op">=</span><span class="va">False</span>,   <span class="co"># 用独立 HF 仓库而非打包仓库</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    preload<span class="op">=</span><span class="va">False</span>,            <span class="co"># 预先加载全部（服务器/演示推荐）</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    dtype<span class="op">=</span><span class="st">"float16"</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>模型名别名（<code>router.py</code> 的 <code>normalise_name</code>）：<code>en / laya / default</code> → english；<code>multi / ml / laya-multilingual</code> → multilingual；<code>typed / typed_decisions / typed-decisions / laya-typed-decisions / decisions</code> → typed-decisions。</p>
+<p><strong>typed-decisions 的四个工作流</strong>（<code>auto_task_detection=True</code> 时启用，按<strong>问题 id 集合的精确匹配</strong>触发，详见 <code>router.py</code> 的 <code>_TYPED_DECISION_WORKFLOWS</code>）：</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>工作流</th>
+<th>问题 id 集合</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>invoice_processing</code></td>
+<td><code>discrepancy_severity</code>, <code>disposition</code>, <code>duplicate</code>, <code>matches_order</code>, <code>urgency</code></td>
+</tr>
+<tr class="even">
+<td><code>security_incidents</code></td>
+<td><code>credential_compromise</code>, <code>disposition</code>, <code>severity</code>, <code>true_positive</code>, <code>urgency</code></td>
+</tr>
+<tr class="odd">
+<td><code>customer_service</code></td>
+<td><code>action</code>, <code>category</code>, <code>churn_risk</code>, <code>needs_human</code>, <code>urgency</code></td>
+</tr>
+<tr class="even">
+<td><code>agent_trace_observability</code></td>
+<td><code>action</code>, <code>needs_review</code>, <code>outcome</code>, <code>risk</code>, <code>urgency</code></td>
+</tr>
+</tbody>
+</table>
+<p>精确匹配意味着：你起的问题名正好等于上表集合才会命中，所以它不会「误抢」普通请求；反过来，想用这个功能，问题名必须照抄。</p>
+<p><strong>加载与内存管理：</strong></p>
+<ul>
+<li>默认 <code>max_loaded=1</code>：语言来回切换时<strong>每次都要重建模型</strong>（官方数据：冷载 7–10 秒，CPU 中位数 7.4 s / T4 10.3 s）。检测本身只要微秒级，重建才是成本。</li>
+<li>服务/演示场景用 <code>Router(preload=True)</code> 或 <code>router.preload(["english", "multilingual"])</code>，把加载成本前置。</li>
+<li>已有 Agent 可以 <code>router.attach("english", agent)</code> 复用，避免重复占内存；<code>router.unload()</code> 释放。</li>
+<li>默认映射从打包仓库 <code>convaiinnovations/laya</code> 按需下载（首次路由到某模型时下 0.6–0.8 GB）。如果已经缓存了 <code>aac6fef/*-mlx</code> 的权重，用 <code>Router(models={"multilingual": "aac6fef/laya-multilingual-mlx"})</code> 覆盖映射，避免重复下载。</li>
+</ul>
+<hr>
+</section>
+<section id="性能数据与调优" class="level2">
+<h2 class="anchored" data-anchor-id="性能数据与调优">15. 性能数据与调优</h2>
+<p>先定义口径，避免拿不同条件的数据互相比较：</p>
+<ul>
+<li><strong>单问 P50 / P95</strong>：一次 <code>predict</code> 只问一道题时的延迟中位数 / 95 分位。</li>
+<li><strong>q/s（吞吐）</strong>：每秒完成的题目数，测量时通常一批 50 题。</li>
+<li><strong>峰值内存</strong>：单次推理期间的进程内存峰值（含权重）。</li>
+<li>「本机」= Apple M4 / 16 GB / macOS 26 / FP16；「官方」= M3 Max / 40 核 GPU / 128 GiB / FP16 端到端。</li>
+</ul>
+<section id="官方实测m3-max" class="level3">
+<h3 class="anchored" data-anchor-id="官方实测m3-max">官方实测（M3 Max）</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Laya 421M</th>
+<th style="text-align: right;">Multilingual 322M</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>单短问 P50</td>
+<td style="text-align: right;">13.42 ms</td>
+<td style="text-align: right;"><strong>7.39 ms</strong></td>
+</tr>
+<tr class="even">
+<td>单短问 P95</td>
+<td style="text-align: right;">13.92 ms</td>
+<td style="text-align: right;">7.79 ms</td>
+</tr>
+<tr class="odd">
+<td>50 问吞吐</td>
+<td style="text-align: right;">146.8 q/s</td>
+<td style="text-align: right;"><strong>395.0 q/s</strong></td>
+</tr>
+<tr class="even">
+<td>单问峰值内存</td>
+<td style="text-align: right;">943.6 MiB</td>
+<td style="text-align: right;"><strong>687.6 MiB</strong></td>
+</tr>
+<tr class="odd">
+<td>模型权重（FP16）</td>
+<td style="text-align: right;">803.6 MiB</td>
+<td style="text-align: right;">614.0 MiB</td>
+</tr>
+</tbody>
+</table>
+<p>长上下文（1024 token，multilingual）单问 P50 上升到约 37.6 ms，10 问约 389 ms——上下文越长越慢，符合预期。</p>
+<p>移植保真度：三个检查点在 FP32/FP16 下 <strong>63/63</strong> 验证题与上游 argmax 一致（378/378 总对比）；每个配置 100 次重复调用结果确定、零内存增长。</p>
+</section>
+<section id="本机实测apple-m416-gbfp16" class="level3">
+<h3 class="anchored" data-anchor-id="本机实测apple-m416-gbfp16">本机实测（Apple M4，16 GB，FP16）</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>项目</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>首次加载</td>
+<td>1.2 s</td>
+</tr>
+<tr class="even">
+<td>冷启动第一次 predict</td>
+<td>1.139 s（含 kernel 编译）</td>
+</tr>
+<tr class="odd">
+<td>Snake 无界面 30 步</td>
+<td>平均推理 28.9 ms/步，11.5 步/秒，0 死亡，全程离线（默认配速档；同机多次运行有 ±10% 波动）</td>
+</tr>
+<tr class="even">
+<td>多语言缓存逻辑总大小</td>
+<td>678 MB（权重 644 MB + tokenizer 34 MB；大文件在 <code>hub/blobs/</code> 共享目录，<code>du</code> 直接量模型目录会偏小）</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="调优建议按收益排序" class="level3">
+<h3 class="anchored" data-anchor-id="调优建议按收益排序">调优建议（按收益排序）</h3>
+<ol type="1">
+<li><strong>多题一次调用</strong>：所有问题共享一次批量前向，比循环调用快得多（但记住 token 成本仍随题数线性增长，§2.2）。</li>
+<li><strong><code>batch_size</code> 调大</strong>（如 64）：批吞吐显著上升，注意内存。</li>
+<li><strong><code>compile=True</code> + <code>pad_to_multiple=16</code> + <code>cache_prompts=True</code></strong>：官方验证过，Snake 场景约 +6.5%，但首次编译有成本（§11）。</li>
+<li><strong><code>dtype="float16"</code></strong>（默认）：速度/内存最优；只在需要数值对齐时换 <code>float32</code>。</li>
+<li><strong>减少无用上下文</strong>：state 越短越快；超长时默认丢结尾，别把关键内容放在会被丢掉的位置（§2.7）。</li>
+</ol>
+<p>官方明说：<strong>没有</strong>找到「同权重再快 10 倍」的方法，实测部分场景仅 1.03–1.08×（见 <code>docs/ENGINEERING_10X_RESEARCH.md</code>）。</p>
+<hr>
+</section>
+</section>
+<section id="权重转换convert" class="level2">
+<h2 class="anchored" data-anchor-id="权重转换convert">16. 权重转换（convert）</h2>
+<blockquote class="blockquote">
+<p>本节命令未在本机执行（会额外下载上游权重），内容来自仓库文档。</p>
+</blockquote>
+<p>上游原始权重本身存的就是 FP16，<code>convert</code> 做的是<strong>参数命名 + 精度转换</strong>，不是量化、不是重训练：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-mlx</span> convert <span class="dt">\</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--model</span> convaiinnovations/laya <span class="dt">\</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--dtype</span> float16 <span class="dt">\</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> models/laya-mlx-fp16</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>然后：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>agent <span class="op">=</span> laya.load(<span class="st">"./models/laya-mlx-fp16"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>想离线部署/内网使用时，把转换后的目录连同 tokenizer 一起打包带走即可，不再需要 HF。 转换后的目录结构里，<code>mlx_config.json</code> 记录来源仓库、revision 与精度；<code>manifest.json</code> 记录各文件的 sha256（Snake 的元数据里会展示这些信息）。</p>
+</blockquote>
+</section>
+<section id="snake-终端游戏完全说明" class="level2">
+<h2 class="anchored" data-anchor-id="snake-终端游戏完全说明">17. Snake 终端游戏完全说明</h2>
+<p>Snake 是这套模型最直观的演示：<strong>每一步，模型回答三个真实问题</strong>——</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>问题</th>
+<th>题型</th>
+<th>选项/命题</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>下一步走哪</td>
+<td><code>choice</code></td>
+<td>四个方向（up/down/left/right）</td>
+</tr>
+<tr class="even">
+<td>前方有安全路线吗</td>
+<td><code>noul</code></td>
+<td>命题：存在安全的前进路线</td>
+</tr>
+<tr class="odd">
+<td>食物现在可达吗</td>
+<td><code>noul</code></td>
+<td>命题：食物能通过当前空格到达</td>
+</tr>
+</tbody>
+</table>
+<section id="三个先讲清楚的概念" class="level3">
+<h3 class="anchored" data-anchor-id="三个先讲清楚的概念">17.1 三个先讲清楚的概念</h3>
+<ul>
+<li><strong>legal / safe 是两回事</strong>（<code>game.py</code> 的 <code>game.moves()</code>）：
+<ul>
+<li><code>legal</code>：这一步不会撞墙、不会撞到自己；</li>
+<li><code>safe</code>：这一步走完后，蛇不会被自己困死（满足「循环安全」判据）；</li>
+<li>模型只看得到你写进 state 和选项描述的信息，所以选项描述里会写明「Blocked / Unsafe / Safe」，让它有依据。</li>
+</ul></li>
+<li><strong>安全盾（shield）</strong>：默认开启。模型给出 <code>move</code> 题的概率后，取 <code>proposed = argmax(概率)</code>；如果 <code>proposed</code> 不是 <code>safe</code> 动作，就改选 <code>safe</code> 集合里概率最大的动作。此时界面标记 <code>SHIELD</code>，记录里 <code>intervened = true</code>。<strong>模型自己的概率不会被改写</strong>，只是执行时被拦一下。用 <code>--unassisted</code> 关掉安全盾，直接执行模型原始 top-1（观察模型原始行为时用）。</li>
+<li><strong>两个 noul 的用法</strong>：<code>dead_end_risk = 1 − P(risk 题)</code>，<code>food_reachable = P(food 题)</code>。它们是模型对局面的事实判断，不是校准过的死亡概率——面板上展示时要知道这一点。</li>
+</ul>
+<p><code>--prompt</code> 有 <code>compact</code>（默认）和 <code>detailed</code> 两档：<code>detailed</code> 给完整局面描述（可用安全方向数、空格数、蛇长、食物可达性）和更细的选项说明；<code>compact</code> 只给「有无安全路线 / 食物是否可达」两句要点和更短的选项。两档会得到不同的概率分布——这就是 §9.2 说的「题面/选项是输入的一部分」在游戏里的体现。</p>
+<p><code>--optimize</code> = 编译 + 长度按 16 分桶 + 有界前缀复用，三件一起开（§11）。</p>
+</section>
+<section id="启动" class="level3">
+<h3 class="anchored" data-anchor-id="启动">17.2 启动</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./play.sh</span>                       <span class="co"># 本项目的包装脚本（检查终端尺寸/颜色）</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 或者直接：</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-snake</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>模型默认 <code>aac6fef/laya-multilingual-mlx</code>；依次找 <code>models/hub/laya-multilingual-mlx</code>、<code>models/laya-multilingual</code>、HF 缓存，<strong>运行中永不下载</strong>（先 <code>hf download</code> 一次）；找不到时会直接给出下载命令。</li>
+<li>终端至少 <strong>104 列 × 35 行</strong>，不够大游戏自动暂停，拉大即继续。</li>
+<li>建议等宽字体（Menlo）+ true color；若 shell 设了 <code>NO_COLOR</code>，用 <code>env -u NO_COLOR ./play.sh</code> 恢复彩色。</li>
+</ul>
+</section>
+<section id="操作" class="level3">
+<h3 class="anchored" data-anchor-id="操作">17.3 操作</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>按键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>空格</td>
+<td>暂停 / 继续</td>
+</tr>
+<tr class="even">
+<td>↑ / ↓ 或 + / −</td>
+<td>节奏 ±2 步/秒</td>
+</tr>
+<tr class="odd">
+<td>R</td>
+<td>换种子重开</td>
+</tr>
+<tr class="even">
+<td>Q / Ctrl-C</td>
+<td>退出并恢复终端</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="全部参数" class="level3">
+<h3 class="anchored" data-anchor-id="全部参数">17.4 全部参数</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--model</code></td>
+<td>本地目录或已缓存 HF ID</td>
+</tr>
+<tr class="even">
+<td><code>--prompt {compact,detailed}</code></td>
+<td>题面详略，默认 <code>compact</code></td>
+</tr>
+<tr class="odd">
+<td><code>--optimize</code></td>
+<td>编译 + 16 token 分桶 + 有界前缀复用</td>
+</tr>
+<tr class="even">
+<td><code>--width/--height</code></td>
+<td>棋盘尺寸（默认 24×16；≥4×4 且必须有一边为偶数）</td>
+</tr>
+<tr class="odd">
+<td><code>--seed</code> / <code>--initial-length</code></td>
+<td>随机种子 / 初始蛇长（默认 7 / 6）</td>
+</tr>
+<tr class="even">
+<td><code>--fps</code></td>
+<td>配速目标，默认 12 决策/秒</td>
+</tr>
+<tr class="odd">
+<td><code>--max-speed</code></td>
+<td>不配速，推理完立刻下一步</td>
+</tr>
+<tr class="even">
+<td><code>--duration</code> / <code>--steps</code></td>
+<td>按秒 / 按步数自动停止（<code>--duration</code> 不计预热阶段）</td>
+</tr>
+<tr class="odd">
+<td><code>--unassisted</code></td>
+<td>关安全盾，执行模型原始 top-1</td>
+</tr>
+<tr class="even">
+<td><code>--record file.jsonl</code></td>
+<td>录制真实决策和棋盘状态</td>
+</tr>
+<tr class="odd">
+<td><code>--headless</code></td>
+<td>无界面（配合 <code>--steps/--max-speed</code> 跑分）</td>
+</tr>
+<tr class="even">
+<td><code>--no-alt-screen</code></td>
+<td>保留最终画面到回滚区</td>
+</tr>
+</tbody>
+</table>
+<p>常用组合：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./play.sh</span> <span class="at">--max-speed</span>                        <span class="co"># 满速</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./play.sh</span> <span class="at">--optimize</span> <span class="at">--max-speed</span>             <span class="co"># 官方验证的加速路径</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./play.sh</span> <span class="at">--fps</span> 20                           <span class="co"># M3 Max 验证过的配速上限档</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="ex">./play.sh</span> <span class="at">--headless</span> <span class="at">--steps</span> 600 <span class="at">--max-speed</span> <span class="co"># 无界面跑 600 步</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>本机无界面实测（默认档，未开 optimize）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">"steps"</span><span class="fu">:</span> <span class="dv">30</span><span class="fu">,</span> <span class="dt">"steps_per_second"</span><span class="fu">:</span> <span class="fl">11.45</span><span class="fu">,</span> <span class="dt">"mean_inference_ms"</span><span class="fu">:</span> <span class="fl">28.92</span><span class="fu">,</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"deaths"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">"interventions"</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span> <span class="dt">"guarded"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">"network"</span><span class="fu">:</span> <span class="st">"offline"</span> <span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>参考：官方 M3 Max 基准里关闭配速后整体 63.61 步/秒；M4 默认配速档实测约 11.5 步/秒属正常区间（同机多次运行 ±10%）——Snake 每步要批量问三个问题再加规划开销，和单问 7–13 ms 的 API 基准不是一回事。关掉配速（<code>--max-speed</code>）后本机实测 41.8 步/秒、平均推理 23.5 ms。</p>
+</blockquote>
+</section>
+<section id="录制与导出" class="level3">
+<h3 class="anchored" data-anchor-id="录制与导出">17.5 录制与导出</h3>
+<blockquote class="blockquote">
+<p>导出 MP4/GIF 需要 ffmpeg，未在本机演示；命令来自仓库文档。</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 录 100 秒</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-snake</span> <span class="at">--fps</span> 12 <span class="at">--duration</span> 100 <span class="at">--record</span> artifacts/snake/run.jsonl</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 导出视频/GIF/封面（MP4 需要 ffmpeg：brew install ffmpeg）</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-snake</span> export artifacts/snake/run.jsonl <span class="dt">\</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--start</span> 65 <span class="at">--seconds</span> 30 <span class="at">--output</span> artifacts/snake/demo.mp4 <span class="dt">\</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--gif</span> artifacts/snake/demo.gif</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-snake</span> export artifacts/snake/run.jsonl <span class="dt">\</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">--start</span> 85 <span class="at">--output</span> artifacts/snake/poster.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>导出是「按录制数据重绘」，1× 原速，不是录屏；MP4 默认 1920×1080 / 30fps。</p>
+</section>
+<section id="基准测试" class="level3">
+<h3 class="anchored" data-anchor-id="基准测试">17.6 基准测试</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv/bin/laya-snake</span> benchmark <span class="dt">\</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--rates</span> 10,12,15,18,20,25,30,35,40,45,50,60 <span class="dt">\</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--sweep-steps</span> 120 <span class="at">--soak-steps</span> 600 <span class="at">--seeds</span> 101,102,103,104 <span class="dt">\</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> artifacts/snake/benchmark.json</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 断点续跑：加 --resume</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="常见问题与报错对照表" class="level2">
+<h2 class="anchored" data-anchor-id="常见问题与报错对照表">18. 常见问题与报错对照表</h2>
+<p><strong>概念类问题（先看这几条）：</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>现象</th>
+<th>原因与解法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>同一段文字，改了下问法结果差很多</td>
+<td>正常现象，不是 bug。题面与选项都是输入的一部分（§9.2 有本机实测：同一命题 0.58–0.78）。生产环境题目定稿后冻结，改了就重新校准</td>
+</tr>
+<tr class="even">
+<td>候选选项的概率加起来不是 100%</td>
+<td>每项各自四舍五入到 4 位小数导致的显示误差（§10）。内部严格归一到 1</td>
+</tr>
+<tr class="odd">
+<td><code>confidence</code> 很高但答案错了</td>
+<td><code>confidence</code> 是分布集中度，不是正确率（§2.4）。模型可以高置信度答错；要看概率可信度得做校准（§9.3）</td>
+</tr>
+<tr class="even">
+<td><code>score</code> 为什么是小数</td>
+<td>它是期望等级 Σ i·p(i)，不是 argmax（§2.3）。比如 1.67 表示「偏向第 2 级」</td>
+</tr>
+<tr class="odd">
+<td>一道题想同时选多个标签</td>
+<td>不支持多标签。拆成多道 <code>noul</code>，或拆多道 <code>choice</code>（§9.1）</td>
+</tr>
+<tr class="even">
+<td>模型答了一个不在我意料内的选项</td>
+<td>它只会从你给的选项里选；「意料外」说明你的选项集合设计需要调整，或者该加兜底项（§9.1）</td>
+</tr>
+<tr class="odd">
+<td>概率看着过度自信</td>
+<td>本机检查点温度全为 1（未校准，§2.4）。官方建议在自己的数据上重新拟合温度；上游 multilingual 重拟合后 ECE 0.314→0.106</td>
+</tr>
+</tbody>
+</table>
+<p><strong>运行/报错类问题：</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>现象 / 报错</th>
+<th>原因与解法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>首次运行卡在下载</td>
+<td>首次会下 0.6–0.8 GB 权重到 <code>~/.cache/huggingface/</code>；慢就设 <code>HF_TOKEN</code>（提高限流），或换 <code>hf-mirror.com</code> 镜像（<code>HF_ENDPOINT=https://hf-mirror.com</code>）</td>
+</tr>
+<tr class="even">
+<td>脚本/代码启动要等 1 分多钟</td>
+<td>每次加载都在联网查模型新版本；本项目脚本默认 <code>HF_HUB_OFFLINE=1</code>（约 1 秒完成）。自己写代码时在 <code>import laya_mlx</code> <strong>之前</strong> <code>os.environ.setdefault("HF_HUB_OFFLINE", "1")</code>，或加前缀 <code>HF_HUB_OFFLINE=1</code>（§5）</td>
+</tr>
+<tr class="odd">
+<td>开了离线还想下新模型</td>
+<td>临时用 <code>HF_HUB_OFFLINE=0</code> 前缀，例如 <code>HF_HUB_OFFLINE=0 hf download 模型名</code></td>
+</tr>
+<tr class="even">
+<td><code>Not a complete Laya checkpoint: ... is missing</code></td>
+<td>本地目录缺 <code>model.safetensors</code> / <code>rl_agent_config.json</code> / <code>encoder/config.json</code>；用 <code>convert</code> 生成的完整目录（§16）</td>
+</tr>
+<tr class="odd">
+<td><code>Question is missing instructions</code></td>
+<td>题目字典缺 <code>instructions</code></td>
+</tr>
+<tr class="even">
+<td><code>Unknown question type ...</code></td>
+<td><code>type</code> 拼错，只能 <code>choice/score/noul</code></td>
+</tr>
+<tr class="odd">
+<td><code>Choice criteria must be a nonempty dictionary or list</code></td>
+<td>choice 没给 criteria，或给了空列表/空字典</td>
+</tr>
+<tr class="even">
+<td><code>Choice labels must be unique</code></td>
+<td>选项列表有重复</td>
+</tr>
+<tr class="odd">
+<td><code>Score criteria must be a nonempty list</code></td>
+<td>score 的 criteria 不是列表</td>
+</tr>
+<tr class="even">
+<td><code>Noul criteria must be a dictionary ...</code></td>
+<td>noul 的 criteria 给了非字典（如列表）</td>
+</tr>
+<tr class="odd">
+<td><code>Question 'x' has too many options for the token budget</code></td>
+<td>选项太多/太长，超出 <code>head_max_len</code>；调大预算或拆选项（§8.5）</td>
+</tr>
+<tr class="even">
+<td>英文模型答中文结果荒谬</td>
+<td>用 <code>aac6fef/laya-multilingual-mlx</code>；英文检查点在非拉丁文字上会高置信度答错（§14、§19）</td>
+</tr>
+<tr class="odd">
+<td>结果和上游对不上</td>
+<td>用 <code>dtype="float32"</code>；FP16 允许小幅概率误差。上游验证数据（<code>BENCHMARKS.md</code>）：三个检查点 FP32/FP16 的 argmax 全部一致（63/63），最大校准概率误差 multilingual FP16 约 0.0013、FP32 约 1.2e-6（typed-decisions FP16 约 0.0017）</td>
+</tr>
+<tr class="even">
+<td>装不上 mlx</td>
+<td>只支持 Apple Silicon + macOS 14+；Intel/Linux 请用上游 <code>pip install laya</code>（§4）</td>
+</tr>
+<tr class="odd">
+<td><code>bfloat16</code> 效果异常</td>
+<td>BF16 不在发布验证矩阵中，换 float16/float32</td>
+</tr>
+<tr class="even">
+<td>Snake 提示终端太小</td>
+<td>拉到 ≥104×35</td>
+</tr>
+<tr class="odd">
+<td>Snake 没颜色</td>
+<td><code>NO_COLOR</code> 被设置：<code>env -u NO_COLOR ./play.sh</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="限制与诚实声明" class="level2">
+<h2 class="anchored" data-anchor-id="限制与诚实声明">19. 限制与诚实声明</h2>
+<p>上游和移植方都反复强调的几点，选型前务必知道：</p>
+<ol type="1">
+<li><strong>基础检查点是「可特化的底座」，不是零样本神器。</strong> 在上游 typed-decisions 基准上，未微调的 <code>laya</code> / <code>laya-multilingual</code> 接近随机（0.36 / 0.34，多数类基线 0.461）；0.766 的分数属于在该基准训练集上微调过的 <code>laya-typed-decisions</code> 检查点（§6）。</li>
+<li><strong>高基数选项是弱项</strong>：&gt;20–50 个选项时准确率下降明显（token 预算问题，§8.5）。</li>
+<li><strong><code>score</code> 是最弱的题型</strong>（上游 SST-5 举例 0.372）；等级集换新的也容易掉。</li>
+<li><strong>概率 ≠ 准确率。</strong> <code>confidence</code> 是分布集中度；本机检查点未做温度缩放（§2.4），OOD 数据上会过度自信。要当概率用，先按 §9.3 校准。</li>
+<li><strong>答案空间 100% 由你的选项决定。</strong> 选项没覆盖的答案，它只能挑最接近的；题目设计的重要性不低于模型选择（§9.1）。</li>
+<li><strong>英文检查点只有英文</strong>；multilingual 覆盖 100+ 语言但也不是句句准，非拉丁文字必须走 multilingual（§14）。</li>
+<li><strong>不可生成文本</strong>：没有自回归解码器，也没有工具、检索或多轮记忆；一次前向就是全部。</li>
+<li><strong>移植保真 ≠ 模型正确</strong>：63/63 是「和上游数值一致」，不是「答案对」。</li>
+<li><strong>性能数据是单机单次测量</strong>（官方 M3 Max），不构成跨设备/生产耐久承诺。</li>
+<li><strong>训练机制 ≠ 发布校准</strong>：RLCD 让模型在训练分布上「诚实」；发布权重是否校准、在你的数据上准不准，都要单独验证（§2.6、§9.3）。</li>
+</ol>
+<hr>
+</section>
+<section id="和上游-layajev-的关系" class="level2">
+<h2 class="anchored" data-anchor-id="和上游-layajev-的关系">20. 和上游 Laya、Jev 的关系</h2>
+<ul>
+<li><strong>TypeSafe Jev</strong>：这个品类的开创者（闭源 API，「System One Model」），强在高基数选项和软分布匹配。第三方实测延迟 236–276 ms/问。</li>
+<li><strong>Laya</strong>（Convai Innovations，<a href="https://github.com/NandhaKishorM/laya">NandhaKishorM/laya</a>）：开源权重（Apache-2.0）的同形态模型，官方宣称单问快 6–8×、多语言 45/51 可用、重拟合温度后 ECE 0.081 vs Jev 0.246；Jev 在 &gt;20 选项仍领先。</li>
+<li><strong>laya-mlx</strong>（本项目）：Laya 的 MLX 推理移植，绑定上游 commit <code>6a5819129eb220570792e417e49723d697efd76f</code>，<strong>非 Convai 官方发布</strong>；RLCD 训练和微调仍在上游。</li>
+<li><strong>open-jev</strong>（Kotoba Labs）：独立复现「Jev 形态」的另一个开源模型（DeBERTa-v3-large），和 Laya 无关但同一路数。</li>
+</ul>
+<p><strong>数字的来源与可比性（重要）：</strong></p>
+<ul>
+<li>上表中 Laya 一侧的数字来自 Laya 官方模型卡（自家基准、自家口径）；Jev 一侧是<strong>第三方公布的数据</strong>，两侧样本、题面、评测条件并不相同。</li>
+<li>因此这些对比只能说明「同一量级、各有胜负」，不能当成严格的同条件对拍。</li>
+<li>唯一可以自己验证的是本机数据（§15 的 M4 实测），以及你自己标注集上的结果。</li>
+</ul>
+<hr>
+</section>
+<section id="文件地图与链接" class="level2">
+<h2 class="anchored" data-anchor-id="文件地图与链接">21. 文件地图与链接</h2>
+<p>本项目（<code>~/laya-snake/</code>）：</p>
+<pre><code>laya-snake/
+├── 使用教程.md          ← 本文
+├── README.md            # 快速开始
+├── play.sh              # Snake 启动脚本（查终端尺寸、NO_COLOR）
+├── demo.py              # 中文示例：一段文字 → 四道情绪分析题（choice + score + 两个 noul）
+├── examples/
+│   ├── quickstart.py    # 最小 API 示例
+│   ├── state.json       # 示例 state（英文邮件）
+│   └── questions.json   # 示例 questions（choice+score+noul）
+└── .venv/               # Python 3.13 + laya-mlx 0.1.0 + mlx 0.32.2</code></pre>
+<p>原仓库资源：</p>
+<ul>
+<li>仓库：<a href="https://github.com/mizorewww/laya-mlx" class="uri">https://github.com/mizorewww/laya-mlx</a></li>
+<li>PyPI：<a href="https://pypi.org/project/laya-mlx/" class="uri">https://pypi.org/project/laya-mlx/</a></li>
+<li>上游 Laya：<a href="https://github.com/NandhaKishorM/laya" class="uri">https://github.com/NandhaKishorM/laya</a> · 模型卡：<a href="https://huggingface.co/convaiinnovations/laya" class="uri">https://huggingface.co/convaiinnovations/laya</a></li>
+<li>MLX 权重：<a href="https://huggingface.co/aac6fef/laya-multilingual-mlx" class="uri">https://huggingface.co/aac6fef/laya-multilingual-mlx</a></li>
+<li>基准原文：<code>BENCHMARKS.md</code> · Snake 说明：<code>docs/SNAKE_DEMO.md</code> · 性能研究：<code>docs/PERFORMANCE_RESEARCH.md</code></li>
+<li>在线演示：<a href="https://huggingface.co/spaces/convaiinnovations/laya-demo" class="uri">https://huggingface.co/spaces/convaiinnovations/laya-demo</a></li>
+<li>许可：Apache-2.0（模型权重与代码均开源）</li>
+</ul>
+<hr>
+</section>
+<section id="附录-a.-术语表" class="level2">
+<h2 class="anchored" data-anchor-id="附录-a.-术语表">附录 A. 术语表</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>术语</th>
+<th>英文</th>
+<th>定义</th>
+<th>首现</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>类型化决策</td>
+<td>typed decisions</td>
+<td>调用方在请求时给定题型与答案集合，模型只在集合上输出概率分布与答案的范式</td>
+<td>§1</td>
+</tr>
+<tr class="even">
+<td>状态</td>
+<td>state</td>
+<td>要判断的材料（文本/JSON/消息列表），序列化后拼进 prompt</td>
+<td>§2.1</td>
+</tr>
+<tr class="odd">
+<td>题面</td>
+<td>instructions</td>
+<td>模型读到的题目文本，直接参与打分</td>
+<td>§2.1</td>
+</tr>
+<tr class="even">
+<td>答案集合</td>
+<td>criteria</td>
+<td>每道题允许的答案：choice 是标签集合，score 是有序等级，noul 是 true/false</td>
+<td>§2.1</td>
+</tr>
+<tr class="odd">
+<td>打分位</td>
+<td>option slot</td>
+<td>每个选项前的一个 <code>[MASK]</code> token，其隐状态被打分器读成该选项的分数</td>
+<td>§2.2</td>
+</tr>
+<tr class="even">
+<td>logit</td>
+<td>logit</td>
+<td>softmax 之前的实数分数</td>
+<td>§2.5</td>
+</tr>
+<tr class="odd">
+<td>softmax</td>
+<td>softmax</td>
+<td>把一组实数变成和为 1 的概率分布的运算</td>
+<td>§2.2</td>
+</tr>
+<tr class="even">
+<td>期望等级</td>
+<td>expected level</td>
+<td><code>score</code> 题型的输出 Σ i·p(i)，可为小数</td>
+<td>§2.3</td>
+</tr>
+<tr class="odd">
+<td>伯努利概率</td>
+<td>Bernoulli P(true)</td>
+<td><code>noul</code> 题型的输出：命题为真的概率</td>
+<td>§2.3</td>
+</tr>
+<tr class="even">
+<td>熵</td>
+<td>entropy</td>
+<td>分布的不确定度 H(p) = −Σ p·log p；越小分布越尖</td>
+<td>§2.4</td>
+</tr>
+<tr class="odd">
+<td>置信度</td>
+<td>confidence</td>
+<td>分布集中度（不是正确率）：choice/score 用 1−H(p)/log K，noul 用 max(p,1−p)</td>
+<td>§2.4</td>
+</tr>
+<tr class="even">
+<td>校准</td>
+<td>calibration</td>
+<td>让「预测概率」与「实际正确率」一致的调整过程</td>
+<td>§2.4</td>
+</tr>
+<tr class="odd">
+<td>期望校准误差</td>
+<td>ECE</td>
+<td>分桶后平均预测概率与实际正确率的加权平均差</td>
+<td>§2.4</td>
+</tr>
+<tr class="even">
+<td>温度</td>
+<td>temperature</td>
+<td>softmax 前的缩放系数：只改分布尖锐程度，不改排序</td>
+<td>§2.5</td>
+</tr>
+<tr class="odd">
+<td>分桶温度</td>
+<td>temperature_by_options</td>
+<td>按（题型，选项数）分别拟合的温度，键形如 <code>choice:3-5</code></td>
+<td>§2.5</td>
+</tr>
+<tr class="even">
+<td>RLCD</td>
+<td>Reinforcement Learning for Calibrated Decisions</td>
+<td>用严格适当评分规则做奖励、迫使模型诚实报概率的训练方法</td>
+<td>§2.6</td>
+</tr>
+<tr class="odd">
+<td>严格适当评分规则</td>
+<td>strictly proper scoring rule</td>
+<td>只有报出真实概率才能最大化期望奖励的评分函数（log、球面、RPS）</td>
+<td>§2.6</td>
+</tr>
+<tr class="even">
+<td>题头预算</td>
+<td>head_max_len</td>
+<td>instructions + 全部选项可用的 token 上限</td>
+<td>§2.7</td>
+</tr>
+<tr class="odd">
+<td>总长上限</td>
+<td>max_len</td>
+<td>单条序列（题头 + state）的 token 上限</td>
+<td>§2.7</td>
+</tr>
+<tr class="even">
+<td>截断</td>
+<td>truncation</td>
+<td>超长时丢弃 token；本实现默认保留开头、丢弃结尾</td>
+<td>§2.7</td>
+</tr>
+<tr class="odd">
+<td>一次前向</td>
+<td>single forward pass</td>
+<td>一批序列同时过编码器与决策头，得到全部题目分数</td>
+<td>§2.8</td>
+</tr>
+<tr class="even">
+<td>前缀缓存</td>
+<td>prefix cache</td>
+<td>缓存题目 token 化前缀（不含编码结果）的 LRU 缓存，上限 128</td>
+<td>§11</td>
+</tr>
+<tr class="odd">
+<td>批大小</td>
+<td>batch_size</td>
+<td>一次前向处理的问题数上限，超出自动分块</td>
+<td>§11</td>
+</tr>
+<tr class="even">
+<td>数值精度</td>
+<td>dtype</td>
+<td>权重/计算的位宽：float16（默认）、float32（对齐）、bfloat16（未验证）</td>
+<td>§11</td>
+</tr>
+<tr class="odd">
+<td>文案头</td>
+<td>act head</td>
+<td>独立于答案的打分头，输出 P(act)（作答 vs 升级）的估计</td>
+<td>§10</td>
+</tr>
+<tr class="even">
+<td>底座检查点</td>
+<td>base checkpoint</td>
+<td>未在目标任务上微调的权重；零样本接近随机</td>
+<td>§6</td>
+</tr>
+<tr class="odd">
+<td>微调检查点</td>
+<td>fine-tuned checkpoint</td>
+<td>在特定训练集上继续训练过的权重；其分数不能当零样本能力</td>
+<td>§6</td>
+</tr>
+<tr class="even">
+<td>分布外</td>
+<td>OOD</td>
+<td>输入/问题不在训练分布内，此时概率容易过度自信</td>
+<td>§19</td>
+</tr>
+<tr class="odd">
+<td>书写系统</td>
+<td>script</td>
+<td>文字类型（latin/han/…），Router 的主路由信号</td>
+<td>§14</td>
+</tr>
+<tr class="even">
+<td>路由</td>
+<td>routing</td>
+<td>按书写系统/语言把请求分给合适检查点的过程</td>
+<td>§14</td>
+</tr>
+<tr class="odd">
+<td>安全盾</td>
+<td>safety shield</td>
+<td>Snake 中拦截模型不安全动作、改选安全集合内最优动作的机制</td>
+<td>§17</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>本教程基于 2026-09 版仓库与 laya-mlx 0.1.0 整理；本机实测数据来自 Apple M4 / macOS 26 / Python 3.13.11 / MLX 0.32.2。 上游更新后个别参数可能变化，以仓库 README 为准。</em></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/your-website-url\.example\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
