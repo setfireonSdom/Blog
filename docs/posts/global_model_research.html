@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -109,8 +109,45 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#一先看结论" id="toc-一先看结论" class="nav-link active" data-scroll-target="#一先看结论">一、先看结论</a></li>
+  <li><a href="#二统计口径" id="toc-二统计口径" class="nav-link" data-scroll-target="#二统计口径">二、统计口径</a>
+  <ul class="collapse">
+  <li><a href="#纳入" id="toc-纳入" class="nav-link" data-scroll-target="#纳入">纳入</a></li>
+  <li><a href="#不纳入或不重复" id="toc-不纳入或不重复" class="nav-link" data-scroll-target="#不纳入或不重复">不纳入或不重复</a></li>
+  <li><a href="#状态代码" id="toc-状态代码" class="nav-link" data-scroll-target="#状态代码">状态代码</a></li>
+  </ul></li>
+  <li><a href="#三全球模型家族总表" id="toc-三全球模型家族总表" class="nav-link" data-scroll-target="#三全球模型家族总表">三、全球模型家族总表</a>
+  <ul class="collapse">
+  <li><a href="#美国加拿大及全球性厂商" id="toc-美国加拿大及全球性厂商" class="nav-link" data-scroll-target="#美国加拿大及全球性厂商">1. 美国、加拿大及全球性厂商</a></li>
+  <li><a href="#欧洲俄罗斯中东和非洲" id="toc-欧洲俄罗斯中东和非洲" class="nav-link" data-scroll-target="#欧洲俄罗斯中东和非洲">2. 欧洲、俄罗斯、中东和非洲</a></li>
+  <li><a href="#日本韩国东南亚印度和拉丁美洲" id="toc-日本韩国东南亚印度和拉丁美洲" class="nav-link" data-scroll-target="#日本韩国东南亚印度和拉丁美洲">3. 日本、韩国、东南亚、印度和拉丁美洲</a></li>
+  <li><a href="#中国大陆港澳台" id="toc-中国大陆港澳台" class="nav-link" data-scroll-target="#中国大陆港澳台">4. 中国大陆、港澳台</a></li>
+  </ul></li>
+  <li><a href="#四开放性和谱系的关键判断" id="toc-四开放性和谱系的关键判断" class="nav-link" data-scroll-target="#四开放性和谱系的关键判断">四、开放性和谱系的关键判断</a>
+  <ul class="collapse">
+  <li><a href="#开源至少要拆成三层" id="toc-开源至少要拆成三层" class="nav-link" data-scroll-target="#开源至少要拆成三层">1. “开源”至少要拆成三层</a></li>
+  <li><a href="#同一公司可以同时拥有闭源和开放模型" id="toc-同一公司可以同时拥有闭源和开放模型" class="nav-link" data-scroll-target="#同一公司可以同时拥有闭源和开放模型">2. 同一公司可以同时拥有闭源和开放模型</a></li>
+  <li><a href="#地区模型不一定是从零训练" id="toc-地区模型不一定是从零训练" class="nav-link" data-scroll-target="#地区模型不一定是从零训练">3. 地区模型不一定是“从零训练”</a></li>
+  </ul></li>
+  <li><a href="#五常见名称如何去重" id="toc-五常见名称如何去重" class="nav-link" data-scroll-target="#五常见名称如何去重">五、常见名称如何去重</a></li>
+  <li><a href="#六没有纳入主表的名称" id="toc-六没有纳入主表的名称" class="nav-link" data-scroll-target="#六没有纳入主表的名称">六、没有纳入主表的名称</a></li>
+  <li><a href="#七使用这份清单时的注意事项" id="toc-七使用这份清单时的注意事项" class="nav-link" data-scroll-target="#七使用这份清单时的注意事项">七、使用这份清单时的注意事项</a></li>
+  <li><a href="#八资料优先级" id="toc-八资料优先级" class="nav-link" data-scroll-target="#八资料优先级">八、资料优先级</a>
+  <ul class="collapse">
+  <li><a href="#结论" id="toc-结论" class="nav-link" data-scroll-target="#结论">结论</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -142,8 +179,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="全球大模型家族调研" class="level1">
-<h1>全球大模型家族调研</h1>
 <blockquote class="blockquote">
 <p>调研快照：2026-09-02</p>
 <p>本文统计的是“模型家族”，不是模型版本。比如 Qwen 2、Qwen 3、Qwen-VL、Qwen-Coder、QwQ 均归入 Qwen；不同参数规模、量化版、Base/Instruct/Chat 版也不重复计数。</p>
@@ -1463,7 +1498,6 @@ ul.task-list li input[type="checkbox"] {
 <p>如果重点是自部署和开放生态，核心公开家族包括 Llama、Qwen、DeepSeek、Mistral、Gemma、Phi、OLMo、OpenELM、Cerebras-GPT、Granite、Nemotron、Falcon、Jais、LLM-jp、InternLM、MiniCPM、Step、LongCat、Ling、MiMo、Apertus、EuroLLM、Bielik、Poro、Viking 等，但仍应逐个核对具体许可证，而不是只依据“开源”标签做商业判断。</p>
 
 
-</section>
 </section>
 </section>
 

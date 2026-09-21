@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,8 +144,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#先说人话它到底是什么" id="toc-先说人话它到底是什么" class="nav-link active" data-scroll-target="#先说人话它到底是什么">先说人话：它到底是什么</a></li>
+  <li><a href="#它最有用的地方" id="toc-它最有用的地方" class="nav-link" data-scroll-target="#它最有用的地方">它最有用的地方</a>
+  <ul class="collapse">
+  <li><a href="#围绕自己的材料学习" id="toc-围绕自己的材料学习" class="nav-link" data-scroll-target="#围绕自己的材料学习">1. 围绕自己的材料学习</a></li>
+  <li><a href="#把问答案变成练习和反馈" id="toc-把问答案变成练习和反馈" class="nav-link" data-scroll-target="#把问答案变成练习和反馈">2. 把“问答案”变成“练习和反馈”</a></li>
+  <li><a href="#做资料调研和报告" id="toc-做资料调研和报告" class="nav-link" data-scroll-target="#做资料调研和报告">3. 做资料调研和报告</a></li>
+  <li><a href="#建立长期学习档案" id="toc-建立长期学习档案" class="nav-link" data-scroll-target="#建立长期学习档案">4. 建立长期学习档案</a></li>
+  <li><a href="#把同一套能力接到其他地方" id="toc-把同一套能力接到其他地方" class="nav-link" data-scroll-target="#把同一套能力接到其他地方">5. 把同一套能力接到其他地方</a></li>
+  </ul></li>
+  <li><a href="#它不是魔法也不等于老师" id="toc-它不是魔法也不等于老师" class="nav-link" data-scroll-target="#它不是魔法也不等于老师">它不是魔法，也不等于老师</a></li>
+  <li><a href="#项目结构和工作原理" id="toc-项目结构和工作原理" class="nav-link" data-scroll-target="#项目结构和工作原理">项目结构和工作原理</a>
+  <ul class="collapse">
+  <li><a href="#技术栈" id="toc-技术栈" class="nav-link" data-scroll-target="#技术栈">技术栈</a></li>
+  </ul></li>
+  <li><a href="#使用前要准备什么" id="toc-使用前要准备什么" class="nav-link" data-scroll-target="#使用前要准备什么">使用前要准备什么</a>
+  <ul class="collapse">
+  <li><a href="#必需项" id="toc-必需项" class="nav-link" data-scroll-target="#必需项">必需项</a></li>
+  <li><a href="#知识库额外需要" id="toc-知识库额外需要" class="nav-link" data-scroll-target="#知识库额外需要">知识库额外需要</a></li>
+  <li><a href="#钱花在哪里" id="toc-钱花在哪里" class="nav-link" data-scroll-target="#钱花在哪里">钱花在哪里</a></li>
+  </ul></li>
+  <li><a href="#最推荐的安装方式docker" id="toc-最推荐的安装方式docker" class="nav-link" data-scroll-target="#最推荐的安装方式docker">最推荐的安装方式：Docker</a>
+  <ul class="collapse">
+  <li><a href="#第一步启动" id="toc-第一步启动" class="nav-link" data-scroll-target="#第一步启动">第一步：启动</a></li>
+  <li><a href="#第二步配置大模型" id="toc-第二步配置大模型" class="nav-link" data-scroll-target="#第二步配置大模型">第二步：配置大模型</a></li>
+  <li><a href="#第三步先测试普通聊天" id="toc-第三步先测试普通聊天" class="nav-link" data-scroll-target="#第三步先测试普通聊天">第三步：先测试普通聊天</a></li>
+  <li><a href="#第四步配置-embedding" id="toc-第四步配置-embedding" class="nav-link" data-scroll-target="#第四步配置-embedding">第四步：配置 embedding</a></li>
+  <li><a href="#第五步建立知识库" id="toc-第五步建立知识库" class="nav-link" data-scroll-target="#第五步建立知识库">第五步：建立知识库</a></li>
+  <li><a href="#停止和再次启动" id="toc-停止和再次启动" class="nav-link" data-scroll-target="#停止和再次启动">停止和再次启动</a></li>
+  </ul></li>
+  <li><a href="#不用-docker从-pypi-安装" id="toc-不用-docker从-pypi-安装" class="nav-link" data-scroll-target="#不用-docker从-pypi-安装">不用 Docker：从 PyPI 安装</a></li>
+  <li><a href="#开发者从源码启动" id="toc-开发者从源码启动" class="nav-link" data-scroll-target="#开发者从源码启动">开发者：从源码启动</a></li>
+  <li><a href="#命令行用法" id="toc-命令行用法" class="nav-link" data-scroll-target="#命令行用法">命令行用法</a></li>
+  <li><a href="#推荐的日常使用流程" id="toc-推荐的日常使用流程" class="nav-link" data-scroll-target="#推荐的日常使用流程">推荐的日常使用流程</a></li>
+  <li><a href="#数据隐私和安全" id="toc-数据隐私和安全" class="nav-link" data-scroll-target="#数据隐私和安全">数据、隐私和安全</a>
+  <ul class="collapse">
+  <li><a href="#本地部署不等于数据不出电脑" id="toc-本地部署不等于数据不出电脑" class="nav-link" data-scroll-target="#本地部署不等于数据不出电脑">本地部署不等于数据不出电脑</a></li>
+  <li><a href="#data-要当作敏感目录" id="toc-data-要当作敏感目录" class="nav-link" data-scroll-target="#data-要当作敏感目录"><code>data/</code> 要当作敏感目录</a></li>
+  <li><a href="#模型生成代码会被执行" id="toc-模型生成代码会被执行" class="nav-link" data-scroll-target="#模型生成代码会被执行">模型生成代码会被执行</a></li>
+  <li><a href="#不要裸奔到公网" id="toc-不要裸奔到公网" class="nav-link" data-scroll-target="#不要裸奔到公网">不要裸奔到公网</a></li>
+  <li><a href="#社区插件也有供应链风险" id="toc-社区插件也有供应链风险" class="nav-link" data-scroll-target="#社区插件也有供应链风险">社区插件也有供应链风险</a></li>
+  </ul></li>
+  <li><a href="#优点" id="toc-优点" class="nav-link" data-scroll-target="#优点">优点</a>
+  <ul class="collapse">
+  <li><a href="#功能真正连在一起" id="toc-功能真正连在一起" class="nav-link" data-scroll-target="#功能真正连在一起">功能真正连在一起</a></li>
+  <li><a href="#知识库选择多" id="toc-知识库选择多" class="nav-link" data-scroll-target="#知识库选择多">知识库选择多</a></li>
+  <li><a href="#记忆相对透明" id="toc-记忆相对透明" class="nav-link" data-scroll-target="#记忆相对透明">记忆相对透明</a></li>
+  <li><a href="#安装路径比较完整" id="toc-安装路径比较完整" class="nav-link" data-scroll-target="#安装路径比较完整">安装路径比较完整</a></li>
+  <li><a href="#工程化不只是演示级" id="toc-工程化不只是演示级" class="nav-link" data-scroll-target="#工程化不只是演示级">工程化不只是演示级</a></li>
+  </ul></li>
+  <li><a href="#缺点和现实成本" id="toc-缺点和现实成本" class="nav-link" data-scroll-target="#缺点和现实成本">缺点和现实成本</a>
+  <ul class="collapse">
+  <li><a href="#功能太多学习成本不低" id="toc-功能太多学习成本不低" class="nav-link" data-scroll-target="#功能太多学习成本不低">功能太多，学习成本不低</a></li>
+  <li><a href="#对模型能力有要求" id="toc-对模型能力有要求" class="nav-link" data-scroll-target="#对模型能力有要求">对模型能力有要求</a></li>
+  <li><a href="#高级功能可能很烧钱" id="toc-高级功能可能很烧钱" class="nav-link" data-scroll-target="#高级功能可能很烧钱">高级功能可能很烧钱</a></li>
+  <li><a href="#部署矩阵复杂" id="toc-部署矩阵复杂" class="nav-link" data-scroll-target="#部署矩阵复杂">部署矩阵复杂</a></li>
+  <li><a href="#仍是快速变化中的年轻项目" id="toc-仍是快速变化中的年轻项目" class="nav-link" data-scroll-target="#仍是快速变化中的年轻项目">仍是快速变化中的年轻项目</a></li>
+  <li><a href="#测试多不等于所有场景都成熟" id="toc-测试多不等于所有场景都成熟" class="nav-link" data-scroll-target="#测试多不等于所有场景都成熟">测试多，不等于所有场景都成熟</a></li>
+  </ul></li>
+  <li><a href="#适合谁" id="toc-适合谁" class="nav-link" data-scroll-target="#适合谁">适合谁</a></li>
+  <li><a href="#不适合谁" id="toc-不适合谁" class="nav-link" data-scroll-target="#不适合谁">不适合谁</a></li>
+  <li><a href="#最终评价" id="toc-最终评价" class="nav-link" data-scroll-target="#最终评价">最终评价</a></li>
+  <li><a href="#资料来源" id="toc-资料来源" class="nav-link" data-scroll-target="#资料来源">资料来源</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -177,8 +249,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="deeptutor-项目分析与使用指南" class="level1">
-<h1>DeepTutor 项目分析与使用指南</h1>
 <blockquote class="blockquote">
 <p>项目地址：<a href="https://github.com/HKUDS/DeepTutor">HKUDS/DeepTutor</a><br>
 分析基准：2026 年 8 月 10 日，<code>main</code> 分支，v1.5.11<br>
@@ -653,7 +723,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

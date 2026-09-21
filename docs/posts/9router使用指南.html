@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,8 +144,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#项目概述" id="toc-项目概述" class="nav-link active" data-scroll-target="#项目概述">项目概述</a>
+  <ul class="collapse">
+  <li><a href="#核心价值" id="toc-核心价值" class="nav-link" data-scroll-target="#核心价值">核心价值</a></li>
+  <li><a href="#工作原理" id="toc-工作原理" class="nav-link" data-scroll-target="#工作原理">工作原理</a></li>
+  </ul></li>
+  <li><a href="#安装与启动" id="toc-安装与启动" class="nav-link" data-scroll-target="#安装与启动">安装与启动</a>
+  <ul class="collapse">
+  <li><a href="#方法-1npm-全局安装推荐" id="toc-方法-1npm-全局安装推荐" class="nav-link" data-scroll-target="#方法-1npm-全局安装推荐">方法 1：npm 全局安装（推荐）</a></li>
+  <li><a href="#方法-2从源码运行" id="toc-方法-2从源码运行" class="nav-link" data-scroll-target="#方法-2从源码运行">方法 2：从源码运行</a></li>
+  <li><a href="#方法-3docker" id="toc-方法-3docker" class="nav-link" data-scroll-target="#方法-3docker">方法 3：Docker</a></li>
+  </ul></li>
+  <li><a href="#核心功能详解" id="toc-核心功能详解" class="nav-link" data-scroll-target="#核心功能详解">核心功能详解</a>
+  <ul class="collapse">
+  <li><a href="#rtk-token-节省器" id="toc-rtk-token-节省器" class="nav-link" data-scroll-target="#rtk-token-节省器">🚀 RTK Token 节省器</a></li>
+  <li><a href="#caveman-模式" id="toc-caveman-模式" class="nav-link" data-scroll-target="#caveman-模式">🪨 Caveman 模式</a></li>
+  <li><a href="#智能三层切换" id="toc-智能三层切换" class="nav-link" data-scroll-target="#智能三层切换">🎯 智能三层切换</a></li>
+  <li><a href="#实时配额追踪" id="toc-实时配额追踪" class="nav-link" data-scroll-target="#实时配额追踪">📊 实时配额追踪</a></li>
+  <li><a href="#格式转换" id="toc-格式转换" class="nav-link" data-scroll-target="#格式转换">🔄 格式转换</a></li>
+  <li><a href="#多账户支持" id="toc-多账户支持" class="nav-link" data-scroll-target="#多账户支持">👥 多账户支持</a></li>
+  <li><a href="#自动-token-刷新" id="toc-自动-token-刷新" class="nav-link" data-scroll-target="#自动-token-刷新">🔄 自动 Token 刷新</a></li>
+  <li><a href="#自定义组合" id="toc-自定义组合" class="nav-link" data-scroll-target="#自定义组合">🎨 自定义组合</a></li>
+  <li><a href="#云同步" id="toc-云同步" class="nav-link" data-scroll-target="#云同步">💾 云同步</a></li>
+  </ul></li>
+  <li><a href="#支持的-cli-工具" id="toc-支持的-cli-工具" class="nav-link" data-scroll-target="#支持的-cli-工具">支持的 CLI 工具</a></li>
+  <li><a href="#支持的-ai-提供商" id="toc-支持的-ai-提供商" class="nav-link" data-scroll-target="#支持的-ai-提供商">支持的 AI 提供商</a>
+  <ul class="collapse">
+  <li><a href="#oauth-提供商需订阅" id="toc-oauth-提供商需订阅" class="nav-link" data-scroll-target="#oauth-提供商需订阅">🔐 OAuth 提供商（需订阅）</a></li>
+  <li><a href="#免费提供商推荐" id="toc-免费提供商推荐" class="nav-link" data-scroll-target="#免费提供商推荐">🆓 免费提供商（推荐）</a></li>
+  <li><a href="#低价提供商备份" id="toc-低价提供商备份" class="nav-link" data-scroll-target="#低价提供商备份">💰 低价提供商（备份）</a></li>
+  <li><a href="#其他-api-key-提供商40" id="toc-其他-api-key-提供商40" class="nav-link" data-scroll-target="#其他-api-key-提供商40">🔑 其他 API Key 提供商（40+）</a></li>
+  </ul></li>
+  <li><a href="#cli-工具集成配置" id="toc-cli-工具集成配置" class="nav-link" data-scroll-target="#cli-工具集成配置">CLI 工具集成配置</a>
+  <ul class="collapse">
+  <li><a href="#claude-code" id="toc-claude-code" class="nav-link" data-scroll-target="#claude-code">Claude Code</a></li>
+  <li><a href="#cursor-ide" id="toc-cursor-ide" class="nav-link" data-scroll-target="#cursor-ide">Cursor IDE</a></li>
+  <li><a href="#codex-cli" id="toc-codex-cli" class="nav-link" data-scroll-target="#codex-cli">Codex CLI</a></li>
+  <li><a href="#cline-continue-roocode" id="toc-cline-continue-roocode" class="nav-link" data-scroll-target="#cline-continue-roocode">Cline / Continue / RooCode</a></li>
+  <li><a href="#openclaw" id="toc-openclaw" class="nav-link" data-scroll-target="#openclaw">OpenClaw</a></li>
+  </ul></li>
+  <li><a href="#combo-组合策略" id="toc-combo-组合策略" class="nav-link" data-scroll-target="#combo-组合策略">Combo 组合策略</a>
+  <ul class="collapse">
+  <li><a href="#示例-1最大化订阅-低价备份" id="toc-示例-1最大化订阅-低价备份" class="nav-link" data-scroll-target="#示例-1最大化订阅-低价备份">示例 1：最大化订阅 + 低价备份</a></li>
+  <li><a href="#示例-2零成本免费组合" id="toc-示例-2零成本免费组合" class="nav-link" data-scroll-target="#示例-2零成本免费组合">示例 2：零成本免费组合</a></li>
+  <li><a href="#示例-3247-不间断编码" id="toc-示例-3247-不间断编码" class="nav-link" data-scroll-target="#示例-3247-不间断编码">示例 3：24/7 不间断编码</a></li>
+  </ul></li>
+  <li><a href="#环境变量配置" id="toc-环境变量配置" class="nav-link" data-scroll-target="#环境变量配置">环境变量配置</a></li>
+  <li><a href="#常见问题与解决方案" id="toc-常见问题与解决方案" class="nav-link" data-scroll-target="#常见问题与解决方案">常见问题与解决方案</a>
+  <ul class="collapse">
+  <li><a href="#q-为什么-dashboard-显示高成本" id="toc-q-为什么-dashboard-显示高成本" class="nav-link" data-scroll-target="#q-为什么-dashboard-显示高成本">Q: 为什么 Dashboard 显示高成本？</a></li>
+  <li><a href="#q-9router-会扣我的钱吗" id="toc-q-9router-会扣我的钱吗" class="nav-link" data-scroll-target="#q-9router-会扣我的钱吗">Q: 9Router 会扣我的钱吗？</a></li>
+  <li><a href="#q-免费提供商真的是无限量的吗" id="toc-q-免费提供商真的是无限量的吗" class="nav-link" data-scroll-target="#q-免费提供商真的是无限量的吗">Q: 免费提供商真的是无限量的吗？</a></li>
+  <li><a href="#q-语言模型未提供消息-错误" id="toc-q-语言模型未提供消息-错误" class="nav-link" data-scroll-target="#q-语言模型未提供消息-错误">Q: “语言模型未提供消息” 错误</a></li>
+  <li><a href="#q-速率限制问题" id="toc-q-速率限制问题" class="nav-link" data-scroll-target="#q-速率限制问题">Q: 速率限制问题</a></li>
+  <li><a href="#q-oauth-token-过期" id="toc-q-oauth-token-过期" class="nav-link" data-scroll-target="#q-oauth-token-过期">Q: OAuth token 过期</a></li>
+  <li><a href="#q-首次登录不工作" id="toc-q-首次登录不工作" class="nav-link" data-scroll-target="#q-首次登录不工作">Q: 首次登录不工作</a></li>
+  <li><a href="#q-logs-下没有请求日志" id="toc-q-logs-下没有请求日志" class="nav-link" data-scroll-target="#q-logs-下没有请求日志">Q: <code>logs/</code> 下没有请求日志</a></li>
+  <li><a href="#q-控制面板在错误端口打开" id="toc-q-控制面板在错误端口打开" class="nav-link" data-scroll-target="#q-控制面板在错误端口打开">Q: 控制面板在错误端口打开</a></li>
+  </ul></li>
+  <li><a href="#重要注意事项" id="toc-重要注意事项" class="nav-link" data-scroll-target="#重要注意事项">重要注意事项</a>
+  <ul class="collapse">
+  <li><a href="#免费提供商状态2026年" id="toc-免费提供商状态2026年" class="nav-link" data-scroll-target="#免费提供商状态2026年">1. 免费提供商状态（2026年）</a></li>
+  <li><a href="#rtk-token-节省器-1" id="toc-rtk-token-节省器-1" class="nav-link" data-scroll-target="#rtk-token-节省器-1">2. RTK Token 节省器</a></li>
+  <li><a href="#数据存储" id="toc-数据存储" class="nav-link" data-scroll-target="#数据存储">3. 数据存储</a></li>
+  <li><a href="#安全建议" id="toc-安全建议" class="nav-link" data-scroll-target="#安全建议">4. 安全建议</a></li>
+  <li><a href="#成本显示" id="toc-成本显示" class="nav-link" data-scroll-target="#成本显示">5. 成本显示</a></li>
+  </ul></li>
+  <li><a href="#推荐配置方案" id="toc-推荐配置方案" class="nav-link" data-scroll-target="#推荐配置方案">推荐配置方案</a>
+  <ul class="collapse">
+  <li><a href="#方案-1零成本方案推荐" id="toc-方案-1零成本方案推荐" class="nav-link" data-scroll-target="#方案-1零成本方案推荐">方案 1：零成本方案（推荐）</a></li>
+  <li><a href="#方案-2低成本方案" id="toc-方案-2低成本方案" class="nav-link" data-scroll-target="#方案-2低成本方案">方案 2：低成本方案</a></li>
+  <li><a href="#方案-3企业级方案" id="toc-方案-3企业级方案" class="nav-link" data-scroll-target="#方案-3企业级方案">方案 3：企业级方案</a></li>
+  </ul></li>
+  <li><a href="#参考链接" id="toc-参考链接" class="nav-link" data-scroll-target="#参考链接">参考链接</a></li>
+  <li><a href="#视频教程" id="toc-视频教程" class="nav-link" data-scroll-target="#视频教程">视频教程</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -177,8 +261,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="router-使用指南" class="level1">
-<h1>9Router 使用指南</h1>
 <blockquote class="blockquote">
 <p><strong>项目地址</strong>：https://github.com/decolua/9router<br>
 <strong>官方网站</strong>：https://9router.com<br>
@@ -186,23 +268,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <strong>Stars</strong>：16.5K+</p>
 </blockquote>
 <hr>
-<section id="目录" class="level2">
-<h2 class="anchored" data-anchor-id="目录">目录</h2>
-<ul>
-<li><a href="#项目概述">项目概述</a></li>
-<li><a href="#安装与启动">安装与启动</a></li>
-<li><a href="#核心功能详解">核心功能详解</a></li>
-<li><a href="#支持的-cli-工具">支持的 CLI 工具</a></li>
-<li><a href="#支持的-ai-提供商">支持的 AI 提供商</a></li>
-<li><a href="#cli-工具集成配置">CLI 工具集成配置</a></li>
-<li><a href="#combo-组合策略">Combo 组合策略</a></li>
-<li><a href="#环境变量配置">环境变量配置</a></li>
-<li><a href="#常见问题与解决方案">常见问题与解决方案</a></li>
-<li><a href="#重要注意事项">重要注意事项</a></li>
-<li><a href="#推荐配置方案">推荐配置方案</a></li>
-</ul>
-<hr>
-</section>
 <section id="项目概述" class="level2">
 <h2 class="anchored" data-anchor-id="项目概述">项目概述</h2>
 <p><strong>9Router</strong> 是一个开源的免费 AI 路由器和 Token 节省器，可以将你的 AI 编程工具（Claude Code、Cursor、Codex 等）连接到 40+ AI 提供商和 100+ 模型。</p>
@@ -955,7 +1020,6 @@ Model: cc/claude-opus-4-7</code></pre>
 <p><em>最后更新：2026年6月</em></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

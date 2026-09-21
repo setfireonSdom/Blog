@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -109,8 +109,42 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#先说结论" id="toc-先说结论" class="nav-link active" data-scroll-target="#先说结论">先说结论</a></li>
+  <li><a href="#一个-agent-是怎样完成任务的" id="toc-一个-agent-是怎样完成任务的" class="nav-link" data-scroll-target="#一个-agent-是怎样完成任务的">一个 Agent 是怎样完成任务的</a></li>
+  <li><a href="#agent-是什么" id="toc-agent-是什么" class="nav-link" data-scroll-target="#agent-是什么">Agent 是什么</a></li>
+  <li><a href="#harness-是什么" id="toc-harness-是什么" class="nav-link" data-scroll-target="#harness-是什么">Harness 是什么</a></li>
+  <li><a href="#两者的边界为什么总是说不清" id="toc-两者的边界为什么总是说不清" class="nav-link" data-scroll-target="#两者的边界为什么总是说不清">两者的边界为什么总是说不清</a></li>
+  <li><a href="#不要再混淆这些术语" id="toc-不要再混淆这些术语" class="nav-link" data-scroll-target="#不要再混淆这些术语">不要再混淆这些术语</a>
+  <ul class="collapse">
+  <li><a href="#model模型" id="toc-model模型" class="nav-link" data-scroll-target="#model模型">Model：模型</a></li>
+  <li><a href="#tool工具" id="toc-tool工具" class="nav-link" data-scroll-target="#tool工具">Tool：工具</a></li>
+  <li><a href="#mcp工具和上下文的连接协议" id="toc-mcp工具和上下文的连接协议" class="nav-link" data-scroll-target="#mcp工具和上下文的连接协议">MCP：工具和上下文的连接协议</a></li>
+  <li><a href="#skill供-agent-使用的任务知识或操作规程" id="toc-skill供-agent-使用的任务知识或操作规程" class="nav-link" data-scroll-target="#skill供-agent-使用的任务知识或操作规程">Skill：供 Agent 使用的任务知识或操作规程</a></li>
+  <li><a href="#workflow预先规定路径的流程" id="toc-workflow预先规定路径的流程" class="nav-link" data-scroll-target="#workflow预先规定路径的流程">Workflow：预先规定路径的流程</a></li>
+  <li><a href="#frameworkruntime-和-scaffold" id="toc-frameworkruntime-和-scaffold" class="nav-link" data-scroll-target="#frameworkruntime-和-scaffold">Framework、Runtime 和 Scaffold</a></li>
+  </ul></li>
+  <li><a href="#常见的-harness-有哪些" id="toc-常见的-harness-有哪些" class="nav-link" data-scroll-target="#常见的-harness-有哪些">常见的 Harness 有哪些</a>
+  <ul class="collapse">
+  <li><a href="#可以直接使用的-coding-agent-产品" id="toc-可以直接使用的-coding-agent-产品" class="nav-link" data-scroll-target="#可以直接使用的-coding-agent-产品">可以直接使用的 Coding Agent 产品</a></li>
+  <li><a href="#用来构建-agent-的框架和-harness" id="toc-用来构建-agent-的框架和-harness" class="nav-link" data-scroll-target="#用来构建-agent-的框架和-harness">用来构建 Agent 的框架和 Harness</a></li>
+  </ul></li>
+  <li><a href="#常见的-agent-有哪些" id="toc-常见的-agent-有哪些" class="nav-link" data-scroll-target="#常见的-agent-有哪些">常见的 Agent 有哪些</a></li>
+  <li><a href="#判断一个东西属于哪一层" id="toc-判断一个东西属于哪一层" class="nav-link" data-scroll-target="#判断一个东西属于哪一层">判断一个东西属于哪一层</a></li>
+  <li><a href="#为什么-harness-越来越重要" id="toc-为什么-harness-越来越重要" class="nav-link" data-scroll-target="#为什么-harness-越来越重要">为什么 Harness 越来越重要</a></li>
+  <li><a href="#最后记住这张关系图" id="toc-最后记住这张关系图" class="nav-link" data-scroll-target="#最后记住这张关系图">最后记住这张关系图</a></li>
+  <li><a href="#主要参考资料" id="toc-主要参考资料" class="nav-link" data-scroll-target="#主要参考资料">主要参考资料</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -142,8 +176,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="agent-和-harness-到底有什么区别" class="level1">
-<h1>Agent 和 Harness 到底有什么区别？</h1>
 <blockquote class="blockquote">
 <p>面向读者的 AI Agent 基础科普</p>
 <p>调研日期：2026-08-29</p>
@@ -640,7 +672,6 @@ Harness 更新上下文和状态
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

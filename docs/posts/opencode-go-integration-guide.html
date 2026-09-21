@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,8 +144,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#背景" id="toc-背景" class="nav-link active" data-scroll-target="#背景">背景</a>
+  <ul class="collapse">
+  <li><a href="#opencode-go-是什么" id="toc-opencode-go-是什么" class="nav-link" data-scroll-target="#opencode-go-是什么">OpenCode Go 是什么</a></li>
+  <li><a href="#qwen-coding-agent-是什么" id="toc-qwen-coding-agent-是什么" class="nav-link" data-scroll-target="#qwen-coding-agent-是什么">Qwen Coding Agent 是什么</a></li>
+  <li><a href="#为什么接入" id="toc-为什么接入" class="nav-link" data-scroll-target="#为什么接入">为什么接入</a></li>
+  </ul></li>
+  <li><a href="#前置条件" id="toc-前置条件" class="nav-link" data-scroll-target="#前置条件">前置条件</a>
+  <ul class="collapse">
+  <li><a href="#注册-opencode-并订阅-go-套餐" id="toc-注册-opencode-并订阅-go-套餐" class="nav-link" data-scroll-target="#注册-opencode-并订阅-go-套餐">1. 注册 OpenCode 并订阅 Go 套餐</a></li>
+  <li><a href="#确认-qwen-coding-agent-已安装" id="toc-确认-qwen-coding-agent-已安装" class="nav-link" data-scroll-target="#确认-qwen-coding-agent-已安装">2. 确认 Qwen Coding Agent 已安装</a></li>
+  <li><a href="#确认-settings.json-位置" id="toc-确认-settings.json-位置" class="nav-link" data-scroll-target="#确认-settings.json-位置">3. 确认 settings.json 位置</a></li>
+  </ul></li>
+  <li><a href="#核心概念两种-api-端点" id="toc-核心概念两种-api-端点" class="nav-link" data-scroll-target="#核心概念两种-api-端点">核心概念：两种 API 端点</a></li>
+  <li><a href="#配置步骤" id="toc-配置步骤" class="nav-link" data-scroll-target="#配置步骤">配置步骤</a>
+  <ul class="collapse">
+  <li><a href="#步骤-1找到并打开-settings.json" id="toc-步骤-1找到并打开-settings.json" class="nav-link" data-scroll-target="#步骤-1找到并打开-settings.json">步骤 1：找到并打开 settings.json</a></li>
+  <li><a href="#步骤-2确认-json-结构" id="toc-步骤-2确认-json-结构" class="nav-link" data-scroll-target="#步骤-2确认-json-结构">步骤 2：确认 JSON 结构</a></li>
+  <li><a href="#步骤-3在-env-中添加-api-key" id="toc-步骤-3在-env-中添加-api-key" class="nav-link" data-scroll-target="#步骤-3在-env-中添加-api-key">步骤 3：在 <code>env</code> 中添加 API Key</a></li>
+  <li><a href="#步骤-4在-modelproviders.openai-中添加模型" id="toc-步骤-4在-modelproviders.openai-中添加模型" class="nav-link" data-scroll-target="#步骤-4在-modelproviders.openai-中添加模型">步骤 4：在 <code>modelProviders.openai</code> 中添加模型</a></li>
+  <li><a href="#步骤-5设置默认模型可选" id="toc-步骤-5设置默认模型可选" class="nav-link" data-scroll-target="#步骤-5设置默认模型可选">步骤 5：设置默认模型（可选）</a></li>
+  <li><a href="#步骤-6完整配置示例" id="toc-步骤-6完整配置示例" class="nav-link" data-scroll-target="#步骤-6完整配置示例">步骤 6：完整配置示例</a></li>
+  </ul></li>
+  <li><a href="#深入理解-settings.json" id="toc-深入理解-settings.json" class="nav-link" data-scroll-target="#深入理解-settings.json">深入理解 settings.json</a>
+  <ul class="collapse">
+  <li><a href="#请求是如何发出的" id="toc-请求是如何发出的" class="nav-link" data-scroll-target="#请求是如何发出的">请求是如何发出的</a></li>
+  <li><a href="#envkey-的命名机制" id="toc-envkey-的命名机制" class="nav-link" data-scroll-target="#envkey-的命名机制">envKey 的命名机制</a></li>
+  </ul></li>
+  <li><a href="#验证方法" id="toc-验证方法" class="nav-link" data-scroll-target="#验证方法">验证方法</a>
+  <ul class="collapse">
+  <li><a href="#方法-1api-直接测试" id="toc-方法-1api-直接测试" class="nav-link" data-scroll-target="#方法-1api-直接测试">方法 1：API 直接测试</a></li>
+  <li><a href="#方法-2查看可用模型列表" id="toc-方法-2查看可用模型列表" class="nav-link" data-scroll-target="#方法-2查看可用模型列表">方法 2：查看可用模型列表</a></li>
+  <li><a href="#方法-3通过-qwen-coding-agent-实际对话" id="toc-方法-3通过-qwen-coding-agent-实际对话" class="nav-link" data-scroll-target="#方法-3通过-qwen-coding-agent-实际对话">方法 3：通过 Qwen Coding Agent 实际对话</a></li>
+  <li><a href="#方法-4查看-qwen-调试日志" id="toc-方法-4查看-qwen-调试日志" class="nav-link" data-scroll-target="#方法-4查看-qwen-调试日志">方法 4：查看 Qwen 调试日志</a></li>
+  </ul></li>
+  <li><a href="#踩坑记录必读" id="toc-踩坑记录必读" class="nav-link" data-scroll-target="#踩坑记录必读">踩坑记录（必读）</a>
+  <ul class="collapse">
+  <li><a href="#坑-1baseurl-重复拼接-chatcompletions-最常见" id="toc-坑-1baseurl-重复拼接-chatcompletions-最常见" class="nav-link" data-scroll-target="#坑-1baseurl-重复拼接-chatcompletions-最常见">坑 1：baseUrl 重复拼接 <code>/chat/completions</code> ⚠️ 最常见</a></li>
+  <li><a href="#坑-2envkey-不匹配" id="toc-坑-2envkey-不匹配" class="nav-link" data-scroll-target="#坑-2envkey-不匹配">坑 2：envKey 不匹配</a></li>
+  <li><a href="#坑-3model-id-写错" id="toc-坑-3model-id-写错" class="nav-link" data-scroll-target="#坑-3model-id-写错">坑 3：model id 写错</a></li>
+  <li><a href="#坑-4anthropic-协议的模型无法接入" id="toc-坑-4anthropic-协议的模型无法接入" class="nav-link" data-scroll-target="#坑-4anthropic-协议的模型无法接入">坑 4：Anthropic 协议的模型无法接入</a></li>
+  <li><a href="#坑-5api-key-未激活" id="toc-坑-5api-key-未激活" class="nav-link" data-scroll-target="#坑-5api-key-未激活">坑 5：API Key 未激活</a></li>
+  <li><a href="#坑-6go-套餐用量超限" id="toc-坑-6go-套餐用量超限" class="nav-link" data-scroll-target="#坑-6go-套餐用量超限">坑 6：Go 套餐用量超限</a></li>
+  </ul></li>
+  <li><a href="#附录go-套餐可用模型清单" id="toc-附录go-套餐可用模型清单" class="nav-link" data-scroll-target="#附录go-套餐可用模型清单">附录：Go 套餐可用模型清单</a></li>
+  <li><a href="#总结" id="toc-总结" class="nav-link" data-scroll-target="#总结">总结</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -181,20 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>目标：让 Qwen Coding Agent 使用 OpenCode Go 套餐中的模型（如 DeepSeek V4 Pro、DeepSeek V4 Flash 等），享受 $10/月的低价高质量模型。</p>
 </blockquote>
 <hr>
-<section id="目录" class="level2">
-<h2 class="anchored" data-anchor-id="目录">目录</h2>
-<ol type="1">
-<li><a href="#背景">背景</a></li>
-<li><a href="#前置条件">前置条件</a></li>
-<li><a href="#核心概念两种-api-端点">核心概念：两种 API 端点</a></li>
-<li><a href="#配置步骤">配置步骤</a></li>
-<li><a href="#深入理解-settingsjson">深入理解 settings.json</a></li>
-<li><a href="#验证方法">验证方法</a></li>
-<li><a href="#踩坑记录必读">踩坑记录（必读）</a></li>
-<li><a href="#附录go-套餐可用模型清单">附录：Go 套餐可用模型清单</a></li>
-</ol>
-<hr>
-</section>
 <section id="背景" class="level2">
 <h2 class="anchored" data-anchor-id="背景">背景</h2>
 <section id="opencode-go-是什么" class="level3">

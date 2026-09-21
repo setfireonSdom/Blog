@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,8 +144,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#配置文件在哪" id="toc-配置文件在哪" class="nav-link active" data-scroll-target="#配置文件在哪">1. 配置文件在哪</a></li>
+  <li><a href="#接入外部模型的两种方式" id="toc-接入外部模型的两种方式" class="nav-link" data-scroll-target="#接入外部模型的两种方式">2. 接入外部模型的两种方式</a>
+  <ul class="collapse">
+  <li><a href="#方式一内置提供商最简单" id="toc-方式一内置提供商最简单" class="nav-link" data-scroll-target="#方式一内置提供商最简单">方式一：内置提供商（最简单）</a></li>
+  <li><a href="#方式二自定义提供商最灵活" id="toc-方式二自定义提供商最灵活" class="nav-link" data-scroll-target="#方式二自定义提供商最灵活">方式二：自定义提供商（最灵活）</a></li>
+  </ul></li>
+  <li><a href="#自定义-provider-核心模板" id="toc-自定义-provider-核心模板" class="nav-link" data-scroll-target="#自定义-provider-核心模板">3. 自定义 Provider 核心模板</a>
+  <ul class="collapse">
+  <li><a href="#个空怎么填" id="toc-个空怎么填" class="nav-link" data-scroll-target="#个空怎么填">5 个空怎么填</a></li>
+  </ul></li>
+  <li><a href="#两个必要条件踩坑总结" id="toc-两个必要条件踩坑总结" class="nav-link" data-scroll-target="#两个必要条件踩坑总结">4. 两个必要条件（踩坑总结）</a>
+  <ul class="collapse">
+  <li><a href="#条件一models-块必须写" id="toc-条件一models-块必须写" class="nav-link" data-scroll-target="#条件一models-块必须写">条件一：<code>models</code> 块必须写</a></li>
+  <li><a href="#条件二ai-sdkopenai-compatible-包必须能被找到" id="toc-条件二ai-sdkopenai-compatible-包必须能被找到" class="nav-link" data-scroll-target="#条件二ai-sdkopenai-compatible-包必须能被找到">条件二：<code>@ai-sdk/openai-compatible</code> 包必须能被找到</a></li>
+  </ul></li>
+  <li><a href="#完整示例9router-接入-deepseek-v4-pro" id="toc-完整示例9router-接入-deepseek-v4-pro" class="nav-link" data-scroll-target="#完整示例9router-接入-deepseek-v4-pro">5. 完整示例：9Router 接入 DeepSeek V4 Pro</a></li>
+  <li><a href="#设置默认模型可选" id="toc-设置默认模型可选" class="nav-link" data-scroll-target="#设置默认模型可选">6. 设置默认模型（可选）</a></li>
+  <li><a href="#多个-provider-怎么写" id="toc-多个-provider-怎么写" class="nav-link" data-scroll-target="#多个-provider-怎么写">7. 多个 Provider 怎么写</a></li>
+  <li><a href="#一个-provider-多个模型怎么写" id="toc-一个-provider-多个模型怎么写" class="nav-link" data-scroll-target="#一个-provider-多个模型怎么写">8. 一个 Provider 多个模型怎么写</a>
+  <ul class="collapse">
+  <li><a href="#结构关系" id="toc-结构关系" class="nav-link" data-scroll-target="#结构关系">结构关系</a></li>
+  </ul></li>
+  <li><a href="#运行验证" id="toc-运行验证" class="nav-link" data-scroll-target="#运行验证">9. 运行验证</a></li>
+  <li><a href="#models-列表的-ui-行为" id="toc-models-列表的-ui-行为" class="nav-link" data-scroll-target="#models-列表的-ui-行为">10. <code>/models</code> 列表的 UI 行为</a></li>
+  <li><a href="#常见问题" id="toc-常见问题" class="nav-link" data-scroll-target="#常见问题">11. 常见问题</a>
+  <ul class="collapse">
+  <li><a href="#q-api-key-不想写在配置文件里怎么办" id="toc-q-api-key-不想写在配置文件里怎么办" class="nav-link" data-scroll-target="#q-api-key-不想写在配置文件里怎么办">Q: API Key 不想写在配置文件里怎么办？</a></li>
+  <li><a href="#q-本地服务9routerollama-等需要-apikey-吗" id="toc-q-本地服务9routerollama-等需要-apikey-吗" class="nav-link" data-scroll-target="#q-本地服务9routerollama-等需要-apikey-吗">Q: 本地服务（9Router/Ollama 等）需要 apiKey 吗？</a></li>
+  <li><a href="#q-模型-id-在哪查看" id="toc-q-模型-id-在哪查看" class="nav-link" data-scroll-target="#q-模型-id-在哪查看">Q: 模型 ID 在哪查看？</a></li>
+  <li><a href="#q-原来用-connect-添加的提供商需要写进配置文件吗" id="toc-q-原来用-connect-添加的提供商需要写进配置文件吗" class="nav-link" data-scroll-target="#q-原来用-connect-添加的提供商需要写进配置文件吗">Q: 原来用 <code>/connect</code> 添加的提供商需要写进配置文件吗？</a></li>
+  <li><a href="#q-配置里的-npm-字段是什么意思" id="toc-q-配置里的-npm-字段是什么意思" class="nav-link" data-scroll-target="#q-配置里的-npm-字段是什么意思">Q: 配置里的 <code>npm</code> 字段是什么意思？</a></li>
+  <li><a href="#q-改完配置后模型不出现怎么办" id="toc-q-改完配置后模型不出现怎么办" class="nav-link" data-scroll-target="#q-改完配置后模型不出现怎么办">Q: 改完配置后模型不出现怎么办？</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -177,8 +220,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="opencode-外部模型接入教程" class="level1">
-<h1>OpenCode 外部模型接入教程</h1>
 <blockquote class="blockquote">
 <p>基于 opencode 1.16.2 实测，2026-06</p>
 </blockquote>
@@ -508,7 +549,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 
 
-</section>
 </section>
 </section>
 

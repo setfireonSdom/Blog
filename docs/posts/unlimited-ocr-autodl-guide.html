@@ -112,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -144,8 +144,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#实际部署复盘这次是怎么跑通的" id="toc-实际部署复盘这次是怎么跑通的" class="nav-link active" data-scroll-target="#实际部署复盘这次是怎么跑通的">0. 实际部署复盘：这次是怎么跑通的</a>
+  <ul class="collapse">
+  <li><a href="#一开始想在-mac-本地部署" id="toc-一开始想在-mac-本地部署" class="nav-link" data-scroll-target="#一开始想在-mac-本地部署">0.1 一开始想在 Mac 本地部署</a></li>
+  <li><a href="#为什么没有选-rtx-2080-ti-11gb" id="toc-为什么没有选-rtx-2080-ti-11gb" class="nav-link" data-scroll-target="#为什么没有选-rtx-2080-ti-11gb">0.2 为什么没有选 RTX 2080 Ti 11GB</a></li>
+  <li><a href="#最后选的-autodl-gpu-配置" id="toc-最后选的-autodl-gpu-配置" class="nav-link" data-scroll-target="#最后选的-autodl-gpu-配置">0.3 最后选的 AutoDL GPU 配置</a></li>
+  <li><a href="#第一次验证服务器环境" id="toc-第一次验证服务器环境" class="nav-link" data-scroll-target="#第一次验证服务器环境">0.4 第一次验证服务器环境</a></li>
+  <li><a href="#为什么项目放在-rootautodl-tmp" id="toc-为什么项目放在-rootautodl-tmp" class="nav-link" data-scroll-target="#为什么项目放在-rootautodl-tmp">0.5 为什么项目放在 /root/autodl-tmp</a></li>
+  <li><a href="#安装依赖时遇到的提示" id="toc-安装依赖时遇到的提示" class="nav-link" data-scroll-target="#安装依赖时遇到的提示">0.6 安装依赖时遇到的提示</a></li>
+  <li><a href="#下载速度慢时改用镜像" id="toc-下载速度慢时改用镜像" class="nav-link" data-scroll-target="#下载速度慢时改用镜像">0.7 下载速度慢时改用镜像</a></li>
+  <li><a href="#第一次启动服务时发生了什么" id="toc-第一次启动服务时发生了什么" class="nav-link" data-scroll-target="#第一次启动服务时发生了什么">0.8 第一次启动服务时发生了什么</a></li>
+  <li><a href="#改为手动下载模型" id="toc-改为手动下载模型" class="nav-link" data-scroll-target="#改为手动下载模型">0.9 改为手动下载模型</a></li>
+  <li><a href="#最终启动成功" id="toc-最终启动成功" class="nav-link" data-scroll-target="#最终启动成功">0.10 最终启动成功</a></li>
+  <li><a href="#如何判断-health-检查成功" id="toc-如何判断-health-检查成功" class="nav-link" data-scroll-target="#如何判断-health-检查成功">0.11 如何判断 health 检查成功</a></li>
+  <li><a href="#nvidia-smi-里的-sglang-进程说明" id="toc-nvidia-smi-里的-sglang-进程说明" class="nav-link" data-scroll-target="#nvidia-smi-里的-sglang-进程说明">0.12 nvidia-smi 里的 sglang 进程说明</a></li>
+  <li><a href="#使用-infer.py-时复用已有服务" id="toc-使用-infer.py-时复用已有服务" class="nav-link" data-scroll-target="#使用-infer.py-时复用已有服务">0.13 使用 infer.py 时复用已有服务</a></li>
+  <li><a href="#遇到-requests0-的经验" id="toc-遇到-requests0-的经验" class="nav-link" data-scroll-target="#遇到-requests0-的经验">0.14 遇到 requests=0 的经验</a></li>
+  <li><a href="#本次部署形成的稳定流程" id="toc-本次部署形成的稳定流程" class="nav-link" data-scroll-target="#本次部署形成的稳定流程">0.15 本次部署形成的稳定流程</a></li>
+  </ul></li>
+  <li><a href="#项目适用场景" id="toc-项目适用场景" class="nav-link" data-scroll-target="#项目适用场景">1. 项目适用场景</a></li>
+  <li><a href="#本地-mac-为什么不适合直接跑" id="toc-本地-mac-为什么不适合直接跑" class="nav-link" data-scroll-target="#本地-mac-为什么不适合直接跑">2. 本地 Mac 为什么不适合直接跑</a></li>
+  <li><a href="#云服务器推荐配置" id="toc-云服务器推荐配置" class="nav-link" data-scroll-target="#云服务器推荐配置">3. 云服务器推荐配置</a></li>
+  <li><a href="#已验证可用环境示例" id="toc-已验证可用环境示例" class="nav-link" data-scroll-target="#已验证可用环境示例">4. 已验证可用环境示例</a></li>
+  <li><a href="#登录服务器后先检查环境" id="toc-登录服务器后先检查环境" class="nav-link" data-scroll-target="#登录服务器后先检查环境">5. 登录服务器后先检查环境</a></li>
+  <li><a href="#进入数据盘" id="toc-进入数据盘" class="nav-link" data-scroll-target="#进入数据盘">6. 进入数据盘</a></li>
+  <li><a href="#下载项目" id="toc-下载项目" class="nav-link" data-scroll-target="#下载项目">7. 下载项目</a></li>
+  <li><a href="#创建虚拟环境" id="toc-创建虚拟环境" class="nav-link" data-scroll-target="#创建虚拟环境">8. 创建虚拟环境</a></li>
+  <li><a href="#设置镜像和缓存目录" id="toc-设置镜像和缓存目录" class="nav-link" data-scroll-target="#设置镜像和缓存目录">9. 设置镜像和缓存目录</a></li>
+  <li><a href="#安装依赖" id="toc-安装依赖" class="nav-link" data-scroll-target="#安装依赖">10. 安装依赖</a></li>
+  <li><a href="#下载模型" id="toc-下载模型" class="nav-link" data-scroll-target="#下载模型">11. 下载模型</a></li>
+  <li><a href="#启动服务" id="toc-启动服务" class="nav-link" data-scroll-target="#启动服务">12. 启动服务</a></li>
+  <li><a href="#常见启动日志说明" id="toc-常见启动日志说明" class="nav-link" data-scroll-target="#常见启动日志说明">13. 常见启动日志说明</a></li>
+  <li><a href="#测试服务是否正常" id="toc-测试服务是否正常" class="nav-link" data-scroll-target="#测试服务是否正常">14. 测试服务是否正常</a></li>
+  <li><a href="#每次使用前的固定步骤" id="toc-每次使用前的固定步骤" class="nav-link" data-scroll-target="#每次使用前的固定步骤">15. 每次使用前的固定步骤</a></li>
+  <li><a href="#识别图片目录" id="toc-识别图片目录" class="nav-link" data-scroll-target="#识别图片目录">16. 识别图片目录</a></li>
+  <li><a href="#识别-pdf" id="toc-识别-pdf" class="nav-link" data-scroll-target="#识别-pdf">17. 识别 PDF</a></li>
+  <li><a href="#如果-infer.py-显示-requests0" id="toc-如果-infer.py-显示-requests0" class="nav-link" data-scroll-target="#如果-infer.py-显示-requests0">18. 如果 infer.py 显示 requests=0</a></li>
+  <li><a href="#查看输出结果" id="toc-查看输出结果" class="nav-link" data-scroll-target="#查看输出结果">19. 查看输出结果</a></li>
+  <li><a href="#显存与并发建议" id="toc-显存与并发建议" class="nav-link" data-scroll-target="#显存与并发建议">20. 显存与并发建议</a></li>
+  <li><a href="#端口占用问题" id="toc-端口占用问题" class="nav-link" data-scroll-target="#端口占用问题">21. 端口占用问题</a></li>
+  <li><a href="#一套最短复用命令" id="toc-一套最短复用命令" class="nav-link" data-scroll-target="#一套最短复用命令">22. 一套最短复用命令</a></li>
+  <li><a href="#常见问题速查" id="toc-常见问题速查" class="nav-link" data-scroll-target="#常见问题速查">23. 常见问题速查</a>
+  <ul class="collapse">
+  <li><a href="#服务启动后没有-uvicorn" id="toc-服务启动后没有-uvicorn" class="nav-link" data-scroll-target="#服务启动后没有-uvicorn">23.1 服务启动后没有 Uvicorn</a></li>
+  <li><a href="#health-有-200-ok-算成功吗" id="toc-health-有-200-ok-算成功吗" class="nav-link" data-scroll-target="#health-有-200-ok-算成功吗">23.2 health 有 200 OK 算成功吗</a></li>
+  <li><a href="#nvidia-smi-显示-sglang-占显存正常吗" id="toc-nvidia-smi-显示-sglang-占显存正常吗" class="nav-link" data-scroll-target="#nvidia-smi-显示-sglang-占显存正常吗">23.3 nvidia-smi 显示 sglang 占显存正常吗</a></li>
+  <li><a href="#pymupdf-下载慢怎么办" id="toc-pymupdf-下载慢怎么办" class="nav-link" data-scroll-target="#pymupdf-下载慢怎么办">23.4 PyMuPDF 下载慢怎么办</a></li>
+  <li><a href="#huggingface-cli-download-不能用怎么办" id="toc-huggingface-cli-download-不能用怎么办" class="nav-link" data-scroll-target="#huggingface-cli-download-不能用怎么办">23.5 huggingface-cli download 不能用怎么办</a></li>
+  </ul></li>
+  <li><a href="#最终建议" id="toc-最终建议" class="nav-link" data-scroll-target="#最终建议">24. 最终建议</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -177,8 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="unlimited-ocr-autodl-部署与使用教程" class="level1">
-<h1>Unlimited-OCR AutoDL 部署与使用教程</h1>
 <p>这份教程记录如何在 AutoDL 云 GPU 服务器上部署并使用 <code>baidu/Unlimited-OCR</code>。适合本地电脑没有 NVIDIA GPU、但想用云服务器跑 OCR 的情况。</p>
 <section id="实际部署复盘这次是怎么跑通的" class="level2">
 <h2 class="anchored" data-anchor-id="实际部署复盘这次是怎么跑通的">0. 实际部署复盘：这次是怎么跑通的</h2>
@@ -882,7 +939,6 @@ port 10000 already in use</code></pre>
 <p>如果只是测试，先不要跑整本书。先跑 1 页或几页，确认输出效果和速度后，再批量处理完整 PDF。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
