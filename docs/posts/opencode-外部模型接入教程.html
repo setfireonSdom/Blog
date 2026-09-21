@@ -553,6 +553,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 </main> <!-- /main -->
+<button id="toc-toggle" type="button" aria-controls="quarto-sidebar" aria-expanded="true">收起</button>
+<script>
+(function () {
+  var KEY = "blog-toc-collapsed";
+  var btn = document.getElementById("toc-toggle");
+  var body = document.body;
+
+  function sync() {
+    var collapsed = body.classList.contains("toc-collapsed");
+    btn.textContent = collapsed ? "目录" : "收起";
+    btn.setAttribute("aria-expanded", String(!collapsed));
+    btn.setAttribute("aria-label", collapsed ? "展开目录" : "收起目录");
+  }
+
+  if (localStorage.getItem(KEY) === "1") {
+    body.classList.add("toc-collapsed");
+  }
+
+  btn.addEventListener("click", function () {
+    var collapsed = body.classList.toggle("toc-collapsed");
+    localStorage.setItem(KEY, collapsed ? "1" : "0");
+    sync();
+  });
+
+  sync();
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
