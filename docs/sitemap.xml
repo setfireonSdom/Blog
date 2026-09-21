@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://your-website-url.example.com/posts/信息爆炸-情绪系统被操控.html</loc>
-    <lastmod>2026-06-06T08:32:43.787Z</lastmod>
+    <lastmod>2026-09-21T15:23:09.224Z</lastmod>
   </url>
   <url>
     <loc>https://your-website-url.example.com/posts/opencode-外部模型接入教程.html</loc>
@@ -75,5 +75,9 @@
   <url>
     <loc>https://your-website-url.example.com/posts/global_model_research.html</loc>
     <lastmod>2026-09-02T17:06:28.956Z</lastmod>
+  </url>
+  <url>
+    <loc>https://your-website-url.example.com/posts/使用教程.html</loc>
+    <lastmod>2026-09-21T15:24:36.583Z</lastmod>
   </url>
 </urlset>
