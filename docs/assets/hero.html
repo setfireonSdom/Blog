@@ -1,0 +1,71 @@
+<script>
+(function () {
+  var listing = document.querySelector("main.content .quarto-listing");
+  if (!listing) return;
+
+  var slot = document.createElement("div");
+  slot.className = "hero-banner";
+  slot.setAttribute("role", "img");
+  slot.setAttribute("aria-label", "知有誰 · 在霧線之上，記錄看過的事");
+  listing.parentNode.insertBefore(slot, listing);
+
+  // 內嵌 SVG，飛鳥、霧氣與星光才會真的動起來。
+  // 以 <img> 載入時，SVG 內的媒體查詢會誤判成窄版而裁掉場景。
+  fetch("assets/banner-dark.svg")
+    .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+    .then(function (svg) {
+      slot.innerHTML = svg;
+      var node = slot.querySelector("svg");
+      if (node) {
+        node.removeAttribute("width");
+        node.removeAttribute("height");
+        // meet 保留完整構圖，避免不同寬高比下被裁成變形的畫面。
+        node.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      }
+    })
+    .catch(function () {
+      var img = document.createElement("img");
+      img.src = "assets/banner-dark.svg";
+      img.alt = slot.getAttribute("aria-label");
+      slot.appendChild(img);
+    });
+})();
+</script>
+<script>
+(function () {
+  // Quarto 的分類欄固定輸出英文 Categories / All，這裡改成中文。
+  var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function localizeDate(el) {
+    var text = el.textContent.trim();
+    var m = text.match(/^([A-Z][a-z]{2})\s+(\d{1,2}),\s*(\d{4})$/);
+    if (!m) return;
+    var month = MONTHS.indexOf(m[1]) + 1;
+    if (!month) return;
+    el.textContent = m[3] + " 年 " + month + " 月 " + Number(m[2]) + " 日";
+  }
+
+  function localize() {
+    var title = document.querySelector(".quarto-listing-category-title");
+    if (title && title.textContent.trim() !== "分类") {
+      title.textContent = "分类";
+    }
+
+    var all = document.querySelector('.quarto-listing-category .category[data-category=""]');
+    if (all) {
+      var count = all.querySelector(".quarto-category-count");
+      var label = all.firstChild;
+      if (label && label.nodeType === 3 && label.nodeValue.trim() !== "全部") {
+        label.nodeValue = "全部 ";
+      }
+      if (count) all.appendChild(count);
+    }
+
+    document.querySelectorAll(".quarto-post .listing-date").forEach(localizeDate);
+  }
+
+  localize();
+  window.addEventListener("load", localize);
+})();
+</script>
