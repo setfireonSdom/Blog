@@ -69,3 +69,26 @@
   window.addEventListener("load", localize);
 })();
 </script>
+<script>
+(function () {
+  // 側欄推薦位：插在分類清單下方，只在首頁出現。
+  var sidebar = document.getElementById("quarto-margin-sidebar");
+  if (!sidebar) return;
+  var categories = sidebar.querySelector(".quarto-listing-category");
+  if (!categories) return;
+  if (sidebar.querySelector(".promo-card")) return;
+
+  var card = document.createElement("a");
+  card.className = "promo-card";
+  card.href = "https://prodclub.xyz/r/QRJT35";
+  card.target = "_blank";
+  card.rel = "noopener noreferrer sponsored";
+  card.innerHTML =
+    '<span class="promo-card__label">Sponsor</span>' +
+    '<span class="promo-card__title">GPT 套餐订阅</span>' +
+    '<span class="promo-card__desc">稳定的 GPT 套餐订阅服务，适合日常写作与开发使用。</span>' +
+    '<span class="promo-card__cta">了解详情</span>';
+
+  categories.parentNode.insertBefore(card, categories.nextSibling);
+})();
+</script>

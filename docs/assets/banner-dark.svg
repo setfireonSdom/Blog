@@ -61,7 +61,6 @@
   @keyframes glide { from { transform: translateX(96px) } to { transform: translateX(-96px) } }
   /* 飛鳥：起點與終點都在畫布之外，循環時不會在畫面內閃現。 */
   /* 每隻鳥的起點與終點都落在畫布外，循環接續時不會在畫面內閃現。 */
-  @keyframes flyA { from { transform: translate(320px, -10px) } to { transform: translate(-1180px, -44px) } }
   @keyframes flyB { from { transform: translate(480px, 6px) } to { transform: translate(-900px, 30px) } }
   @keyframes flyC { from { transform: translate(400px, -6px) } to { transform: translate(-1040px, 24px) } }
   @keyframes flyD { from { transform: translate(-380px, 8px) } to { transform: translate(1000px, -22px) } }
@@ -208,7 +207,6 @@
       <circle cx="0" cy="-23.6" r="2.7" fill="#0C141A"/>
     </g>
   <g class="birds">
-    <g class="glide" style="animation-name:flyA;animation-duration:74s;animation-delay:-12s"><g class="bob" style="animation-delay:-0.4s"><path transform="translate(1080,186) scale(1.55)" d="M-10,0 q5,-4.6 10,0 q5,-4.6 10,0" fill="none" stroke="#C2CDD5" stroke-width="1.55" stroke-linecap="round" opacity="0.62"/></g></g>
     <g class="glide" style="animation-name:flyC;animation-duration:63s;animation-delay:-27s"><g class="bob" style="animation-delay:-1.2s"><path transform="translate(940,122) scale(1.25)" d="M-10,0 q5,-4.6 10,0 q5,-4.6 10,0" fill="none" stroke="#A3AFB9" stroke-width="1.5" stroke-linecap="round" opacity="0.5" filter="url(#birdMid)"/></g></g>
     <g class="glide" style="animation-name:flyB;animation-duration:88s;animation-delay:-41s"><g class="bob" style="animation-delay:-2.1s"><path transform="translate(792,76) scale(1.05)" d="M-10,0 q5,-4.6 10,0 q5,-4.6 10,0" fill="none" stroke="#939FA9" stroke-width="1.5" stroke-linecap="round" opacity="0.38" filter="url(#birdFar)"/></g></g>
     <g class="glide" style="animation-name:flyE;animation-duration:96s;animation-delay:-18s"><g class="bob" style="animation-delay:-2.8s"><path transform="translate(520,94) scale(0.92)" d="M-10,0 q5,-4.6 10,0 q5,-4.6 10,0" fill="none" stroke="#88949D" stroke-width="1.55" stroke-linecap="round" opacity="0.32" filter="url(#birdFar)"/></g></g>

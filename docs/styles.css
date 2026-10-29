@@ -501,6 +501,79 @@ div.quarto-post .listing-description code {
   white-space: nowrap;
 }
 
+/* 側欄推薦位：細框卡片，與頁面同色系，不搶正文。 */
+.promo-card {
+  display: block;
+  margin-top: 1.6rem;
+  padding: 1.1rem 1rem 1.15rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(192, 138, 60, 0.07), rgba(192, 138, 60, 0.015));
+  text-decoration: none;
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.promo-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(192, 138, 60, 0.12), rgba(192, 138, 60, 0.03));
+}
+
+.promo-card__label {
+  display: block;
+  margin-bottom: 0.55rem;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.promo-card__title {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
+.promo-card__desc {
+  display: block;
+  color: var(--text-faint);
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  line-height: 1.7;
+}
+
+.promo-card__cta {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  width: 100%;
+  color: var(--text-soft);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  transition: color 0.3s ease;
+}
+
+.promo-card:hover .promo-card__cta {
+  color: var(--accent);
+}
+
+.promo-card__cta::after {
+  content: " →";
+}
+
+@media (max-width: 991.98px) {
+  .promo-card {
+    margin-top: 1.6rem;
+  }
+}
+
 .quarto-title-banner,
 .page-footer {
   display: none;
