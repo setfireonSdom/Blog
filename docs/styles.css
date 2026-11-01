@@ -95,9 +95,11 @@ body {
   color: var(--text);
 }
 
-/* 首頁橫幅：內嵌 SVG，飛鳥與霧氣才會真的動。 */
+/* 首頁橫幅：內嵌 SVG，飛鳥與霧氣才會真的動。
+   注意：不要用 :has() 控制 display —— 列表重繪時條件會瞬間失效，
+   導致 display:none 再恢復，動畫會被銷毀並從 0 重新開始。 */
 .hero-banner {
-  display: none;
+  display: block;
   margin: 0 0 2.6rem;
   aspect-ratio: 1200 / 360;
   border-radius: 20px;
@@ -107,8 +109,9 @@ body {
   box-shadow: inset 0 0 0 1px rgba(140, 160, 175, 0.1);
 }
 
-main.content:has(.quarto-listing) .hero-banner {
-  display: block;
+/* 由腳本決定是否保留面板：只有真的插入了才顯示。 */
+.hero-banner:empty {
+  display: none;
 }
 
 .hero-banner svg,
@@ -704,7 +707,7 @@ div.quarto-post .listing-description code {
     padding-bottom: 4rem;
   }
 
-  main.content:has(.quarto-listing) .hero-banner {
+  .hero-banner {
     margin-bottom: 1.8rem;
     border-radius: 10px;
   }

@@ -1059,21 +1059,21 @@ Jun 2, 2026
 <script src="site_libs/quarto-html/zenscroll-min.js"></script>
 <script>
 (function () {
+  // 只在首頁（存在文章列表）插入橫幅；先載入 SVG 再插入，
+  // 避免出現空容器，也避免 display 切換導致動畫被重建。
   var listing = document.querySelector("main.content .quarto-listing");
   if (!listing) return;
+  if (document.querySelector(".hero-banner")) return;
 
-  var slot = document.createElement("div");
-  slot.className = "hero-banner";
-  slot.setAttribute("role", "img");
-  slot.setAttribute("aria-label", "知有誰 · 在霧線之上，記錄看過的事");
-  listing.parentNode.insertBefore(slot, listing);
-
-  // 內嵌 SVG，飛鳥、霧氣與星光才會真的動起來。
-  // 以 <img> 載入時，SVG 內的媒體查詢會誤判成窄版而裁掉場景。
   fetch("assets/banner-dark.svg")
     .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
     .then(function (svg) {
+      var slot = document.createElement("div");
+      slot.className = "hero-banner";
+      slot.setAttribute("role", "img");
+      slot.setAttribute("aria-label", "知有誰 · 在霧線之上，記錄看過的事");
       slot.innerHTML = svg;
+
       var node = slot.querySelector("svg");
       if (node) {
         node.removeAttribute("width");
@@ -1081,13 +1081,18 @@ Jun 2, 2026
         // meet 保留完整構圖，避免不同寬高比下被裁成變形的畫面。
         node.setAttribute("preserveAspectRatio", "xMidYMid meet");
       }
+
+      // 以列表為錨點；若列表被重繪，改為固定在內容區頂部，
+      // 這樣面板本身不會隨列表一起被移除而重播動畫。
+      var anchor = document.querySelector("main.content .quarto-listing");
+      if (anchor && anchor.parentNode) {
+        anchor.parentNode.insertBefore(slot, anchor);
+      } else {
+        document.getElementById("quarto-document-content")
+          .insertBefore(slot, document.getElementById("quarto-document-content").firstChild);
+      }
     })
-    .catch(function () {
-      var img = document.createElement("img");
-      img.src = "assets/banner-dark.svg";
-      img.alt = slot.getAttribute("aria-label");
-      slot.appendChild(img);
-    });
+    .catch(function () { /* 載入失敗就不顯示面板，不留空框 */ });
 })();
 </script>
 <script>
@@ -1151,6 +1156,9 @@ Jun 2, 2026
   categories.parentNode.insertBefore(card, categories.nextSibling);
 })();
 </script>
+
+
+
 
 
 
